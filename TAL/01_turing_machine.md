@@ -7,9 +7,9 @@ Turingův stroj je sedmice $(Q, \Sigma, \Gamma, \delta, q_0, B, F)$, kde
 * $Q$ je konečná množina stavů,
 * $\Sigma$ je konečná množina vstupních symbolů,
 * $\Gamma$ je konečná množina páskových symbolů, přitom $\Sigma \subset \Gamma$,
-* $B$ je prázdný symbol, jedná se o páskový symbol, který není vstupním symbolem, tj. $B \in \Gamma \setminus \Sigma$,
 * $\delta$ je přechodová funkce, tj. parciální zobrazení (nemusí být definováno všude) z množiny $(Q \setminus F) \times \Gamma$ do množiny $Q \times \Gamma \times \{L, R \}$, (zde $L$, resp. $R$, znamená pohyb hlavy doleva, resp. doprava),
 * $q_0 \in Q$ je počáteční stav a
+* $B$ je prázdný symbol, jedná se o páskový symbol, který není vstupním symbolem, tj. $B \in \Gamma \setminus \Sigma$,
 * $F \subset Q$ je množina koncových stavů.
 
 **Situace Turingova stroje** (též **konfigurace**) plně popisuje obsah pásky, pozici hlavy na pásce a stav, ve kterém se nachází řídící jednotka.
@@ -34,7 +34,7 @@ Vstupní slovo $w \in \Sigma^*$ je **přijato** Turingovým strojem $M$, jestli�
 
 Je dáno zobrazení $f: \Sigma^* \rightarrow \Sigma^*$. Řekneme, že TM $M$ **realizuje zobrazení** $f$, jestliže pro každé $w \in \Sigma^*$, pro které je $f(w)$ definovaná, se $M$ úspěšně zastaví s výstupem $f(w)$ (tj. $q_0 w \vdash^* \alpha q_F \beta$, kde $\alpha \beta = f(w)$). Pro $w$ pro něž $f(w)$ není definováno se $M$ **zastaví neúspěšně**.
 
-**Časová složitost Turingova stroje** je parciální zobrazení $T(n)$ z množiny všech přirozených čísel do sebe. Jestliže pro nějaký vstup délky $n$ se Turingův stroj nezastaví, $T(n)$ není definováno. V opačném případě je $T(n)$ rovno maximálnímu počtu kroků, po nichž dojde k zastavení Turingova stroje.
+**Časová složitost Turingova stroje $T(n)$** je parciální zobrazení  z množiny všech přirozených čísel do sebe. Jestliže pro nějaký vstup délky $n$ se Turingův stroj nezastaví, $T(n)$ není definováno. V opačném případě je $T(n)$ rovno maximálnímu počtu kroků, po nichž dojde k zastavení Turingova stroje.
 
 **Paměťová složitost Turingova stroje $S(n)$**. Jestliže pro nějaký vstup délky $n$ Turingův stroj použije nekonečnou část pásky (pak se nemůže v konečném čase zastavit), $S(n)$ není definováno. V opačném případě je $S(n)$ rovno největšímu rozdílu pořadových čísel polí, které byly během výpočtu použity, kde maximum se bere přes všechny vstupy délky $n$.
 

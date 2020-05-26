@@ -12,33 +12,24 @@
 
 Teorie složitosti pracuje zejména s tzv. *rozhodovacími* úlohami. Rozhodovací úlohy jsou takové úlohy, jejichž řešením je buď odpověď ANO nebo NE.
 
-* Rozhodovací verze
-    * Minimální kostra: Je dán orientovaný graf $G = (V, E)$, ohodnocení $c: E \rightarrow \mathbb{N}$ a dále celé číslo $K$. Existuje minimální kostra, jejíž cena je nejvýše $K$?
-    * Je dána matice délek $\mathbf{A} = (a(i, j))$, výchozí vrchol $r$, cílový vrchol $c$ a číslo $K$. Existuje cesta z vrcholu $r$ do vrcholu $c$ délky nejvýše $K$?
-    * TSP: Jsou dány délky cest mezi městy a je dáno číslo $K$. Existuje trasa $\pi$ délky nejvýše $K$?
-* Vyhodnocovací verze
-    * Minimální kostra: Je dán neorientovaný graf $G = (V, E)$ a $c: E \rightarrow \mathbb{N}$. Najděte cenu minimální kostry ohodnoceného grafu.
-    * Je dána matice délek $\mathbf{A} = (a(i, j))$, výchozí vrchol $r$ a cílový vrchol $c$. Najděte délku nejkratší cesty z vrcholu $r$ do vrcholu $c$.
-    * TSP: Jsou dány délky cest mezi městy. Najděte cenu optimální trasy, tj. trasy s nejmenší možnou délkou.
-* Optimalizační verze
-    * Minimální kostra: Je dán neorietovaný graf $G = (V, E)$ a $c: E \rightarrow \mathbb{N}$. Najděte minimální kostru ohodnoceného grafu.
-    * Je dána matice délek $\mathbf{A} = (a(i, j))$, výchozí vrchol $r$, cílový vrchol $c$. Najděte nejkratší cestu z vrcholu $r$ do vrcholu $c$.
-    * TSP: Jsou dány délky cest mezi městy. Najděte optimální trasu, tj. trasu s nejmenší možnou délkou.
+* Rozhodovací verze: Je dán orientovaný graf $G = (V, E)$, ohodnocení $c: E \rightarrow \mathbb{N}$ a dále celé číslo $K$. Existuje minimální kostra, jejíž cena je nejvýše $K$?
+* Vyhodnocovací verze: Je dán neorientovaný graf $G = (V, E)$ a $c: E \rightarrow \mathbb{N}$. Najděte cenu minimální kostry ohodnoceného grafu.
+* Optimalizační verze: Je dán neorietovaný graf $G = (V, E)$ a $c: E \rightarrow \mathbb{N}$. Najděte minimální kostru ohodnoceného grafu.
 
-Dá se dokázat, že když je kterákoli verze dané úlohy polynomiálně řešitelnáý, jsou polynomiálně řešitelné všechny tři verze.
+Dá se dokázat, že když je kterákoliv verze dané úlohy polynomiálně řešitelná, jsou polynomiálně řešitelné všechny tři verze.
 
 ## Třídy \calP a \NP
 
-Instance libovolné rozhodovací úlohy můžeme zakódovat jako slova nad vhodnou abecedou. Protože řešením rozhodovací úlohy je buď "ANO" nebo "NE", rozdělíme instance na tzv. "ANO-instance" a "NE-instance". **Jazyk úlohy \calU**, značíme jej $L_\calU$, se skládá ze všech slov odpovídajících ANO-instancím úlohu \calU. Množina všech NE-instancí tvoří doplněk jazyka $L_\calU$, tj. $\Sigma^* \setminus L_\calU$.
+Instance libovolné rozhodovací úlohy můžeme zakódovat jako slova nad vhodnou abecedou. Protože řešením rozhodovací úlohy je buď "ANO" nebo "NE", rozdělíme instance na tzv. "ANO-instance" a "NE-instance". **Jazyk úlohy $\calU$**, značíme jej $L_\calU$, se skládá ze všech slov odpovídajících ANO-instancím úlohu \calU. Množina všech NE-instancí tvoří doplněk jazyka $\overline{L_\calU}$, tj. $\Sigma^* \setminus L_\calU$.
 
-**Třída \calP**. Řekneme, že rozhodovací úloha \calU leží ve třídě \calP, jestliže exiastuje deterministický Turingův stroj, který rozhodne jazyk $L_\calU$ a pracuje v polynomiálním čase; tj. funkce $T(n)$ je $\mathcal{O}(p(n))$ pro nějaký polynom $p(n)$.
+**Třída $\calP$**. Řekneme, že rozhodovací úloha \calU leží ve třídě \calP, jestliže existuje deterministický Turingův stroj, který rozhodne jazyk $L_\calU$ a pracuje v polynomiálním čase; tj. funkce $T(n)$ je $\mathcal{O}(p(n))$ pro nějaký polynom $p(n)$.
 
 * **Minimální kostra v grafu**. Je dán neorientovaný graf $G$ s ohodnocením hran $c$. Je dáno číslo $k$. Existuje kostra grafu ceny menší nebo rovno $k$?
-* **Nejkratší cesty v acyklickém grafu**. Je dán acyklický graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $c$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcolu $r$ do vrcholu $cč délky menší nebo rovno $k$?
+* **Nejkratší cesty v acyklickém grafu**. Je dán acyklický graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $c$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $cč délky menší nebo rovno $k$?
 * **Toky v sítích**. Je dána síť s horním omezením $c$, dolním omezením $l$, se zdrojem $z$ a spotřebičem $s$. Dále je dáno číslo $k$. Existuje přípustný tok od $z$ do $s$ velikosti alespoň $k$?
 * **Minimální řez**. Je dána síť s horním omezením $c$, dolním omezením $l$. Dále je dáno číslo $k$. Existuje řez, který má kapacitu menší nebo rovnu $k$?
 
-**Třída \NP**. Řekneme, že rozhodovací úloha \calU leží ve třídě \NP, jestliže existuje nedeterministický Turingův stroj, který rozhodne jazky $L_\calU$ a pracuje v poylnomiálním čase.
+**Třída $\NP$**. Řekneme, že rozhodovací úloha \calU leží ve třídě \NP, jestliže existuje nedeterministický Turingův stroj, který rozhodne jazky $L_\calU$ a pracuje v poylnomiálním čase.
 
 * **Kliky v grafu**. Je dán neorientovaný graf $G$ a číslo $k$. Existuje klika v grafu $G$ o alespoň $k$ vrcholech?
 * **Nejkratší cesty v obecném grafu**. Je dán orientovaný graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $v$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $v$ délky menší nebo rovno $k$?
@@ -48,7 +39,7 @@ $$ \sum_{i \in I} w_i \leq A \quad \text{a} \quad \sum_{i \in I} c_i \geq B?$$
 
 ## Třída $\mathcal{NPC}$
 
-**Redukce a polynomiální reukce úloh.** Jsou dány dvě rozhodovací úlohy \calU a \calV. Řekneme, že úloha \calU se **redukuje** na úlohu \calV, jestliže existuje algoritmus (program pro RAM, Turingův stroj) $M$, který pro každou instanci $I$ úlohy \calU zkonstruuje instanci $I'$ úlohy \calV a to tak, že
+**Redukce a polynomiální redukce úloh.** Jsou dány dvě rozhodovací úlohy \calU a \calV. Řekneme, že úloha \calU se **redukuje** na úlohu \calV, jestliže existuje algoritmus (program pro RAM, Turingův stroj) $M$, který pro každou instanci $I$ úlohy \calU zkonstruuje instanci $I'$ úlohy \calV a to tak, že
 $$I \text{ je ANO-instance } \calU \text{ iff } I' \text{ je ANO-instance } \calV.$$
 Fakt, že úloha \calU se redukuje na úlohy \calV značíme
 $$\calU \red \calV.$$
@@ -67,31 +58,31 @@ $$\calU \red_p \calV \text{ a } \calV \red_p \mathcal{W}, \text{ pak } \calU \re
 
 * 3-barevnost
 * ILP
-* Problém rozkladu
-* SubsetSum
+* Problém rozkladu: Je dána konečná množina $X$ a systém jejich podmnožin $\mathcal{S}$. Je možné z $\mathcal{S}$ vybrat prvky tak, že tvoří rozklad množiny $X$?
+* SubsetSum: Jsou dána kladná čísla $a_1, a_2, ..., a_n$ a číslo $K$. Lze vybrat podmnožinu čísel $a_1, a_2, ..., a_n$ tak, aby jejich součet byl roven číslu $K$?
 * Problém kliky grafu
-* Úloha o nezávislých množinách
-* Problém vrcholového pokrytí
+* Úloha o nezávislých množinách: Je dán prostý neorientovaný graf $G = (V, E)$ bez smyček. Množina vrcholů $N \subseteq V$ se nazývá *nezávislá množina* v $G$, jestliže žádná hrana grafu $G$ nemá oba krajní vrcholy v $N$. Existuje v $G$ nezávislá množina o $k$ vrcholech?
+* Problém vrcholového pokrytí: Je dán prostý neorientovaný graf bez smyček $G = (V, E)$. Podmnožina vrcholů $B \subseteq V$ se nazývá *vrcholové pokrytí* $G$, jestliže každá hrana grafu $Gč má alespoň jeden krajní vrchol v množině $B$. Existuje v grafu $G$ vrcholové pokrytí o $k$ vrcholech?
 * Problém existence hamiltonovského cyklu
 * Problém obchodního cestujícího
 * Problém nejdelších cest v orientovaném grafu
 * Problém nejkratších cest v orientovaném grafu
 
-**\NP obtížné úlohy.** Jestliže o některé úloze \calU pouze víme, že se na ní polynomiálně redukuje některé \NP úplná ploha, pak řákáme, že \calU je \NP obtížná téžká, nebo též \NP obtížná.
+**\NP obtížné úlohy.** Jestliže o některé úloze \calU pouze víme, že se na ní polynomiálně redukuje některá \NP úplná úloha, pak říkáme, že \calU je \NP téžká, nebo též \NP obtížná.
 
 **Heuristiky.** Jestliže je třeba řešit problém, který je \NP úplný, musíme pro větší instance opustit myšlenku přesného nebo optimálního řešení a smířit se s tím, že získáme "dostatečně přesné" nebo "dostatečně kvalitní" řešení. K tomu se používají heuristické algoritmy pracující v polynomiálním čase.
 
 **Aproximační algoritmus.** Uvažujme optimalizační problém \calU. Polynomiální algoritmus $\mathcal{A}$ se nazývá **$R$ aproximační algoritmus**, jestliže existuje reálné číslo $R$ takové, že pro každou instanci algoritmu $\mathcal{A}$ najde přípustné řešení ne horší než $R$-krát hodnota optimálního řešení.
 
-Ne pro všechny úlohy, jejichž rozhodovací verze jsou \NP úplné, aproximační algoritmy existují.
+Ne pro všechny úlohy, jejichž rozhodovací verze jsou \NP úplné, aproximační algoritmy existují. (TSP $\red_p$ HAM $\Rightarrow \calP = \NP$)
 
 ## Třída co-\NP
 
-Je-li jazyk $L$ ve třídě \calP, pak i jeho doplněk $\overline{L}$ patří do třídy \calP. Obdoné tvrzení se pro jazyky třídy \NP neumí dokázat.
+Je-li jazyk $L$ ve třídě \calP, pak i jeho doplněk $\overline{L}$ patří do třídy \calP. Obdobné tvrzení se pro jazyky třídy \NP neumí dokázat.
 
-Jazyk $L$ patří do třídy co-\NP, jesltiže jeho doplněk patří do třídy \NP.
+Jazyk $L$ patří do třídy co-\NP, jestliže jeho doplněk patří do třídy \NP.
 
-* Jazyk USAT, který je doplňkem jazyka SAT, se skládá ze všech nesplnitelných booleovských formulí a ze všech slov, kteeré neodpovídají booleovské formuli
+* Jazyk USAT, který je doplňkem jazyka SAT, se skládá ze všech nesplnitelných booleovských formulí a ze všech slov, které neodpovídají booleovské formuli
 * Jazyk TAUT, který se skládá ze všech slov odpovídajících tautologii výrokové logiky
 
 Mějme dva jazyky $L_1$ a $L_2$, pro které platí $L_1 \red_p L_2$. Pak platí také $\overline{L_1} \red_p \overline{L_2}$.
