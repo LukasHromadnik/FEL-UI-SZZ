@@ -30,9 +30,9 @@ Jestliže $\delta(q, X_i)$ není definováno, TM se zastaví.
 
 Jestliže během výpočtu Turingova stroje nad slovem $w$ se Turingův stroj dostane do jednoho z koncových stavů $q' \in F$, říkáme, že se TM **úspěšně zastavil**. Obsah pásky při úspěšném zastavení je **výstupem** TM nad vstupem $w$.
 
-Vstupní slovo $w \in \Sigma^*$ je **přijato** Turingovým strojem $M$, jestliže se Turingův stroj na slově $w$ úspěšně zastaví. Množina slov $w \in \Sigma^*$, který Turingův stroj přijímá, se nazývá **jazyk přijímaný** $m$ a značíme $L(M)$.
+Vstupní slovo $w \in \Sigma^*$ je **přijato** Turingovým strojem $M$, jestliže se Turingův stroj na slově $w$ **úspěšně zastaví**. Množina slov $w \in \Sigma^*$, který Turingův stroj přijímá, se nazývá **jazyk přijímaný** $M$ a značíme $L(M)$.
 
-Je dáno zobrazení $f: \Sigma^* \rightarrow \Sigma^*$. Řekneme, že TM $M$ **realizuje zobrazení** $f$, jestliže každé $w \in \Sigma^*$, pro které je $f(w)$ definovaná, se $M$ úspěšně zastaví s výstupem $f(w)$ (tj. $q_0 w \vdash^* \alpha q_F \beta$, kde $\alpha \beta = f(w)$). Pro $w$ pro něž $f(w)$ není definováno se $M$ **zastaví neúspěšně**.
+Je dáno zobrazení $f: \Sigma^* \rightarrow \Sigma^*$. Řekneme, že TM $M$ **realizuje zobrazení** $f$, jestliže pro každé $w \in \Sigma^*$, pro které je $f(w)$ definovaná, se $M$ úspěšně zastaví s výstupem $f(w)$ (tj. $q_0 w \vdash^* \alpha q_F \beta$, kde $\alpha \beta = f(w)$). Pro $w$ pro něž $f(w)$ není definováno se $M$ **zastaví neúspěšně**.
 
 **Časová složitost Turingova stroje** je parciální zobrazení $T(n)$ z množiny všech přirozených čísel do sebe. Jestliže pro nějaký vstup délky $n$ se Turingův stroj nezastaví, $T(n)$ není definováno. V opačném případě je $T(n)$ rovno maximálnímu počtu kroků, po nichž dojde k zastavení Turingova stroje.
 
@@ -42,13 +42,13 @@ Je dáno zobrazení $f: \Sigma^* \rightarrow \Sigma^*$. Řekneme, že TM $M$ **r
 
 Každý jazyk, který je rozhodován Turingovým strojem, je také tímto Turingovým strojem přijímán. Naopak to ale neplatí.
 
-**Turingův stroj s $k$ páskami** se skládá z řídící jednotky, která se nachází v jednom z konečně mnoha stavů $q \in Q$, množiny vstupních symbolů $\Gamma$, přechodové funkce $\delta$, počátečního stavu $q_0$, páskového symbolu $B$ a množiny koncových stavů $F$. Dále je dáno $k$ pásek a $k$ hlav, $i$-tá hlava vždy čte jedno pole $i$-té pásky. Přechodová funkce $\delta$ je parciální zobrazení, které reaguje na stav, ve kterém se Turingův stroj nachází a na $k$-tici páskových symbolů, kterou jednotlivé hlavy snímají. Formálně je $\delta$ parciální zobrazení $\delta: (Q \setminus F) \times \Gamma^k \rightarrow Q \times \Gamma^k \times \{L, R\}^k$.
+**Turingův stroj s $k$ páskami** se skládá z řídící jednotky, která se nachází v jednom z konečně mnoha stavů $q \in Q$, množiny vstupních symbolů $\Sigma$, přechodové funkce $\delta$, počátečního stavu $q_0$, páskového symbolu $B$ a množiny koncových stavů $F$. Dále je dáno $k$ pásek a $k$ hlav, $i$-tá hlava vždy čte jedno pole $i$-té pásky. Přechodová funkce $\delta$ je parciální zobrazení, které reaguje na stav, ve kterém se Turingův stroj nachází a na $k$-tici páskových symbolů, kterou jednotlivé hlavy snímají. Formálně je $\delta$ parciální zobrazení $\delta: (Q \setminus F) \times \Gamma^k \rightarrow Q \times \Gamma^k \times \{L, R\}^k$.
 
-Přechodová funkce udává pohyb každé halvy nezávisle na pohybech ostatních hlav.
+Přechodová funkce udává pohyb každé hlavy nezávisle na pohybech ostatních hlav.
 
 Ke každému Turingovu stroji $M_1$ s $k$ páskami existuje Turingův stroj $M_2$ s jednou páskou, který má stejné chování jako $M_1$. Navíc, jestliže $M_1$ potřeboval k úspěšnému zastavení $n$ kroků, pak $M_2$ potřebuje $\mathcal{O}(n^2)$ kroků. *Důkaz v přednáškách*
 
-**Nedeterministický Turingův stroj**. Jestliže pro Turingův stroj připustíme, aby v jedné situaci mohl povést několik různých kroků, dostáváme nedeterministický Turingův stroj. Jediný rozdíl je v přechodové funkci:
+**Nedeterministický Turingův stroj**. Jestliže pro Turingův stroj připustíme, aby v jedné situaci mohl provést několik různých kroků, dostáváme nedeterministický Turingův stroj. Jediný rozdíl je v přechodové funkci:
 
 * $\delta$ je přechodová funkce, tj. parciální zobrazení z množiny $(Q \setminus F) \times \Gamma$ do množiny $\mathcal{P}_f(Q \times \Gamma \times \{L, R\})$, kde $\mathcal{P}_f(X)$ je konečná podmnožina množiny $X$.
 
