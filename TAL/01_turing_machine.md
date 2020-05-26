@@ -14,7 +14,7 @@ Turingův stroj je sedmice $(Q, \Sigma, \Gamma, \delta, q_0, B, F)$, kde
 
 **Situace Turingova stroje** (též **konfigurace**) plně popisuje obsah pásky, pozici hlavy na pásce a stav, ve kterém se nachází řídící jednotka.
 
-Na začátku práce se Turingův stroj nachází v počátečním stavu $q_0$, na pásce má na $n$ polích vstupní slovo $a_1 a_2 ... a_n (a_i \in \Sigma)$, ostatní pole obsahují blank $B$ a hlava čte pole pásky se symbolem $a_1$. Tedy formálně počáteční situaci zapisujeme $q_0 a_1 a_2 ... a_n$.
+Na začátku práce se Turingův stroj nachází v počátečním stavu $q_0$, na pásce má na $n$ polích vstupní slovo $a_1 \, a_2 \, ... \, a_n (a_i \in \Sigma)$, ostatní pole obsahují blank $B$ a hlava čte pole pásky se symbolem $a_1$. Tedy formálně počáteční situaci zapisujeme $q_0 \, a_1 \, a_2 \, ... \, a_n$.
 
 Předpokládejme, že se Turingův stroj nachází v situaci
 
