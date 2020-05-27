@@ -128,17 +128,18 @@ Jazyky $L_p$ a $L_s$ patří do průniku tříd \NP a co-\NP.
 * Vstup: velké liché přirozené číslo $n$
 * Výstup: \uv{prvočíslo} nebo \uv{složené}
 
-1. Spočítáme $n - 1 = 2^lm$, kde $m$ je liché číslo
+1. Spočítáme $n - 1 = 2^lm$, kde $m$ je liché číslo.
 2. Náhodně vybereme $a \in \{ 1, 2, \dots, n - 1 \}$.
 3. Spočítáme $a^m \modn$, jestliže $a^m \equiv 1 \modn$, stop, výstup \uv{prvočíslo}.
 4. Opakovaným umocňováním počítáme
 $$a^{2m} \modn, \quad a^{2^2m} \modn, \quad \dots, \quad a^{2^lm} \modn.$$
 5. Jestliže $a^{2^lm} \not\equiv 1 \modn$, stop, výstup \uv{složené}.
-6. Vezmeme $k$ takové, že $a^{2^km} \not\equiv 1 \modn$ a $a^{2{k + 1}m} \modn$. \
+6. Vezmeme $k$ takové, že $a^{2^km} \not\equiv 1 \modn$ a $a^{2{k + 1}m} \equiv 1 \modn$. \
 Jestliže $a^{2^km} \equiv -1 \modn$, stop, výstup \uv{prvočíslo}. \
 Jestliže $a^{2^km} \not\equiv -1 \modn$, stop, výstup \uv{složené}.
 
 **Věta.**
+
 1. Jestliže pro vstup $n$ dá Millerův test prvočíselnosti odpověď \uv{složené}, pak je číslo $n$ složené.
 2. Jestliže pro vstup $n$  dá Millerův test prvočíselnosti odpověď \uv{prvočíslo}, pak $n$ je prvočíslo s pravděpodobností větší než $\frac{1}{2}$.
 
@@ -152,10 +153,10 @@ Na začátku práce:
 * případné další pásky obsahují $B$,
 * všechny hlavy jsou nastaveny na prvním políčku dané pásky.
 
-Na základě stavu $q$, ve kterém se stroj $M$ nechází, a na základě obsahu políček, kteeré jednotlivé hlavy čtou, přechodová funkce $\delta$ určuje, zda se $M$ zastaví nebo přejde do nového stavu $p$, přepíše obsah první pásky (**nikol ale obsah druhé pásky**) a hlavy posune doprava, doleva nebo zůstanou stát (posuny hlav jsou nezávislé).
+Na základě stavu $q$, ve kterém se stroj $M$ nachází, a na základě obsahu políček, které jednotlivé hlavy čtou, přechodová funkce $\delta$ určuje, zda se $M$ zastaví nebo přejde do nového stavu $p$, přepíše obsah první pásky (**nikoli ale obsah druhé pásky**) a hlavy posune doprava, doleva nebo zůstanou stát (posuny hlav jsou nezávislé).
 
 Formálně, je-li $M$ ve stavu $q$, hlava na první pásce čte symbol $X$, na druhé pásce je číslo $a$ a
-$$\delta(q, X, a) = (P, Y, D_1, D_2), \quad q, p \in Q, a \in \{0, 1\}, X, Y, \in \Gamma, D_1, D_2 \in \{L, R, S \},$$
+$$\delta(q, X, a) = (P, Y, D_1, D_2), \quad q, p \in Q, \quad a \in \{0, 1\}, \quad X, Y, \in \Gamma, \quad D_1, D_2 \in \{L, R, S \},$$
 pak $M$ se přesune do stavu $p$, na první pásku napíše $Y$ a $i$-tá hlava se posune doprava pro $D_i = R$, doleva pro $D_i = L$ nebo zůstane na místě pro $D_i = S$.
 
 Jestliže $\delta(q, X, a)$ není definováno, $M$ se zastaví.
@@ -164,24 +165,24 @@ $M$ se úspěšně zastaví právě tehdy, když se přesune do koncového (při
 
 Může se zdát, že tento model je nerealistický – nemůžeme před začátkem práce naplnit nekonečnou pásku. Toto je ale \uv{realizováno} tak, že v okamžiku, kdy druhá hlava čte dosud nenavštívené políčko druhé pásky, náhodně se vygeneruje 0 nebo 1 každé s pravděpodobností $\frac{1}{2}$ a tento symbol už se nikdy během jednoho průběhu práce TM nezmění.
 
-**Třída \RP.** Jazyk $L$ patří do třídy \RP právě tehdy, když existuje RTM $M$ takový, že
+**Třída \RP.** Jazyk $L$ patří do třídy \RP právě tehdy, když existuje RTM $M$ takový, že:
 
 1. Jestliže $w \notin L$, stroj $M$ se ve stavu $q_F$ zastaví s pravděpodobností 0.
-2. Jestliže $w \in L$, stroj $M$ se ve stavu $q_F$ zastaví s pravděpodobností, který je alespoň rovna $\frac{1}{2}$.
+2. Jestliže $w \in L$, stroj $M$ se ve stavu $q_F$ zastaví s pravděpodobností, která je alespoň rovna $\frac{1}{2}$.
 3. Existuje polynom $p(n)$ takový, že každý běh $M$ (tj. pro jakýkoliv obsah druhé pásky) trvá maximálně $p(n)$ kroků, kde $n$ je délka vstupního slova.
 
-Miller-Rabinův test prvočíselnosti je příklad algoritmu, který splňuje všechny tři podmínky a proto jazyk $L$, který se skládá ze všech složených čísel patří do třídy \RP.
+Miller-Rabinův test prvočíselnosti je příkladem algoritmu, který splňuje všechny tři podmínky a proto jazyk $L$, který se skládá ze všech složených čísel patří do třídy \RP.
 
-**Turingův stroj typu Monte-Carlo.** RTM splňující podmínky 1 a 2 z předchozí definice se nazývá RTM typu *Monte-Carlo*. RTM typu Monte-Carlo obecně nemusí pracovat v polynomoálním čase.
+**Turingův stroj typu Monte-Carlo.** RTM splňující podmínky 1 a 2 z předchozí definice se nazývá RTM typu *Monte-Carlo*. RTM typu Monte-Carlo obecně nemusí pracovat v polynomiálním čase.
 
-Je dán jazyk $L \in \RP$, pak pro každou kladnou konstantnu $0 < c < \frac{1}{2}$ je možné sestrojit RTM $M$ (algoritmus) s polynomiální složitostí takový, že
+Je dán jazyk $L \in \RP$, pak pro každou kladnou konstantu $0 < c < \frac{1}{2}$ je možné sestrojit RTM $M$ (algoritmus) s polynomiální složitostí takový, že
 
 1. Jestliže $w \notin L$, stroj $M$ se úspěšně zastaví s pravděpodobností 0.
 2. Jestliže $w \in L$, stroj $M$ se úspěšně zastaví s pravděpodobností $1 - c$.
 
 **Třída \ZPP.** Jazyk $L$ patří do třídy \ZPP právě tehdy, když existuje RTM $M$ takový, že
 
-1. Jestliže $w \notin L$, stroj $M$ se úspěšně zastaví s pravděpodností 0.
+1. Jestliže $w \notin L$, stroj $M$ se úspěšně zastaví s pravděpodobností 0.
 2. Jestliže $w \in L$, stroj $M$ se úspěšně zastaví s pravděpodobností 1.
 3. Střední hodnota počtu kroků $M$ v jednom běhu je $p(n)$, kde $p(n)$ je polynom a $n$ je délka vstupního slova.
 
@@ -194,7 +195,7 @@ Jestliže jazyk $L$ patří do třídy \ZPP, pak i jeho doplněk $\overline{L}$ 
 **Třída co-\RP.** Jazyk $L$ patří do třídy co-\RP právě tehdy, když jeho doplněk $\overline{L}$ patří do třídy \RP.
 
 Platí
-$$\ZPP = \RP \cap \mathrm{co-RP}.$$
+$$\ZPP = \RP \cap \text{co-}\RP.$$
 
 Platí
-$$\calP \subseteq \ZPP, \quad \RP \subseteq \NP, \quad \mathrm{co}-\RP \subseteq \mathrm{co}-\NP.$$
+$$\calP \subseteq \ZPP, \quad \RP \subseteq \NP, \quad \text{co-}\RP \subseteq \text{co-}\NP.$$
