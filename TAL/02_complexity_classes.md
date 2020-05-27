@@ -4,13 +4,13 @@
 \newcommand{\RP}{\mcal{RP}}
 \newcommand{\ZPP}{\mcal{ZPP}}
 \newcommand{\red}{\vartriangleleft}
-\newcommand{\calP}{\mcal{P}}
-\newcommand{\calU}{\mcal{U}}
-\newcommand{\calV}{\mcal{V}}
-\newcommand{\pspace}{\calP\texttt{SPACE}}
+\newcommand{\mcalP}{\mcal{P}}
+\newcommand{\mcalU}{\mcal{U}}
+\newcommand{\mcalV}{\mcal{V}}
+\newcommand{\pspace}{\mcalP\texttt{SPACE}}
 \newcommand{\npspace}{\NP\texttt{SPACE}}
 
-[^1]: TSP $\red_p$ HAM $\Rightarrow \calP = \NP$
+[^1]: TSP $\red_p$ HAM $\Rightarrow \mcalP = \NP$
 
 # Třídy složitosti
 
@@ -24,18 +24,18 @@ Teorie složitosti pracuje zejména s tzv. *rozhodovacími* úlohami. Rozhodovac
 
 Dá se dokázat, že když je kterákoliv verze dané úlohy polynomiálně řešitelná, jsou polynomiálně řešitelné všechny tři verze.
 
-## Třídy \calP a \NP
+## Třídy \mcalP a \NP
 
-Instance libovolné rozhodovací úlohy můžeme zakódovat jako slova nad vhodnou abecedou. Protože řešením rozhodovací úlohy je buď ANO nebo NE, rozdělíme instance na tzv. ANO-instance a NE-instance. **Jazyk úlohy $\calU$**, značíme jej $L_\calU$, se skládá ze všech slov odpovídajících ANO-instancím úlohy \calU. Množina všech NE-instancí tvoří doplněk jazyka $\overline{L_\calU}$, tj. $\Sigma^* \setminus L_\calU$.
+Instance libovolné rozhodovací úlohy můžeme zakódovat jako slova nad vhodnou abecedou. Protože řešením rozhodovací úlohy je buď ANO nebo NE, rozdělíme instance na tzv. ANO-instance a NE-instance. **Jazyk úlohy $\mcalU$**, značíme jej $L_\mcalU$, se skládá ze všech slov odpovídajících ANO-instancím úlohy \mcalU. Množina všech NE-instancí tvoří doplněk jazyka $\overline{L_\mcalU}$, tj. $\Sigma^* \setminus L_\mcalU$.
 
-**Třída \calP.** Řekneme, že rozhodovací úloha \calU leží ve třídě \calP, jestliže existuje deterministický Turingův stroj, který rozhodne jazyk $L_\calU$ a pracuje v polynomiálním čase; tj. funkce $T(n)$ je $\mathcal{O}(p(n))$ pro nějaký polynom $p(n)$.
+**Třída \mcalP.** Řekneme, že rozhodovací úloha \mcalU leží ve třídě \mcalP, jestliže existuje deterministický Turingův stroj, který rozhodne jazyk $L_\mcalU$ a pracuje v polynomiálním čase; tj. funkce $T(n)$ je $\mathcal{O}(p(n))$ pro nějaký polynom $p(n)$.
 
 * **Minimální kostra v grafu**. Je dán neorientovaný graf $G$ s ohodnocením hran $c$. Je dáno číslo $k$. Existuje kostra grafu ceny menší nebo rovno $k$?
 * **Nejkratší cesty v acyklickém grafu**. Je dán acyklický graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $c$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $cč délky menší nebo rovno $k$?
 * **Toky v sítích**. Je dána síť s horním omezením $c$, dolním omezením $l$, se zdrojem $z$ a spotřebičem $s$. Dále je dáno číslo $k$. Existuje přípustný tok od $z$ do $s$ velikosti alespoň $k$?
 * **Minimální řez**. Je dána síť s horním omezením $c$, dolním omezením $l$. Dále je dáno číslo $k$. Existuje řez, který má kapacitu menší nebo rovnu $k$?
 
-**Třída \NP.** Řekneme, že rozhodovací úloha \calU leží ve třídě \NP, jestliže existuje nedeterministický Turingův stroj, který rozhodne jazyk $L_\calU$ a pracuje v polynomiálním čase.
+**Třída \NP.** Řekneme, že rozhodovací úloha \mcalU leží ve třídě \NP, jestliže existuje nedeterministický Turingův stroj, který rozhodne jazyk $L_\mcalU$ a pracuje v polynomiálním čase.
 
 * **Kliky v grafu**. Je dán neorientovaný graf $G$ a číslo $k$. Existuje klika v grafu $G$ o alespoň $k$ vrcholech?
 * **Nejkratší cesty v obecném grafu**. Je dán orientovaný graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $v$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $v$ délky menší nebo rovno $k$?
@@ -45,20 +45,20 @@ $$ \sum_{i \in I} w_i \leq A \quad \text{a} \quad \sum_{i \in I} c_i \geq B?$$
 
 ## Třída $\mathcal{NPC}$
 
-**Redukce a polynomiální redukce úloh.** Jsou dány dvě rozhodovací úlohy \calU a \calV. Řekneme, že úloha \calU se **redukuje** na úlohu \calV, jestliže existuje algoritmus (program pro RAM, Turingův stroj) $M$, který pro každou instanci $I$ úlohy \calU zkonstruuje instanci $I'$ úlohy \calV a to tak, že
-$$I \text{ je ANO-instance } \calU \text{ iff } I' \text{ je ANO-instance } \calV.$$
-Fakt, že úloha \calU se redukuje na úlohy \calV značíme
-$$\calU \red \calV.$$
-Jestliže navíc algoritmus $M$ pracuje v polynomiálním čase, říkáme, že \calU se **polynomiálně redukuje** na \calV a značíme
-$$\calU \red_p \calV.$$
+**Redukce a polynomiální redukce úloh.** Jsou dány dvě rozhodovací úlohy \mcalU a \mcalV. Řekneme, že úloha \mcalU se **redukuje** na úlohu \mcalV, jestliže existuje algoritmus (program pro RAM, Turingův stroj) $M$, který pro každou instanci $I$ úlohy \mcalU zkonstruuje instanci $I'$ úlohy \mcalV a to tak, že
+$$I \text{ je ANO-instance } \mcalU \text{ iff } I' \text{ je ANO-instance } \mcalV.$$
+Fakt, že úloha \mcalU se redukuje na úlohy \mcalV značíme
+$$\mcalU \red \mcalV.$$
+Jestliže navíc algoritmus $M$ pracuje v polynomiálním čase, říkáme, že \mcalU se **polynomiálně redukuje** na \mcalV a značíme
+$$\mcalU \red_p \mcalV.$$
 
 Polynomiální redukce $\red_p$ je tranzitivní. Tedy pokud
-$$\calU \red_p \calV \text{ a } \calV \red_p \mathcal{W}, \text{ pak } \calU \red_p \mathcal{W}.$$
+$$\mcalU \red_p \mcalV \text{ a } \mcalV \red_p \mathcal{W}, \text{ pak } \mcalU \red_p \mathcal{W}.$$
 
-**\NP úplné úlohy.** Řekneme, že rozhodovací úloha \calU je **\NP úplná**, jestliže
+**\NP úplné úlohy.** Řekneme, že rozhodovací úloha \mcalU je **\NP úplná**, jestliže
 
-1. \calU je ve třídě \NP,
-2. každá \NP úloha se polynomiálně redukuje na \calU.
+1. \mcalU je ve třídě \NP,
+2. každá \NP úloha se polynomiálně redukuje na \mcalU.
 
 \NP úplné úlohy jsou ty \uv{nejtěžší} mezi všemi \NP úlohami, značíme ji $\mathcal{NPC}$.
 
@@ -74,17 +74,17 @@ $$\calU \red_p \calV \text{ a } \calV \red_p \mathcal{W}, \text{ pak } \calU \re
 * Problém nejdelších cest v orientovaném grafu
 * Problém nejkratších cest v orientovaném grafu
 
-**\NP obtížné úlohy.** Jestliže o některé úloze \calU pouze víme, že se na ni polynomiálně redukuje některá \NP úplná úloha, pak říkáme, že \calU je \NP téžká, nebo též \NP obtížná.
+**\NP obtížné úlohy.** Jestliže o některé úloze \mcalU pouze víme, že se na ni polynomiálně redukuje některá \NP úplná úloha, pak říkáme, že \mcalU je \NP téžká, nebo též \NP obtížná.
 
 **Heuristiky.** Jestliže je třeba řešit problém, který je \NP úplný, musíme pro větší instance opustit myšlenku přesného nebo optimálního řešení a smířit se s tím, že získáme \uv{dostatečně přesné} nebo \uv{dostatečně kvalitní} řešení. K tomu se používají heuristické algoritmy pracující v polynomiálním čase.
 
-**Aproximační algoritmus.** Uvažujme optimalizační problém \calU. Polynomiální algoritmus $\mathcal{A}$ se nazývá **$R$ aproximační algoritmus**, jestliže existuje reálné číslo $R$ takové, že pro každou instanci algoritmu $\mathcal{A}$ najde přípustné řešení ne horší než $R$-krát hodnota optimálního řešení.
+**Aproximační algoritmus.** Uvažujme optimalizační problém \mcalU. Polynomiální algoritmus $\mathcal{A}$ se nazývá **$R$ aproximační algoritmus**, jestliže existuje reálné číslo $R$ takové, že pro každou instanci algoritmu $\mathcal{A}$ najde přípustné řešení ne horší než $R$-krát hodnota optimálního řešení.
 
 Ne pro všechny úlohy, jejichž rozhodovací verze jsou \NP úplné, aproximační algoritmy existují[^1].
 
 ## Třída co-\NP
 
-Je-li jazyk $L$ ve třídě \calP, pak i jeho doplněk $\overline{L}$ patří do třídy \calP. Obdobné tvrzení se pro jazyky třídy \NP neumí dokázat.
+Je-li jazyk $L$ ve třídě \mcalP, pak i jeho doplněk $\overline{L}$ patří do třídy \mcalP. Obdobné tvrzení se pro jazyky třídy \NP neumí dokázat.
 
 Jazyk $L$ patří do třídy co-\NP, jestliže jeho doplněk patří do třídy \NP.
 
@@ -98,7 +98,7 @@ Platí co-$\NP = \NP$ právě tehdy, když existuje \NP úplný jazyk, jehož do
 ## Třídy \pspace a \npspace
 
 **Třída \pspace.** Jazyk $L$ patří do třídy \pspace, jestliže existuje deterministický Turingův stroj $M$, který přijímá jazyk $L$ a pracuje s polynomiální paměťovou složitostí. Platí
-$$\calP \subseteq \pspace.$$
+$$\mcalP \subseteq \pspace.$$
 
 **Třída \npspace.** Jazyk $L$ patří do třídy \npspace, jestliže existuje nedeterministický Turingův stroj $M$, který přijímá jazyk $L$ a pracuje s polynomiální paměťovou složitostí. Platí
 $$\NP \subseteq \npspace.$$
@@ -107,7 +107,7 @@ $$\NP \subseteq \npspace.$$
 $$\pspace = \npspace.$$
 
 Platí
-$$\calP \subseteq \NP \subseteq \pspace.$$
+$$\mcalP \subseteq \NP \subseteq \pspace.$$
 
 ![Třídy obtížnosti](assets/complexity-classes.png)
 
@@ -118,7 +118,7 @@ $$\calP \subseteq \NP \subseteq \pspace.$$
 L_p &= \{w \ | \ w \text{ je binární zápis prvočísla} \} \\
 L_s &= \{ w \ | \ w \text{ je binární zápis složeného čísla} \}
 \end{align*}
-Jazyk $L_s$ je (až na číslo 1) doplňkem jazyka $L_p$; přidáme-li 1 do jazyka $L_s$, pak dostáváme
+Jazyk $L_s$ je (až na číslo 1, protože číslo 1 není ani prvočíslo ani složené číslo) doplňkem jazyka $L_p$; přidáme-li 1 do jazyka $L_s$, pak dostáváme
 $$L_s = \overline{L_p}, \quad L_p = \overline{L_s}.$$
 
 Jazyky $L_p$ a $L_s$ patří do průniku tříd \NP a co-\NP.
@@ -173,14 +173,11 @@ Může se zdát, že tento model je nerealistický – nemůžeme před začátk
 
 Miller-Rabinův test prvočíselnosti je příkladem algoritmu, který splňuje všechny tři podmínky a proto jazyk $L$, který se skládá ze všech složených čísel patří do třídy \RP.
 
+Navíc pro každou kladnou konstantu $0 < c < \frac{1}{2}$ je možné sestrojit RTM $M$ s polynomiální složitostí takový, že pro jazyk $L \in \RP$ a slovo $w \in L$ se úspěšně zastaví s pravděpodobností $1 - c$.
+
 **Turingův stroj typu Monte-Carlo.** RTM splňující podmínky 1 a 2 z předchozí definice se nazývá RTM typu *Monte-Carlo*. RTM typu Monte-Carlo obecně nemusí pracovat v polynomiálním čase.
 
-Je dán jazyk $L \in \RP$, pak pro každou kladnou konstantu $0 < c < \frac{1}{2}$ je možné sestrojit RTM $M$ (algoritmus) s polynomiální složitostí takový, že
-
-1. Jestliže $w \notin L$, stroj $M$ se úspěšně zastaví s pravděpodobností 0.
-2. Jestliže $w \in L$, stroj $M$ se úspěšně zastaví s pravděpodobností $1 - c$.
-
-**Třída \ZPP.** Jazyk $L$ patří do třídy \ZPP právě tehdy, když existuje RTM $M$ takový, že
+**Třída \ZPP.** Jazyk $L$ patří do třídy \ZPP právě tehdy, když existuje RTM $M$ takový, že:
 
 1. Jestliže $w \notin L$, stroj $M$ se úspěšně zastaví s pravděpodobností 0.
 2. Jestliže $w \in L$, stroj $M$ se úspěšně zastaví s pravděpodobností 1.
@@ -198,4 +195,98 @@ Platí
 $$\ZPP = \RP \cap \text{co-}\RP.$$
 
 Platí
-$$\calP \subseteq \ZPP, \quad \RP \subseteq \NP, \quad \text{co-}\RP \subseteq \text{co-}\NP.$$
+$$\mcalP \subseteq \ZPP, \quad \RP \subseteq \NP, \quad \text{co-}\RP \subseteq \text{co-}\NP.$$
+
+## Nerozhodnutelnost
+
+**Rekurzivní jazyky.** Řekneme, že jazyk $L$ je **rekurzivní**, jestliže existuje Turingův stroj $M$, který rozhoduje jazyk $L$.
+
+**Rekurzivně spočetné jazyky.** Řekneme, že jazyk $L$ je **rekurzivně spočetný**, jestliže existuje Turingův stroj $M$, který tento jazyk přijímá.
+
+Jazykům, které nejsou rekurzivní, také říkáme, že jsou *algoritmicky neřešitelné* nebo *nerozhodnutelné*.
+
+Každý rekurzivní jazyk je též rekurzivně spočetný.
+
+Jestliže jazyk $L$ i  jeho doplněk $\overline{L}$ jsou oba rekurzivně spočetné, pak $L$ je rekurzivní.
+
+Pro jazyk $L$ může nastat jedna z následujících možností:
+
+1. $L$ i $\overline{L}$ jsou oba rekurzivní.
+2. Jeden z $L$ a $\overline{L}$ je rekurzivně spočetný a druhý není rekurzivně spočetný.
+3. $L$ i $\overline{L}$ nejsou rekurzivně spočetné.
+
+**Kód Turingova stroje.** Každý Turingův stroj $M$ lze zakódovat jako binární slovo. Mějme Turingův stroj $M$ s množinou stavů $Q = \{ q_1, q_2, \dots, q_n \}$, množinou vstupních symbolů $\Sigma = \{ 0, 1 \}$, množinou páskových symbolů $\Gamma = \{ X_1, X_2, \dots, X_m \}$, kde $X_1 = 0, X_2 = 1, X_3 = B$. Dále počáteční stav je $q_1$, koncový stav $q_2$. Označme $D_1$ pohyb hlavy doprava a $D_2$ pohyb hlavy doleva (tj. $D_1 = R$ a $D_2 = L$).
+
+Jeden přechod stroje $M$
+$$\delta(q_i, X_j) = (q_k, X_l, D_r),$$
+zákodujeme slovem
+$$w = 0^i10^j10^k10^l10^r.$$
+*Kód Turingova stroje*, který značíme $\langle M \rangle$, je
+$$\langle M \rangle = 111 w_1 11 w_2 11 \dots 11 w_p 111,$$
+kde $w_1, \dots, w_p$ jsou slova odpovídající všem přechodům stroje $M$.
+
+**Diagonální jazyk $L_d$.** Jestliže binární slovo $w$ nemá tvar $111 w_1 11 w_2 11 \dots 11 w_p 111$, považujeme ho za kód Turingova stroje, který nepřijímá žádné slovo (neudělá nikdy žádný krok), tj. $L(M) = \emptyset$.
+
+Jazyk $L_d$ se skládá ze všech binárních slov $w$ takových, že Turingův stroj s kódem $w$ nepřijímá slovo $w$. Tedy $L_d$ obsahuje i všechna slova $w$, která neodpovídají kódům nějakého Turingova stroje, ovšem obsahuje i další binární slova.
+
+Neexistuje Turingův stroj, který by přijímal jazyk $L_d$. Jinými slovy, $L_d \ne L(M)$ pro každý Turingův stroj $M$.
+
+**Univerzální jazyk.** *Univerzální jazyk $L_{UN}$* je množina slov tvaru $\langle M \rangle w$, kde $\langle M \rangle$ je kód Turingova stroje a $w \in \{ 0, 1 \}^*$ je binární slovo takové, že $w \in L(M)$.
+
+**Univerzální Turingův stroj.** *Univerzální Turingův stroj $U$* má 4 pásky. První páska obsahuje vstupní slovo $\langle M \rangle w$, druhá páska simuluje pásku Turingova stroje $M$ a třetí páska obsahuje kód stavu, ve kterém se Turingův stroj $M$ nachází. Dále má $U$ ještě čtvrtou, pomocnou pásku.
+
+Univerzální jazyk $L_{UN}$ je rekurzivně spočetný, ale není rekurzivní.
+
+Jsou dány dvě úlohy \mcalU a \mcalV takové, že $\mcalU \red \mcalV$. Pak platí:
+
+1. Jestliže \mcalV je rozhodnutelná, pak i \mcalU je rozhodnutelná.
+2. Jestliže \mcalU je nerozhodnutelná, pak i \mcalV je nerozhodnutelná.
+3. Jestliže jazyk úlohy \mcalU není rekurzivně spočetný, pak i jazyk úlohy \mcalV není rekurzivně spočetný.
+
+**Věta (Rice).** Jakákoli netriviální vlastnost rekurzivně spočetných jazyků je nerozhodnutelná.
+
+Netriviální vlastností se rozumí každá vlastnost, kterou má aspoň jeden rekurzivně spočetný jazyk a nemají ho všechny rekurzivně spočetné jazyky.
+
+## Další nerozhodnutelné úlohy
+
+Univerzální jazyk $L_{UN}$ hraje pro nerozhodnutelné úlohy / jazyky obdobnou roli jako hrál problém splnitelnosti booleovských formulí pro \NP úplné úlohy.
+
+Označme \mcal{UN} úlohu odpovídající univerzálnímu jazyku $L_{UN}$; tj. tuto úlohu: Instance se skládá z TM $M$ a slova $w$. Jedná se o ano instanci právě tehdy, když $w \in L(M)$.
+
+**Postův korespondenční problém (PCP).** Jsou dány dva seznamy slov $A, B$ nad danou abecedou $\Sigma$.
+$$A = (w_1, w_2, \dots, w_k), \quad B = (x_1, x_2, \dots, x_k),$$
+kde $w_i, x_i \in \Sigma^*, i = 1, 2, \dots, k$. Řekneme, že dvojice $A, B$ *má řešení*, jestliže existuje posloupnost $i_1, i_2, \dots, i_r$ indexů, tj. $i_j \in \{ 1, 2, \dots, k \}$, taková, že
+$$w_{i_1} w_{i_2} \dots w_{i_r} = x_{i_1} x_{i_2} \dots x_{i_r}.$$
+Otázka: Existuje řešení dané instance?
+
+**Modifikovaný Postův korespondenční problém (MPCP).** Jsou dány dva seznamy $A, B$ nad danou abecedou $\Sigma$. Řekneme, že dvojice $A, B$ *má řešení*, jestliže existuje posloupnost indexů taková, že
+$$w_1 w_{i_1} w_{i_2} \dots w_{i_r} = x_1 x_{i_1} x_{i_2} \dots x_{i_r}.$$
+Otázka: Existuje řešení dané instance?
+
+Modifikovaný Postův korespondenční problém se od Postova korespondenčního problému liší tím, že v MPCP vyžadujeme, aby hledaná posloupnost indexů vždy začínala jedničkou.
+
+Platí
+$$\mcal{UN} \red \mathrm{MPCP} \red \mathrm{PCP}.$$
+
+Postův korespondenční problém je nerozhodnutelný.
+
+**Víceznačnost bezkontextových gramatik.** Je dána bezkontextová gramatika $\mcal{G} = (N, \Sigma, S, P)$, kde $N$ je množina neterminálních symbolů, $\Sigma$ je množina terminálních symbolů, $S$ je startovací symbol a $P$ je množina pravidel typu $X \rightarrow \alpha$ pro $X \in N, \alpha \in (N \cup \Sigma)^*$.
+
+Otázka: Rozhodněte, zda existuje slovo $w$, které má dva různé derivační stromy?
+
+Platí
+
+$$\mathrm{PCP} \red \text{víceznačnost bezkontextových gramatik}.$$
+
+Jsou dány bezkontextové gramatiky $\mcal{G}_1$ a $\mcal{G}_2$. Označme $L(\mcal{G}_1)$ a $L(\mcal{G}_2)$ jazyky generované gramatikami $\mcal{G}_1$ a $\mcal{G}_2$. Následující úlohy jsou nerozhodnutelné.
+
+1. $L(\mcal{G}_1) \cap L(\mcal{G}_2) = \emptyset.$
+2. $L(\mcal{G}_1) = L(\mcal{G}_2).$
+3. $L(\mcal{G}_1) \subseteq L(\mcal{G}_2).$
+4. $L(\mcal{G}_1) = \Sigma^*.$
+
+**Tiling problém.** Jsou dány čtvercové dlaždičky velikosti $1\, cm^2$ několika typů. Každá dlaždička má barevné okraje. Máme neomezený počet dlaždiček každého typu.
+
+Otázka: Je možné dlaždičkami vydláždit každou plochu daného typu tak, aby se dlaždičky dotýkaly hranami stejné barvy, za předpokladu, že dlaždičky nesmíme rotovat?
+
+Tiling problém je nerozhodnutelný. Tedy speciálně je nerozhodnutelné, zda každou neomezenou plochu je možné vydláždit předem danou sadou dlaždiček.
