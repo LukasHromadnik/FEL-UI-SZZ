@@ -31,7 +31,7 @@ Instance libovolné rozhodovací úlohy můžeme zakódovat jako slova nad vhodn
 * **Toky v sítích**. Je dána síť s horním omezením $c$, dolním omezením $l$, se zdrojem $z$ a spotřebičem $s$. Dále je dáno číslo $k$. Existuje přípustný tok od $z$ do $s$ velikosti alespoň $k$?
 * **Minimální řez**. Je dána síť s horním omezením $c$, dolním omezením $l$. Dále je dáno číslo $k$. Existuje řez, který má kapacitu menší nebo rovnu $k$?
 
-**Třída \NP.** Řekneme, že rozhodovací úloha \calU leží ve třídě \NP, jestliže existuje nedeterministický Turingův stroj, který rozhodne jazky $L_\calU$ a pracuje v poylnomiálním čase.
+**Třída \NP.** Řekneme, že rozhodovací úloha \calU leží ve třídě \NP, jestliže existuje nedeterministický Turingův stroj, který rozhodne jazyk $L_\calU$ a pracuje v polynomiálním čase.
 
 * **Kliky v grafu**. Je dán neorientovaný graf $G$ a číslo $k$. Existuje klika v grafu $G$ o alespoň $k$ vrcholech?
 * **Nejkratší cesty v obecném grafu**. Je dán orientovaný graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $v$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $v$ délky menší nebo rovno $k$?
@@ -70,7 +70,7 @@ $$\calU \red_p \calV \text{ a } \calV \red_p \mathcal{W}, \text{ pak } \calU \re
 * Problém nejdelších cest v orientovaném grafu
 * Problém nejkratších cest v orientovaném grafu
 
-**\NP obtížné úlohy.** Jestliže o některé úloze \calU pouze víme, že se na ní polynomiálně redukuje některá \NP úplná úloha, pak říkáme, že \calU je \NP téžká, nebo též \NP obtížná.
+**\NP obtížné úlohy.** Jestliže o některé úloze \calU pouze víme, že se na ni polynomiálně redukuje některá \NP úplná úloha, pak říkáme, že \calU je \NP téžká, nebo též \NP obtížná.
 
 **Heuristiky.** Jestliže je třeba řešit problém, který je \NP úplný, musíme pro větší instance opustit myšlenku přesného nebo optimálního řešení a smířit se s tím, že získáme \uv{dostatečně přesné} nebo \uv{dostatečně kvalitní} řešení. K tomu se používají heuristické algoritmy pracující v polynomiálním čase.
 
@@ -99,8 +99,10 @@ $$\calP \subseteq \pspace.$$
 **Třída \npspace.** Jazyk $L$ patří do třídy \npspace, jestliže existuje nedeterministický Turingův stroj $M$, který přijímá jazyk $L$ a pracuje s polynomiální paměťovou složitostí. Platí
 $$\NP \subseteq \npspace.$$
 
-Platí
+**Savitchova věta.** Platí
 $$\pspace = \npspace.$$
 
 Platí
 $$\calP \subseteq \NP \subseteq \pspace.$$
+
+![Třídy obtížnosti](assets/complexity-classes.png)

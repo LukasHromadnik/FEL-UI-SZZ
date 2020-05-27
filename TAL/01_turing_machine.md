@@ -30,13 +30,13 @@ Jestliže $\delta(q, X_i)$ není definováno, TM se zastaví.
 
 Jestliže během výpočtu Turingova stroje nad slovem $w$ se Turingův stroj dostane do jednoho z koncových stavů $q' \in F$, říkáme, že se TM **úspěšně zastavil**. Obsah pásky při úspěšném zastavení je **výstupem** TM nad vstupem $w$.
 
-Vstupní slovo $w \in \Sigma^*$ je **přijato** Turingovým strojem $M$, jestliže se Turingův stroj na slově $w$ **úspěšně zastaví**. Množina slov $w \in \Sigma^*$, který Turingův stroj přijímá, se nazývá **jazyk přijímaný** $M$ a značíme $L(M)$.
+Vstupní slovo $w \in \Sigma^*$ je **přijato** Turingovým strojem $M$, jestliže se Turingův stroj na slově $w$ **úspěšně zastaví**. Množina slov $w \in \Sigma^*$, kterou Turingův stroj přijímá, se nazývá **jazyk přijímaný** $M$ a značíme $L(M)$.
 
-Je dáno zobrazení $f: \Sigma^* \rightarrow \Sigma^*$. Řekneme, že TM $M$ **realizuje zobrazení** $f$, jestliže pro každé $w \in \Sigma^*$, pro které je $f(w)$ definovaná, se $M$ úspěšně zastaví s výstupem $f(w)$ (tj. $q_0 w \vdash^* \alpha q_F \beta$, kde $\alpha \beta = f(w)$). Pro $w$ pro něž $f(w)$ není definováno se $M$ **zastaví neúspěšně**.
+Je dáno zobrazení $f: \Sigma^* \rightarrow \Sigma^*$. Řekneme, že TM $M$ **realizuje zobrazení** $f$, jestliže pro každé $w \in \Sigma^*$, pro které je $f(w)$ definované, se $M$ úspěšně zastaví s výstupem $f(w)$ (tj. $q_0 w \vdash^* \alpha q_F \beta$, kde $\alpha \beta = f(w)$). Pro $w$ pro něž $f(w)$ není definováno se $M$ **zastaví neúspěšně**.
 
 **Časová složitost Turingova stroje $T(n)$** je parciální zobrazení  z množiny všech přirozených čísel do sebe. Jestliže pro nějaký vstup délky $n$ se Turingův stroj nezastaví, $T(n)$ není definováno. V opačném případě je $T(n)$ rovno maximálnímu počtu kroků, po nichž dojde k zastavení Turingova stroje.
 
-**Paměťová složitost Turingova stroje $S(n)$**. Jestliže pro nějaký vstup délky $n$ Turingův stroj použije nekonečnou část pásky (pak se nemůže v konečném čase zastavit), $S(n)$ není definováno. V opačném případě je $S(n)$ rovno největšímu rozdílu pořadových čísel polí, které byly během výpočtu použity, kde maximum se bere přes všechny vstupy délky $n$.
+**Paměťová složitost Turingova stroje $S(n)$**. Jestliže pro nějaký vstup délky $n$ Turingův stroj použije nekonečnou část pásky (pak se nemůže v konečném čase zastavit), $S(n)$ není definováno. V opačném případě je $S(n)$ rovno největšímu rozdílu pořadových čísel polí, která byla během výpočtu použita, kde maximum se bere přes všechny vstupy délky $n$.
 
 Řekneme, že jazyk $L$ je **přijímán** nějakým Turingovým strojem, jestliže existuje TM $M$ takový, že $L = L(M)$. Řekneme, že Turingův stroj **rozhoduje jazyk** $L$, jestliže tento jazyk přijímá a navíc se na každém vstupu zastaví.
 
