@@ -1,0 +1,211 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  czech,
+  a4paperpaper,
+]{article}
+\usepackage{lmodern}
+\usepackage{setspace}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdflang={cs-CZ},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs}
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage[a4paper,left=2.5cm,right=2.5cm]{geometry}
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{czech}
+\else
+  \usepackage[shorthands=off,main=czech]{babel}
+\fi
+
+\author{}
+\date{}
+
+\begin{document}
+
+\setstretch{1.2}
+\hypertarget{ilp}{%
+\section{ILP}\label{ilp}}
+
+The ILP problem is given by matrix
+\(\mathbf{A} \in \mathbb{R}^{m \times n}\) and vectors
+\(\mathbf{b} \in \mathbb{R}^m\) and \(\mathbf{c} \in \mathbb{R}^n\). The
+goal is to find a vector \(\mathbf{x} \in \mathbb{Z}^n\) such that
+\(\mathbf{A} \cdot x \leq b\) and \(c^T \cdot x\) is the maximum.
+
+Usually the problem is given as
+
+\[\max \left\{ c^T \cdot x : \mathbf{A} \cdot x \leq b, x \in \mathbb{Z}^n \right\}\]
+
+Since the \textbf{ILP solution psace is not a convex set}, we cannot use
+convex optimization techniques.
+
+The most successful method to solve the ILP problem are:
+
+\begin{itemize}
+\tightlist
+\item
+  Enumerative methods
+\item
+  Branch and bound method
+\item
+  Cutting planes methods
+\end{itemize}
+
+\hypertarget{enumerative-methods}{%
+\subsection{Enumerative methods}\label{enumerative-methods}}
+
+Based on the idea of \textbf{inspecting all possible solutions}. Due to
+the integer nature of the variables, the number of solutions is
+countable but their number is huge. So this method is usually suited
+only for smaller instances with a small number of variables.
+
+\hypertarget{branch-and-bound-method}{%
+\subsection{Branch and bound method}\label{branch-and-bound-method}}
+
+The method is based on \textbf{splitting} the solutionn space into
+disjoint sets. It starts by relaxing on the integrality of the variables
+and \textbf{solves the LP problem}. If all variables \(x_i\) are
+\textbf{integers, the computation ends}. Otherwise one variable
+\(x_i \in \mathbb{Z}\) is chosen and its value is assigned to \(k\).
+Then the solution space is \textbf{divided into two sets} -- in the
+first one we consider \(x_i \leq \lfloor k \rfloor\) and in the second
+one \(x_i \geq \lfloor k \rfloor + 1\). The algorithm
+\textbf{recursively repeats} computation for the both new sets till
+feasible integer solution is found.
+
+As sson as the algorithm finds an integer solutoin, its objective
+function value can be used for bounding. The \textbf{node is discarded}
+whenever \emph{z}, its (integer or real) objective function value, is
+worse than \(z^*\), the value of the best known solution.
+
+\hypertarget{special-cases-of-ilp}{%
+\subsection{Special cases of ILP}\label{special-cases-of-ilp}}
+
+Matrix \(\mathbf{A} = [a_{ij}]\) of size \(m/n\) is totally unimodular
+if the determinant of every square submatrix of matrix \(\mathbf{A}\) is
+equal \(0\), \(+1\) or \(-1\). Matrix \(\mathbf{A}\) is totally
+unimodular if each colum contains onne non-zero element or exactly two
+non-zero elements \(+1\) and \(-1\).
+
+The ILP problem with a totally unimodular matrix \(\mathbf{A}\) and
+integer vector \(b\) can be solved by a simplex algorithm and the
+solution will be an integer. Also it can be solved in polynomial time
+for this matrix.
+
+\hypertarget{representaion-formulas-as-ilp}{%
+\subsection{Representaion formulas as
+ILP}\label{representaion-formulas-as-ilp}}
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule
+\begin{minipage}[b]{0.46\columnwidth}\raggedright
+Formula\strut
+\end{minipage} & \begin{minipage}[b]{0.48\columnwidth}\raggedright
+ILP\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.46\columnwidth}\raggedright
+\(x_1 \Rightarrow \overline{x_3}\)\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(x_1 + x_3 \leq 1\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.46\columnwidth}\raggedright
+\(x_2 \Rightarrow x_1\)\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(x_2 \leq x_1\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.46\columnwidth}\raggedright
+\(x_4 \text{ XOR } x_5\)\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(x_4 + x_5 = 1\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.46\columnwidth}\raggedright
+1 must be chosen but 2 can not\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(x_1 = 1, x_2 = 0\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.46\columnwidth}\raggedright
+at leat 3 items must be chosen\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(\sum x_i \geq 3\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.46\columnwidth}\raggedright
+exactly 3 items must be chosen\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(\sum x_i = 3\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.46\columnwidth}\raggedright
+\((x_1 \text{ AND } x_2) \Rightarrow x_3\)\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(x_1 \cdot x_2 \leq x_3\)\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.46\columnwidth}\raggedright
+exactly 2 items can not be chosen\strut
+\end{minipage} & \begin{minipage}[t]{0.48\columnwidth}\raggedright
+\(\!\begin{aligned}  \sum x_i & \leq 1 + M \cdot y \\  M \cdot (1 - y) + \sum x_i & \geq 3 \\  y \in \{ 0, 1 \}  \end{aligned}\)\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{at-least-k-of-n-constraints-must-hold}{%
+\subsubsection{\texorpdfstring{At least \(K\) of \(N\) constraints must
+hold}{At least K of N constraints must hold}}\label{at-least-k-of-n-constraints-must-hold}}
+
+\begin{align*}
+f(x_1, x_2, \dots, x_n) &\leq b_1 + M \cdot y_1 \\
+f(x_1, x_2, \dots, x_n) &\leq b_2 + M \cdot y_2 \\
+& \vdots \\
+f(x_1, x_2, \dots, x_n) &\leq b_N + M \cdot y_N \\
+\sum_{i = 1}^N y_i &= N - K
+\end{align*}
+
+\end{document}
