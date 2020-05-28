@@ -1,4 +1,5 @@
-FILES=$(shell find . -name "*.md" -not -name "README.md" -not -name "00_title.md" | sort)
+PART=.
+FILES=$(shell find $(PART) -name "*.md" -not -name "README.md" -not -name "00_title.md" | sort)
 PANDOC=pandoc -s 00_title.md $(FILES) -f markdown -V lang=cs-CZ --number-sections
 
 all: pdf
@@ -8,10 +9,9 @@ pdf:
 		--variable papersize=a4paper \
 		-o main.pdf
 
-html:
-	$(PANDOC) \
-		--katex \
-		-t html \
-		--css github.css \
-		-o docs/index.html \
-		-V title:""
+# html:
+# 	$(PANDOC) \
+# 		--katex \
+# 		-t html \
+# 		--css github.css \
+# 		-o docs/index.html
