@@ -18,9 +18,9 @@
 
 Teorie složitosti pracuje zejména s tzv. *rozhodovacími* úlohami. Rozhodovací úlohy jsou takové úlohy, jejichž řešením je buď odpověď ANO nebo NE.
 
-* **Rozhodovací verze**: Je dán orientovaný graf $G = (V, E)$, ohodnocení $c: E \rightarrow \mathbb{N}$ a dále celé číslo $K$. Existuje minimální kostra, jejíž cena je nejvýše $K$?
-* **Vyhodnocovací verze**: Je dán neorientovaný graf $G = (V, E)$ a $c: E \rightarrow \mathbb{N}$. Najděte cenu minimální kostry ohodnoceného grafu.
-* **Optimalizační verze**: Je dán neorietovaný graf $G = (V, E)$ a $c: E \rightarrow \mathbb{N}$. Najděte minimální kostru ohodnoceného grafu.
+* **Rozhodovací verze**: Je dán neorientovaný graf $G = (V, E)$, ohodnocení $c: E \rightarrow \mathbb{N}$ a dále celé číslo $K$. Existuje minimální kostra, jejíž cena je nejvýše $K$?
+* **Vyhodnocovací verze**: Je dán neorientovaný graf $G = (V, E)$ a ohodnocení $c: E \rightarrow \mathbb{N}$. Najděte cenu minimální kostry ohodnoceného grafu.
+* **Optimalizační verze**: Je dán neorietovaný graf $G = (V, E)$ a ohodnocení $c: E \rightarrow \mathbb{N}$. Najděte minimální kostru ohodnoceného grafu.
 
 Dá se dokázat, že když je kterákoliv verze dané úlohy polynomiálně řešitelná, jsou polynomiálně řešitelné všechny tři verze.
 
@@ -31,13 +31,13 @@ Instance libovolné rozhodovací úlohy můžeme zakódovat jako slova nad vhodn
 **Třída \mcalP.** Řekneme, že rozhodovací úloha \mcalU leží ve třídě \mcalP, jestliže existuje deterministický Turingův stroj, který rozhodne jazyk $L_\mcalU$ a pracuje v polynomiálním čase; tj. funkce $T(n)$ je $\mathcal{O}(p(n))$ pro nějaký polynom $p(n)$.
 
 * **Minimální kostra v grafu**. Je dán neorientovaný graf $G$ s ohodnocením hran $c$. Je dáno číslo $k$. Existuje kostra grafu ceny menší nebo rovno $k$?
-* **Nejkratší cesty v acyklickém grafu**. Je dán acyklický graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $c$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $cč délky menší nebo rovno $k$?
+* **Nejkratší cesty v acyklickém grafu**. Je dán acyklický graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $c$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $c$ délky menší nebo rovno $k$?
 * **Toky v sítích**. Je dána síť s horním omezením $c$, dolním omezením $l$, se zdrojem $z$ a spotřebičem $s$. Dále je dáno číslo $k$. Existuje přípustný tok od $z$ do $s$ velikosti alespoň $k$?
 * **Minimální řez**. Je dána síť s horním omezením $c$, dolním omezením $l$. Dále je dáno číslo $k$. Existuje řez, který má kapacitu menší nebo rovnu $k$?
 
 **Třída \NP.** Řekneme, že rozhodovací úloha \mcalU leží ve třídě \NP, jestliže existuje nedeterministický Turingův stroj, který rozhodne jazyk $L_\mcalU$ a pracuje v polynomiálním čase.
 
-* **Kliky v grafu**. Je dán neorientovaný graf $G$ a číslo $k$. Existuje klika v grafu $G$ o alespoň $k$ vrcholech?
+* **Klika grafu**. Je dán neorientovaný graf $G$ a číslo $k$. Existuje klika v grafu $G$ o alespoň $k$ vrcholech?
 * **Nejkratší cesty v obecném grafu**. Je dán orientovaný graf s ohodnocením hran $a$. Jsou dány vrcholy $r$ a $v$. Je dáno číslo $k$. Existuje orientovaná cesta z vrcholu $r$ do vrcholu $v$ délky menší nebo rovno $k$?
 * **$k$-barevnost**. Je dán neorietovaný graf $G$. Je graf $G$ $k$-barevný?
 * **Problém batohu**. Je dáno $n$ předmětů $1, 2, \dots, n$. Každý předmět $i$ má cenu $c_i$ a váhu $w_i$. Dále jsou dána čísla $A$ a $B$. Je možné vybrat předměty tak, aby celková váha nepřevýšila $A$ a celková cena byla alespoň $B$? Přesněji, existuje podmožina předmětů $I \subseteq \{ 1, 2, \dots, n \}$ taková, že
@@ -60,19 +60,19 @@ $$\mcalU \red_p \mcalV \text{ a } \mcalV \red_p \mathcal{W}, \text{ pak } \mcalU
 1. \mcalU je ve třídě \NP,
 2. každá \NP úloha se polynomiálně redukuje na \mcalU.
 
-\NP úplné úlohy jsou ty \uv{nejtěžší} mezi všemi \NP úlohami, značíme ji $\mathcal{NPC}$.
+\NP úplné úlohy jsou ty \uv{nejtěžší} mezi všemi \NP úlohami, značíme je $\mathcal{NPC}$.
 
-* 3-barevnost
-* ILP
-* Problém rozkladu: Je dána konečná množina $X$ a systém jejich podmnožin $\mathcal{S}$. Je možné z $\mathcal{S}$ vybrat prvky tak, že tvoří rozklad množiny $X$?
-* SubsetSum: Jsou dána kladná čísla $a_1, a_2, \dots, a_n$ a číslo $K$. Lze vybrat podmnožinu čísel $a_1, a_2, \dots, a_n$ tak, aby jejich součet byl roven číslu $K$?
-* Problém kliky grafu
-* Úloha o nezávislých množinách: Je dán prostý neorientovaný graf $G = (V, E)$ bez smyček. Množina vrcholů $N \subseteq V$ se nazývá *nezávislá množina* v $G$, jestliže žádná hrana grafu $G$ nemá oba krajní vrcholy v $N$. Existuje v $G$ nezávislá množina o $k$ vrcholech?
-* Problém vrcholového pokrytí: Je dán prostý neorientovaný graf bez smyček $G = (V, E)$. Podmnožina vrcholů $B \subseteq V$ se nazývá *vrcholové pokrytí* $G$, jestliže každá hrana grafu $G$ má alespoň jeden krajní vrchol v množině $B$. Existuje v grafu $G$ vrcholové pokrytí o $k$ vrcholech?
-* Problém existence hamiltonovského cyklu
-* Problém obchodního cestujícího
-* Problém nejdelších cest v orientovaném grafu
-* Problém nejkratších cest v orientovaném grafu
+* **3-barevnost**
+* **ILP**
+* **Problém rozkladu**: Je dána konečná množina $X$ a systém jejich podmnožin $\mathcal{S}$. Je možné z $\mathcal{S}$ vybrat prvky tak, že tvoří rozklad množiny $X$?
+* **SubsetSum**: Jsou dána kladná čísla $a_1, a_2, \dots, a_n$ a číslo $K$. Lze vybrat podmnožinu čísel $a_1, a_2, \dots, a_n$ tak, aby jejich součet byl roven číslu $K$?
+* **Problém kliky grafu**
+* **Úloha o nezávislých množinách**: Je dán prostý neorientovaný graf $G = (V, E)$ bez smyček. Množina vrcholů $N \subseteq V$ se nazývá *nezávislá množina* v $G$, jestliže žádná hrana grafu $G$ nemá oba krajní vrcholy v $N$. Existuje v $G$ nezávislá množina o $k$ vrcholech?
+* **Problém vrcholového pokrytí**: Je dán prostý neorientovaný graf bez smyček $G = (V, E)$. Podmnožina vrcholů $B \subseteq V$ se nazývá *vrcholové pokrytí* $G$, jestliže každá hrana grafu $G$ má alespoň jeden krajní vrchol v množině $B$. Existuje v grafu $G$ vrcholové pokrytí o $k$ vrcholech?
+* **Problém existence hamiltonovského cyklu**
+* **Problém obchodního cestujícího**
+* **Problém nejdelších cest v orientovaném grafu**
+* **Problém nejkratších cest v orientovaném grafu**
 
 **\NP obtížné úlohy.** Jestliže o některé úloze \mcalU pouze víme, že se na ni polynomiálně redukuje některá \NP úplná úloha, pak říkáme, že \mcalU je \NP téžká, nebo též \NP obtížná.
 
@@ -88,7 +88,7 @@ Je-li jazyk $L$ ve třídě \mcalP, pak i jeho doplněk $\overline{L}$ patří d
 
 Jazyk $L$ patří do třídy co-\NP, jestliže jeho doplněk patří do třídy \NP.
 
-* Jazyk USAT, který je doplňkem jazyka SAT, se skládá ze všech nesplnitelných booleovských formulí a ze všech slov, které neodpovídají booleovské formuli
+* Jazyk USAT, který je doplňkem jazyka SAT, se skládá ze všech nesplnitelných booleovských formulí a ze všech slov, která neodpovídají booleovské formuli
 * Jazyk TAUT, který se skládá ze všech slov odpovídajících tautologii výrokové logiky
 
 Mějme dva jazyky $L_1$ a $L_2$, pro které platí $L_1 \red_p L_2$. Pak platí také $\overline{L_1} \red_p \overline{L_2}$.
@@ -156,14 +156,14 @@ Na začátku práce:
 Na základě stavu $q$, ve kterém se stroj $M$ nachází, a na základě obsahu políček, které jednotlivé hlavy čtou, přechodová funkce $\delta$ určuje, zda se $M$ zastaví nebo přejde do nového stavu $p$, přepíše obsah první pásky (**nikoli ale obsah druhé pásky**) a hlavy posune doprava, doleva nebo zůstanou stát (posuny hlav jsou nezávislé).
 
 Formálně, je-li $M$ ve stavu $q$, hlava na první pásce čte symbol $X$, na druhé pásce je číslo $a$ a
-$$\delta(q, X, a) = (P, Y, D_1, D_2), \quad q, p \in Q, \quad a \in \{0, 1\}, \quad X, Y, \in \Gamma, \quad D_1, D_2 \in \{L, R, S \},$$
+$$\delta(q, X, a) = (p, Y, D_1, D_2), \quad q, p \in Q, \quad a \in \{0, 1\}, \quad X, Y \in \Gamma, \quad D_1, D_2 \in \{L, R, S \},$$
 pak $M$ se přesune do stavu $p$, na první pásku napíše $Y$ a $i$-tá hlava se posune doprava pro $D_i = R$, doleva pro $D_i = L$ nebo zůstane na místě pro $D_i = S$.
 
 Jestliže $\delta(q, X, a)$ není definováno, $M$ se zastaví.
 
 $M$ se úspěšně zastaví právě tehdy, když se přesune do koncového (přijímacího) stavu $q_F$.
 
-Může se zdát, že tento model je nerealistický – nemůžeme před začátkem práce naplnit nekonečnou pásku. Toto je ale \uv{realizováno} tak, že v okamžiku, kdy druhá hlava čte dosud nenavštívené políčko druhé pásky, náhodně se vygeneruje 0 nebo 1 každé s pravděpodobností $\frac{1}{2}$ a tento symbol už se nikdy během jednoho průběhu práce TM nezmění.
+Může se zdát, že tento model je nerealistický – nemůžeme před začátkem práce naplnit druhou pásku nekonečnou sekvencí 0 a 1. Toto je \uv{realizováno} tak, že v okamžiku, kdy druhá hlava čte dosud nenavštívené políčko druhé pásky, náhodně se vygeneruje 0 nebo 1 každé s pravděpodobností $\frac{1}{2}$ a tento symbol už se nikdy během jednoho průběhu práce TM nezmění.
 
 **Třída \RP.** Jazyk $L$ patří do třídy \RP právě tehdy, když existuje RTM $M$ takový, že:
 
@@ -285,7 +285,7 @@ Jsou dány bezkontextové gramatiky $\mcal{G}_1$ a $\mcal{G}_2$. Označme $L(\mc
 3. $L(\mcal{G}_1) \subseteq L(\mcal{G}_2).$
 4. $L(\mcal{G}_1) = \Sigma^*.$
 
-**Tiling problém.** Jsou dány čtvercové dlaždičky velikosti $1\, cm^2$ několika typů. Každá dlaždička má barevné okraje. Máme neomezený počet dlaždiček každého typu.
+**Tiling problém.** Jsou dány čtvercové dlaždičky velikosti 1 $\mathrm{cm}^2$ několika typů. Každá dlaždička má barevné okraje. Máme neomezený počet dlaždiček každého typu.
 
 Otázka: Je možné dlaždičkami vydláždit každou plochu daného typu tak, aby se dlaždičky dotýkaly hranami stejné barvy, za předpokladu, že dlaždičky nesmíme rotovat?
 
