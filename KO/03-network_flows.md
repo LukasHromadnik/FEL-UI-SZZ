@@ -60,3 +60,57 @@ When the labeling procedure of "Finding the Augmenting path" algorithm stops, th
 If the capacities of the network are integers, then **an integer-valued maximum flow exists**.
 
 When choosing the augmenting path, if we always choose the shortest one, time complexity is $\mathcal{O}(m^2n)$.
+
+## Minimum Cost Flow
+
+**Instance:** 5-tuple $(G, l, u, c, b)$ where
+
+* **cost of arcs** $c: E(G) \rightarrow \mathbb{R}$
+* balance $b: V(G) \rightarrow \mathbb{R}$ that represents the supply /consumptino of the nodes and satisfies $\sum_{v \in V(G)} b(v) = 0$.
+
+**Goal:** Find the feasible flow $f$ that minimizes
+$$\sum_{e \in E(G)} f(e) \cdot c(e)$$
+and satisfies
+$$\sum_{e \in \delta^+(v)} f(e) - \sum_{e \in \delta^-(v)} f(e) = b(v)$$
+for all $v \in V(G)$, or decide that it does not exists.
+
+## Matching
+
+**Matching** is the set or arcs $P \subseteq E(G)$ in graph $G$ such that the endpoints are all different (no arcs from $P$ are incident with the same node). When all nodes of $G$ are incident with some arc in $P$, we call $P$ a **perfect matching**.
+
+### Maximum Cardinality Matching Problem
+
+Let $G$ be a graph and let $M$ be some matching in $G$. A path $P$ is an **$M$-alternating path** if $E(P) \setminus M$ is a matching. An $M$-alternating path is **$M$-augmenting** if its endpoints are not covered by $M$.
+
+The $M$ is maximum iff there is no $M$-augmenting path.
+
+#### Algorithm
+
+1. Find the arbitrary matching.
+2. Find the $M$-alternating path with uncovered endpoints. Exchange the matching along the alternating path. Repeat as long as such a path does exist.
+
+### Maximum Cardinality Matching in Bipartite Graphs
+
+Can be transformed to the maximum flow problem:
+
+1. Add source $s$ and edge $(s, i)$ for all $i \in X$.
+2. Add sint $t$ and edge $(j, t)$ for all $j \in Y$.
+3. Edge orientation should be from $s \rightarrow X \rightarrow Y \rightarrow t$.
+4. The uppoer bound of all edges is equal to 1 and the lower bound is equal to 0.
+5. By solving the maximum flow from $s$ to $t$ we obtain maximum cardinality matching.
+
+### Assignment Problem
+
+We have $n$ exmployees and $n$ tasks and we know the cost of execution for each possible employee-task pair. Goal is to assign one task per employee while minimizing the total cost.
+
+Can be solved using **Hungarian Algorithm**.
+
+## Minimum Cost Multicommodity Flow Problem
+
+* **Instance:** 5-tuple $(G, l, u, c, b^1, \dots, b^m, \dots, b^{|M|})$ where
+    * vectors $b^m: V(G) \rightarrow \mathbb{R}$ that express (**supply / consumption**) of nodes by commodity $m$. $\sum_{v \in V(G)} b^m(v) = 0$ **for all commodities** $m \in M$.
+* **Goal:** Find the feasible flow $f$ whose cost
+$$\sum_{e \in E(G)} \sum_{m \in M} f^m(e) \cdot c(e)$$
+is minimal or decide that such a flow does not exist. Feasible flow satisfies
+$$\sum_{e \in \delta^+(v)} f^m(e) - \sum_{e \in \delta^-(v)} f^m(e) = b^m(v)$$
+for all $v \in V(G)$ and all $m \in M$.
