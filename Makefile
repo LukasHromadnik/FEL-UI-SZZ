@@ -1,6 +1,6 @@
 PART=.
 FILES=$(shell find $(PART) -name "*.md" -not -name "README.md" -not -name "00_title.md" | sort)
-PANDOC=pandoc -s 00_title.md $(FILES) -f markdown -V lang=cs-CZ --number-sections
+PANDOC=pandoc -s 00_title.md $(FILES) -f markdown -V lang=cs-CZ --number-sections --top-level-division=chapter -H preamble.tex
 
 all: pdf
 

@@ -26,7 +26,7 @@ An augmenting path for flow $f$ is a path from $s$ to $t$ with
 
 Capacity $\gamma$ of the augmenting path is the biggest possible increase of the flow on the augmenting path.
 
-\begin{algorithm}
+\begin{algorithm}[!htp]
 \caption{Ford-Fulkerson Algorithm}
 \hspace*{\algorithmicindent} \textbf{Input:}  Network $(G, l, u, s, t)$ \\
 \hspace*{\algorithmicindent} \textbf{Output:} Maximum feasible flow $f$ from $s$ to $t$
@@ -41,7 +41,7 @@ Increase flow by $\gamma$ on forward arcs and decrease flow by $\gamma$ on backw
 
 The flow from $s$ to $t$ is the **maximum** iff there is no augmenting path.
 
-\begin{algorithm}
+\begin{algorithm}[!htp]
 \caption{Finding the Augmenting path}
 \label{alg:finding-augmenting-path}
 \begin{algorithmic}[1]
@@ -88,7 +88,7 @@ Let $G$ be a graph and let $M$ be some matching in $G$. A path $P$ is an **$M$-a
 
 The $M$ is maximum matching iff there is no $M$-augmenting path.
 
-\begin{algorithm}
+\begin{algorithm}[!htp]
 \caption{Maximum Cardinality Matching Problem}
 \begin{algorithmic}[1]
 \State Find the arbitrary matching.

@@ -1,10 +1,10 @@
 # ILP
 
-The ILP problem is $\mathcal{NP}$-hard and it's given by matrix $\mathbf{A} \in \mathbb{R}^{m \times n}$ and vectors $\mathbf{b} \in \mathbb{R}^m$ and $\mathbf{c} \in \mathbb{R}^n$. The goal is to find a vector $\mathbf{x} \in \mathbb{Z}^n$ such that $\mathbf{A} \cdot \mathbf{x} \leq mathbf{b}$ and $mathbf{c}^T \cdot mathbf{x}$ is the maximum.
+The ILP problem is $\mathcal{NP}$-hard and it's given by matrix $\mathbf{A} \in \mathbb{R}^{m \times n}$ and vectors $\mathbf{b} \in \mathbb{R}^m$ and $\mathbf{c} \in \mathbb{R}^n$. The goal is to find a vector $\mathbf{x} \in \mathbb{Z}^n$ such that $\mathbf{A} \cdot \mathbf{x} \leq \mathbf{b}$ and $\mathbf{c}^T \cdot \mathbf{x}$ is the maximum.
 
 Usually the problem is given as
 
-$$\max \left\{ mathbf{c}^T \cdot mathbf{x} : \mathbf{A} \cdot mathbf{x} \leq mathbf{b}, mathbf{x} \in \mathbb{Z}^n \right\}$$
+$$\max \left\{ \mathbf{c}^T \cdot \mathbf{x} : \mathbf{A} \cdot \mathbf{x} \leq \mathbf{b}, \mathbf{x} \in \mathbb{Z}^n \right\}$$
 
 Since the **ILP solution space is not a convex set**, we cannot use convex optimization techniques.
 
@@ -31,13 +31,14 @@ Another group of algorithms are cutting planes methods. Its general idea is (sim
 * the solution found by LP becomes infeasible,
 * all integer solutions feasible in the last step have to remain feasible.
 
-### Gomory cuts
-
-Algorithm
-
-1. (Initialization) Solve the problem as an LP by a simplex algorithm
-2. (Optimality test) If the solution is an integer, the computation ends.
-3. (Reduction) Add new constraint (Gomory cut) into the simplex table. Optimize the problem by dual LP, then goto 2.
+\begin{algorithm}[!htp]
+\caption{Gomory cuts}
+\begin{algorithmic}[1]
+\State (Initialization) Solve the problem as an LP by a simplex algorithm
+\State (Optimality test) If the solution is an integer, the computation ends. \label{alg:gomory:optimality-test}
+\State (Reduction) Add new constraint (Gomory cut) into the simplex table. Optimize the problem by dual LP, then goto \ref{alg:gomory:optimality-test}.
+\end{algorithmic}
+\end{algorithm}
 
 ## Special cases of ILP
 

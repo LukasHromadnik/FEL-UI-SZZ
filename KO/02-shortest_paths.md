@@ -23,7 +23,7 @@ $$l(i, j) \leq l(i,k) + l(k, j).$$
 
 * $\mathcal{O}(n^2)$ or $\mathcal{O}(m + n \log n)$ using priority queue
 
-\begin{algorithm}
+\begin{algorithm}[!htp]
 \caption{Dijkstra's Algorithm}
 \hspace*{\algorithmicindent} \textbf{Input:} directed graph $G$, weights $c: E(G) \rightarrow \mathbb{R}_0^+$ and node $s \in V(G)$ \\
 \hspace*{\algorithmicindent} \textbf{Output:} $l(v)$ length of the shortest path from $s$ to $v$, $p(v)$ predecessor of $v$ on the shortest path
@@ -52,7 +52,7 @@ In contrast, **label-correcting algorithms** (e.g. Bellman-Ford's or Floyd's alg
 
 * $\mathcal{O}(nm)$
 
-\begin{algorithm}
+\begin{algorithm}[!htp]
 \caption{Bellman-Ford Algorithm}
 \hspace*{\algorithmicindent} \textbf{Input:} directed graph $G$ without negative cycle, weights $c: E(G) \rightarrow \mathbb{R}$ and node $s \in V(G)$ \\
 \hspace*{\algorithmicindent} \textbf{Output:} $l(v)$ length of the shortest path from $s$ to $v$, $p(v)$ predecessor of $v$ on the shortest path
@@ -72,7 +72,7 @@ If the iteration of the main loop terminates without making any changes, the alg
 
 Bellman-Ford algorithm can **detect negative cycle** that is reachable from vertex $s$ while checking triangular inequality for resulting $l$.
 
-\begin{algorithm}
+\begin{algorithm}[!htp]
 \caption{Bellman-Ford Algorithm – negative cycle detection}
 \begin{algorithmic}[1]
 \ForAll{edge $(v, t) \in E(G)$}
@@ -89,7 +89,7 @@ Bellman-Ford algorithm can **detect negative cycle** that is reachable from vert
 
 * $\mathcal{O}(n^3)$
 
-\begin{algorithm}
+\begin{algorithm}[!htp]
 \caption{Floyd Algorithm}
 \hspace*{\algorithmicindent} \textbf{Input:} directed graph $G$, weights $c: E(G) \rightarrow \mathbb{R}_0^+$ \\
 \hspace*{\algorithmicindent} \textbf{Output:} $l_{ij}$ is the length of the shortest path from $i$ to $j$, $p_{ij}$ is the predecessor of $j$ on such path
