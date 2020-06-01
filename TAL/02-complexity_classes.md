@@ -109,7 +109,7 @@ $$\pspace = \npspace.$$
 Platí
 $$\mcalP \subseteq \NP \subseteq \pspace.$$
 
-![Třídy obtížnosti](assets/complexity-classes.png)
+![Třídy obtížnosti](assets/complexity-classes.png){width=400px}
 
 ## Testování prvočíselnosti
 
@@ -122,6 +122,8 @@ Jazyk $L_s$ je (až na číslo 1, protože číslo 1 není ani prvočíslo ani s
 $$L_s = \overline{L_p}, \quad L_p = \overline{L_s}.$$
 
 Jazyky $L_p$ a $L_s$ patří do průniku tříd \NP a co-\NP.
+
+\clearpage
 
 **Millerův test prvočíselnosti.**
 
