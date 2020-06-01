@@ -1,2 +1,0 @@
-# SZZ
-Notes for SZZ
