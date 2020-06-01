@@ -70,12 +70,16 @@ When choosing the augmenting path, if we always choose the shortest one, time co
 **Instance:** 5-tuple $(G, l, u, c, b)$ where
 
 * **cost of arcs** $c: E(G) \rightarrow \mathbb{R}$
-* **balance** $b: V(G) \rightarrow \mathbb{R}$ that represents the supply /consumption of the nodes and satisfies $\sum_{v \in V(G)} b(v) = 0$.
+* **balance** $b: V(G) \rightarrow \mathbb{R}$ that represents the supply / consumption of the nodes and satisfies $\sum_{v \in V(G)} b(v) = 0$.
 
 **Goal:** Find the feasible flow $f$ that minimizes
-$$\sum_{e \in E(G)} f(e) \cdot c(e)$$
-and satisfies
-$$\sum_{e \in \delta^+(v)} f(e) - \sum_{e \in \delta^-(v)} f(e) = b(v)$$
+\begin{equation*}
+\begin{array}{ll}
+\text{minimize} & \displaystyle\sum_{e \in E(G)} f(e) \cdot c(e) \\
+\text{subject to} & \displaystyle\sum_{e \in \delta^+(v)} f(e) - \sum_{e \in \delta^-(v)} f(e) = b(v) \\
+\end{array}
+\end{equation*}
+
 for all $v \in V(G)$, or decide that it does not exists.
 
 ## Matching
@@ -110,7 +114,7 @@ Can be transformed to the maximum flow problem:
 
 We have $n$ exmployees and $n$ tasks and we know the cost of execution for each possible employee-task pair. Goal is to assign one task per employee while minimizing the total cost.
 
-Can be solved using **Hungarian Algorithm**.
+Can be solved using **Hungarian Algorithm**. (min řádek odečíst, min sloupec odečíst, pokrytí nul, nejmenší prvek odečíst z průsečíků, and repeat)
 
 ## Minimum Cost Multicommodity Flow Problem
 

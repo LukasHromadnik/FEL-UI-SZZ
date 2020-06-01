@@ -5,12 +5,12 @@
 
 We consider oriented graphs:
 
-* negative weights are allowed
+* negative weights are allowed,
 * negative cycles are not allowed, since the shortest path problem becomes $\mathcal{NP}$-hard.
 
 If path from $s$ to $t$ exists in the graph, then the shortest path from $s$ to $t$ exists too.
 
-If there is no **negative weight or zero weight cycle** in the graph, then every shortest edge progression from $s$ to $t$ is the shortest path from $s$ to $t$.
+If there is no **negative weight or zero weight cycle** in the graph, then every shortest edge progression (sled) from $s$ to $t$ is the shortest path from $s$ to $t$.
 
 If there is no **negative weight cycle** in the graph, then every shortest edge progression from $s$ to $t$ contains the shortest path from $s$ to $t$ and the length of this path is the same.
 
@@ -111,7 +111,7 @@ Bellman-Ford algorithm can **detect negative cycle** that is reachable from vert
 \end{algorithmic}
 \end{algorithm}
 
-The best known algorithm for **all pairs shortest path** problem without negative cycles. Negative cycle can be detected by check $l_{ii} < 0$ for some $i$.
+The best known algorithm for **all pairs shortest path** problem without negative cycles. Negative cycle can be detected by checking $l_{ii} < 0$ for some $i$.
 
 ## Johnson's Algorithm
 
@@ -121,4 +121,4 @@ Is better suited for sparse graphs then Floyd \ref{sec:floyd-algorithm}. Uses Di
 
 **Optimal substructure.** The solution to a given optimization problem can be obtained by the **combination of optimal solutions to its subproblems**. Such optimal substructures are usually described by means of **recurrent formula** (examples are Bellman equation in Bellman-Ford algorithm and "shortest path consists of shortests paths in Floyd algorithm").
 
-**Overlapping subproblems.** Computed **solutions to subproblems are stored** so that there don't have to recomputed. Dynamic programming is not useful when there are no common (overlapping) subproblems because there is no point of storing the solution if they are not needed again.
+**Overlapping subproblems.** Computed **solutions to subproblems are stored** so that there don't have to be recomputed. Dynamic programming is not useful when there are no common (overlapping) subproblems because there is no point of storing the solution if they are not needed again.

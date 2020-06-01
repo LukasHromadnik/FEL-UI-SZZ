@@ -3,7 +3,7 @@
 Scheduling is an assignment of a task to a resource in time.
 
 * set of $n$ tasks $\mathcal{T} = \{ T_1, T_2, \dots, T_n \}$
-* set of $m$ types of resources wities $R_k, \mathcal{P} = \left\{ P_1^1, \dots, P_1^{R_1}, P_2^1, \dots, P_2^{R_2}, \dots \dots, P_m^1, \dots, P_m^{R_m} \right\}$
+* set of $m$ types of resources with capacities $R_k, \mathcal{P} = \left\{ P_1^1, \dots, P_1^{R_1}, P_2^1, \dots, P_2^{R_2}, \dots \dots, P_m^1, \dots, P_m^{R_m} \right\}$
 
 Each task must be **completed**. Set of tasks is known when executing the scheduling algorithm – off-line scheduling.
 
@@ -18,13 +18,6 @@ Specific constraints:
 * When the precedence constraint is defined between $T_i$ and $T_j$, the processing of the task $T_j$ can't start before task $T_i$ is completed
 * If scheduling is non-preemptive, a task cannot be stopped and completed later
 * If scheduling is preemptive, the number of preemptions must be finite
-
-Parameters:
-
-* release time $r_j$
-* processing time $p_j$
-* due date $d_j$, time in which task $T_j$ should be completed
-* deadline $\tilde{d_j}$, time in which task $T_j$ has to be completed
 
 ## Graham's Notation $\alpha | \beta | \gamma$
 
@@ -260,7 +253,7 @@ Start time of $T_i$ is $s_i = \sum_{t = 0}^{UB - 1}(t \cdot x_{it})$.
 \end{array}
 \end{equation*}
 
-### Comparions of the Two Models
+### Comparisons of the Two Models
 
 Time-indexed model:
 

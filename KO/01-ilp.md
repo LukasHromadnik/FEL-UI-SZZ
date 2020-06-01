@@ -4,7 +4,7 @@ The ILP problem is $\mathcal{NP}$-hard and it's given by matrix $\mathbf{A} \in 
 
 Usually the problem is given as
 
-$$\max \left\{ \mathbf{c}^T \cdot \mathbf{x} : \mathbf{A} \cdot \mathbf{x} \leq \mathbf{b}, \mathbf{x} \in \mathbb{Z}^n \right\}$$
+$$\max \left\{ \mathbf{c}^T \cdot \mathbf{x} \ | \ \mathbf{A} \cdot \mathbf{x} \leq \mathbf{b}, \mathbf{x} \in \mathbb{Z}^n \right\}$$
 
 Since the **ILP solution space is not a convex set**, we cannot use convex optimization techniques.
 
