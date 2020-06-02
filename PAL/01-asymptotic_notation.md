@@ -2,7 +2,7 @@
 
 * $f(n) \in \mathcal{O}(g(n))$  
     The value of the function $f$ is on or below the value of the function $g$ within a constant factor
-    $$(\exists c > 0) (\exists n_0) (\forall n > n_0): | f(n) | \leq | c \cdot g(n) |$$
+    $$(\exists c > 0) (\exists n_0) (\forall n > n_0): \left| f(n) \right| \leq \left| c \cdot g(n) \right|$$
 * $f(n) \in \Omega(g(n))$  
     The value of the function $f$ is on or above the value of the function $g$ within a constant factor
     $$(\exists c > 0) (\exists n_0) (\forall n > n_0): | c \cdot g(n) | \leq | f(n) |$$
@@ -12,13 +12,13 @@
 
 # Graphs
 
-A graph is an ordered pair of a set of vertices $V$ (nodes) and set of edges $E$ (arcs) $G = (V, E)$.
+A graph is an ordered pair of a set of vertices $V$ (nodes) and a set of edges $E$ (arcs) $G = (V, E)$.
 
-**Incidence.** If two nodes $x, y$ are linked by edge $e$, nodes $x, y$ are said to be **incident** to edge $e$ or edge $e$ is incident to nodes $x, y$.
+**Incidence.** If two nodes $x, y$ are linked by the edge $e$, nodes $x, y$ are said to be **incident** to the edge $e$ or the edge $e$ is incident to nodes $x, y$.
 
-**Node degree** is a function that returns a number of edges incident to a given node.
+**Node degree.** It's a function that returns a number of edges incident to a given node.
 
-$$\deg(u) = |\{e \in E \ | \ u \in e \}|$$
+$$\deg(u) = \left|\{e \in E \ | \ u \in e \}\right|$$
 
 For directed graphs
 
@@ -27,24 +27,24 @@ deg^+(u) = |\{e \in E \ | \ (\exists v \in V): e = (v, u) \}| \\
 deg^-(u) = |\{e \in E \ | \ (\exists v \in V): e = (u, v) \}|
 \end{align*}
 
-**Hadnshaking lemma.**
+**Handshaking lemma.**
 $$\sum_{v \in V} deg(v) = 2|E|$$
 and for directed graphs
-$$\sum_{v \in V} (deg^+(v) + deg^-(v)) = 2|E|$$
+$$\sum_{v \in V} \left(deg^+(v) + deg^-(v)\right) = 2|E|$$
 
-**Path.** A path is a sequence of vertices and edges $(v_0, e_1, v_1, \dots, e_t, v_t)$, where all vertices $v_0, \dots, v_t$ **differ from each other** and for every $i = 1, 2, \dots, t, e_i = \{ v_{i-1}, v_i\} \in E(G)$. Edges are traversed in forward direction.
+**Path.** A path is a sequence of vertices and edges $(v_0, e_1, v_1, \dots, e_t, v_t)$, where all vertices $v_0, \dots, v_t$ **differ from each other** and for every $i = 1, 2, \dots, t, e_i = \{ v_{i-1}, v_i\} \in E(G)$. Edges are traversed in a forward direction.
 
 **Circuit.** A circuit is a closed path, i.e. a sequence $(v_0, e_1, v_1, \dots, e_t, v_t = v_0)$.
 
 **Cycle.** A cycle is a closed simple chain. Edges can be traveresed in both directions.
 
-**Connectivity.** Graph $G$ is **connected ** if for every pair of vertices $x$ and $y$ in $G$ there is a path from $x$ to $y$.
+**Connectivity.** Graph $G$ is **connected** if for every pair of vertices $x$ and $y$ in $G$ there is a path from $x$ to $y$.
 
 **Tree.** The following definitions of a tree (graph $G$) are equivalent:
 
 * $G$ is a connected graph without cycles.
-* $G$ is such a graph so that a cycle occurs if an arbitrary new edges is added.
-* $G$ is such a connected graph so that it becomes disconnected if any edge is remooved.
+* $G$ is such a graph so that a cycle occurs if an arbitrary new edge is added.
+* $G$ is such a connected graph so that it becomes disconnected if any edge is removed.
 * $G$ is a connected graph with $|V| - 1$ edges.
 * $G$ is a graph in which every two vertices are connected by just one path.
 
@@ -101,7 +101,7 @@ $$
 
 In other words, every edge has $-1$ at the source vertex and $+1$ at the target vertex. There is $+1$ at both vertices for undirected graphs.
 
-**Adjacency list.** In an adjacency list representation we keep for each vertex in graph a list of all other vertices which it has an edge to (list of neighbours).
+**Adjacency list.** In an adjacency list representation we keep for each vertex in the graph a list of all other vertices which it has an edge to (a list of neighbours).
 
 ## Comparison of graph representations
 
@@ -118,12 +118,16 @@ Query: are vertices $u, v$ adjacent? & \multicolumn{2}{c|}{$\mathcal{O}(1)$}    
 Query: get node degree of vertex $v$ & $|V| \in \mathcal{O}(|V|)$ & $\mathcal{O}(1)$        & $deg(v) \in \mathcal{O}(|V|)$ & $|E| \in \mathcal{O}(|E|)$ \\ \hline
 \end{tabular}
 
+*Adjacency matrix* and *Laplacian matrix* are slow to add or remove vertices because matrix must be resized / copied. *Incidence matrix* is also slow to add or remove edges for the same reason. When removing edges or vertices from the *adjacency list*, we need to find all vertices or edges.
+
+\clearpage
+
 ## Depth First Search (DFS)
 
 \begin{algorithm}[!htp]
 \caption{Depth First Search (DFS)}
 \begin{algorithmic}[1]
-\State $\mathrm{to\_visit}: \mathbf{Stack} \gets \emptyset$
+\State $\mathrm{to\_visit}: \mathbf{Queue} \gets \emptyset$
 \State $\mathrm{visited} \gets \emptyset$
 \State $\mathrm{to\_visit}.push(\mathrm{start\_vertex})$
 \While{$size(\mathrm{to\_visit}) \ne 0$}
@@ -140,30 +144,28 @@ Query: get node degree of vertex $v$ & $|V| \in \mathcal{O}(|V|)$ & $\mathcal{O}
 
 ## Breadth First Search (BFS)
 
-Same as DFS. Only difference is it uses $\mathbf{Stack}$ instead of $\mathbf{Queue}$.
+Same as DFS. Only difference is that it uses $\mathbf{Stack}$ instead of $\mathbf{Queue}$.
 
 ## Advanced graphs
 
-**Subgraph.** A graph $H$ is a subgraph of graph $G$, if the followin two inclusions are satisfied:
-
+**Subgraph.** A graph $H$ is a subgraph of the graph $G$, if the following two inclusions are satisfied:
 \begin{align*}
 V(H) &\subseteq V(G) \\
 E(H) &\subseteq E(G) \cap \binom{V(H)}{2}
 \end{align*}
 
-**Topological ordering.** Let $G$ be DAG. Let's defined a binary relation $R$ of topological ordering over vertices of graph $G$ such as $R(x, y)$ is valid iff there exists a directed path from $x$ to $y$, that is whenever $y$ is reachable from $x$.
+**Topological ordering.** Let $G$ be DAG. Let's define a binary relation $R$ of a topological ordering over vertices of the graph $G$ such as $R(x, y)$ is valid iff there exists a directed path from $x$ to $y$, that is whenever $y$ is reachable from $x$.
 
-**Connected component.** A connect component of graph $G = (V, E)$ with regard to vertex $v$ is a set
-$$C(v) = \{ u \in V \ | \ \text{thre exists a path in } G \text{ from } u \text{ to } v \}.$$
+**Connected component.** A connected component of the graph $G = (V, E)$ with regard to the vertex $v$ is a set
+$$C(v) = \{ u \in V \ | \ \text{there exists a path in } G \text{ from } u \text{ to } v \}.$$
 
-**Spanning tree.** Let $G = (V, E)$ be a graph. A spanning tree of a graph $G$ is such a subgraph $H$ of graph $G$ that $V(G) = V(H)$ and $H$ is a tree.
+**Spanning tree.** Let $G = (V, E)$ be a graph. A spanning tree of the graph $G$ is such a subgraph $H$ of the graph $G$ that $V(G) = V(H)$ and $H$ is a tree.
 
 **Minimum spanning tree.** Let $G = (V, E)$ be a graph and $w: E \rightarrow \mathbb{R}$ be its weight function. A minimum spanning tree of the graph $G$ is such a tree $K = (V, E_k)$ of graph $G$ that
-$$\sum_{e \in e_K} w(e) = w(K)$$
-is minimal.
+$$ \argmin_K \sum_{e \in e_K} w(e).$$
 
 **Cut.** A cut of graph $G = (V, E)$ is a subset of edges $F \subseteq E$ such that
-$$\exists U \subset V: F = \{\{u, v\} \in E \ | \ u \in U, v \notin U \}.$$
+$$\exists U \subset V \ | \ F = \{\{u, v\} \in E \ | \ u \in U, v \notin U \}.$$
 
 Let $G$ be a graph, $w$ be its injective real-valued weight function, $F$ be a cut of graph $G$ and $f$ be its lightest edge of cut $F$ (crossing), then every minimum spanning tree $K$ of graph $G$ contains $f \in E(K)$.
 
@@ -189,8 +191,6 @@ Jarník's algorithm stops after maximum of $|V(G)|$ steps and the result is a mi
 
 ### Borůvka's algorithm
 
-**Light incident edge.** It's an edge connecting two components while a weight of this edges is the lowest.
-
 \begin{algorithm}[!htp]
 \caption{Borůvka's algorithm}
 \hspace*{\algorithmicindent} \textbf{Input:} A graph $G$ with a weight function $w: E(G) \rightarrow \mathbb{R}$ where all weights are different. \\
@@ -199,7 +199,7 @@ Jarník's algorithm stops after maximum of $|V(G)|$ steps and the result is a mi
 \State $K \gets (V(G), \emptyset)$
 \While{$K$ has at least two connected components}
     \ForAll{components $T_i$ of graph $K$}
-        \State Select the light incident edge $t_i$
+        \State Select the light incident edge $t_i$ \Comment connects two components and has the lowest weight
         \State Add $t_i$ to $K$
     \EndFor
 \EndWhile
@@ -229,9 +229,11 @@ We can stop the main loop when we successfully add $|V(G) - 1|$ edges to $K$. Th
 
 #### Union-find problem
 
-Question: "Do vertices $u$ and $v$ belong to the same connect component of $G$?"
+Question: "Do vertices $u$ and $v$ belong to the same connected component of $G$?"
 
-* Let's assume all vertices are assigned with a number from 1 to $n$. Let's use an array $R[1, \dots, n]$, where $R(i)$ represents number of one noode from the component.
-* Operation FIND($v$) just returns the value of $R[v]$ ($\mathcal{O}(1)$).
-* To perform UNION($u, v$) we find representatives $R(u)$ and $R(v)$. If they different then we process all items of array $R$. Any value of $R(u)$ is rewritten to $R(v)$ ($\mathcal{O}(n)$).
-* We can improve the implementation by using directed tree as a component representation, where every node has a pointer to its father.
+* Let's assume all vertices are assigned with a number from 1 to $n$. Let's use an array $R[1, \dots, n]$, where $R(i)$ represents number of one node from the component.
+* Operation FIND($v$) just returns the value of $R[v]$.
+    * $\mathcal{O}(1)$
+* To perform UNION($u, v$) we have to find representatives $R(u)$ and $R(v)$. If they are different then we process all items of the array $R$. Any value of $R(u)$ is rewritten to $R(v)$.
+    * $\mathcal{O}(n)$
+* We can improve the implementation by using a directed tree as a component representation, where every node has a pointer to its father.

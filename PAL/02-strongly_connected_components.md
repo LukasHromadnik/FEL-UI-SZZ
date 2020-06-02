@@ -2,7 +2,7 @@
 
 A directed graph $G = (V, E)$ is called **strongly connected** if there is a path in each direction between every couple of vertices in the graph.
 
-The **strongly connected component** of a directed graph $G$ are its maximal strongly connected subgraphs.
+The **strongly connected components** of a directed graph $G$ are its maximal strongly connected subgraphs.
 
 ## Kosaraju-Sharir algorithm
 
@@ -62,13 +62,19 @@ The **strongly connected component** of a directed graph $G$ are its maximal str
 \end{algorithmic}
 \end{algorithm}
 
-The Kosaraju-Sharir algorithm performs two complete traversals of the graph. If the graph is represented as an *adjacency list* then the algorithm runs in $\Theta(|V| + |E|)$ time. If the graph is represented as an *adjacency matrix* then the algorithm runs in $\mathcal{O}(|V|^2)$ time.
+The Kosaraju-Sharir algorithm performs two complete traversals of the graph:
+
+* adjacency list: $\Theta(|V| + |E|)$,
+* adjacency matrix: $\mathcal{O}(|V|^2)$.
 
 ## Tarjan's algorithm
 
-The Tarjan's algorithm performs only one complete traversal of the graph. If the graph is represented as an *adjacency list* then the algorithm runs in $\Theta(|V| + |E|)$ time. If the graph is represented as an *adjacency matrix* then the algorithm runs in $\mathcal{O}(|V|^2)$ time.
+The Tarjan's algorithm performs only one complete traversal of the graph:
 
-In absolute number the Tarjan's algorithm runs faster then Kosaraju-Sharir algorithm.
+* adjacency list: $\Theta(|V| + |E|)$,
+* adjacency matrix: $\mathcal{O}(|V|^2)$.
+
+Within absolute numbers the Tarjan's algorithm runs faster then Kosaraju-Sharir algorithm.
 
 ## Euler Trail problem
 
@@ -93,5 +99,5 @@ A graph $G$ has an Euler trail iff it is connected and has 0 or 2 vertices of od
 
 The Euler trail algorithm performs only one complete traversal of the graph:
 
-* adjacency list: $\Theta(|V| + |E|)$
-* adjacency matrix: $\mathcal{O}(|V|^2)$
+* adjacency list: $\Theta(|V| + |E|)$,
+* adjacency matrix: $\mathcal{O}(|V|^2)$.
