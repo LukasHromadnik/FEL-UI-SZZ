@@ -16,7 +16,7 @@ The **strongly connected components** of a directed graph $G$ are its maximal st
     \State Choose an arbitrary vertex $v \notin S$
     \State $\text{DFS-Walk'}(v)$ \Comment After execution, $v$ is automatically pushed onto $S$
 \EndWhile
-\State Revese the directioons of all arcs to obtain the transpose graph
+\State Revese the directions of all arcs to obtain the transpose graph
 \While{$S \ne \emptyset$}
     \State $v = S.pop()$
     \If{$v = \text{UNVISITED}$}

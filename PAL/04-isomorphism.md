@@ -29,9 +29,9 @@ $$\forall G_1, G_2 \in \mathcal{F} \ | \ Cert(G_1) = Cert(G_2) \Leftrightarrow G
 1. Label all the vertices of $G$ with the string $01$.
 2. While there are more than two vertices of $G$ do for each non-leaf $x$ of $G$:
     - Let $Y$ be the set of labels of the leaves adjacent to $x$ and the label of $x$ with the initial 0 and trailing 1 deleted from $x$.
-    - Replace the label of $x$ with concatenation of he labels in $Y$ sorted in increasing lexicographic order, with 0 prepended and 1 appended.
+    - Replace the label of $x$ with concatenation of the labels in $Y$ sorted in increasing lexicographic order, with 0 prepended and 1 appended.
     - Remove all leaves adjacent to $x$
 3. If there is only one vertex left, report the label of $x$ as a certificate.
-4. If there are two vertices $x$ and $y$ left, then report tha labels of $x$ and $y$ concatenated in increasing lexicographic oorder as the certificate.
+4. If there are two vertices $x$ and $y$ left, then report labels of $x$ and $y$ concatenated in increasing lexicographic order as the certificate.
 
 Length of the certificate is $2 \cdot |V|$. The number of 1s and 0s is the same.

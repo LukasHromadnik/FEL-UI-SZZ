@@ -6,7 +6,7 @@
 * $Q$ is set of states,
 * $\sigma$ is transition function, $\sigma: Q \times A \rightarrow Q$,
 * $S_0$ is start state, $s_0 \in Q$,
-* *Q_F$ is unempty set of final states, $\emptyset \ne Q_F \subseteq Q$
+* $Q_F$ is unempty set of final states, $\emptyset \ne Q_F \subseteq Q$
 
 Transforming NFA (Non-deterministic finite automaton) to DFA using a transition table.
 
@@ -30,6 +30,7 @@ $\vdots$
 # Text Search
 
 Naive approach:
+
 1. Align the pattern with the beginning of the text.
 2. While corresponding symbols of the pattern and the text match each other move forward by one symbol in the pattern.
 3. When symbol mismatch occurs shift the pattern forward by one symbol, reset position in the pattern to the beginning of the pattern and go to 2.
@@ -38,13 +39,15 @@ Naive approach:
 
 ## Regular languages
 
-Only regular languages can be processed by NFA / DFA. More complex languages cannot. For example, any language containing *well-formed parentheses* is context-free nad not regular and cannot be recognized by NFA / DFA.
+Only regular languages can be processed by NFA / DFA. More complex languages cannot. For example, any language containing *well-formed parentheses* is context-free and not regular and cannot be recognized by NFA / DFA.
 
 Whenever $L_1$ and $L_2$ are regular languages then $L_1 \cup L_2, L_1 \cdot L_2, L_1^*$ are regular languages too.
 
-Regular expressioons are defined recursively:
-* ymbol $\varepsilon$ is a regular expression,
+Regular expressions are defined recursively:
+
+* symbol $\varepsilon$ is a regular expression,
 * each symbol of alphabet $\Sigma$ is a regular expression.
+
 Whenever $e_1$ and $e_2$ are regular expression then also strings $(e_1), e_1 + e_2, e_1e_2, (e_1)^*$ are regular expressions.
 
 Languages represented by regular expressions (RE) are defined the same way.
@@ -68,7 +71,7 @@ Create transition from state $(p_1, p_2)$ to $(q_1, q_2)$ labeled by symbol $x$ 
 
 ## Hamming distance
 
-Hamming distnace of two strings is equal to $k (k \leq 0)$, whenever $k$ is the minimal number of rewrite operations which when applied on one of those strings produce the other string.
+Hamming distance of two strings is equal to $k \geq 0$, whenever $k$ is the minimal number of rewrite operations which when applied on one of those strings produce the other string.
 
 Rewrite operation rewrites one symbol of the alphabet by some other symbol of the alphabet. Symbols cannot be deleted or inserted.
 
@@ -80,7 +83,7 @@ Informally: Align the strings and count the number of mismatches of correspondin
 
 Let pattern $P$ be $p[1], p[2], \dots, p[m]$, let text $T$ be $t[1], t[2], \dots, t[n]$.
 
-Create dynamic programming table $D[m + 1][n + 1]$ whise elements $d[i][k]$ are defined as follows:
+Create dynamic programming table $D[m + 1][n + 1]$ which elements $d[i][k]$ are defined as follows:
 
 1. $d[0][k] = 0, \forall k \in 0, \dots, n$
 2. 

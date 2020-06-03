@@ -12,7 +12,7 @@
 
 # Graphs
 
-A graph is an ordered pair of a set of vertices $V$ (nodes) and a set of edges $E$ (arcs) $G = (V, E)$.
+A graph $G$ is an ordered pair of a set of vertices $V$ (nodes) and a set of edges $E$ (arcs) $G = (V, E)$.
 
 **Incidence.** If two nodes $x, y$ are linked by the edge $e$, nodes $x, y$ are said to be **incident** to the edge $e$ or the edge $e$ is incident to nodes $x, y$.
 
@@ -23,14 +23,14 @@ $$\deg(u) = \left|\{e \in E \ | \ u \in e \}\right|$$
 For directed graphs
 
 \begin{align*}
-deg^+(u) = |\{e \in E \ | \ (\exists v \in V): e = (v, u) \}| \\
-deg^-(u) = |\{e \in E \ | \ (\exists v \in V): e = (u, v) \}|
+\deg^+(u) = |\{e \in E \ | \ (\exists v \in V): e = (v, u) \}| \\
+\deg^-(u) = |\{e \in E \ | \ (\exists v \in V): e = (u, v) \}|
 \end{align*}
 
 **Handshaking lemma.**
-$$\sum_{v \in V} deg(v) = 2|E|$$
+$$\sum_{v \in V} \deg(v) = 2|E|$$
 and for directed graphs
-$$\sum_{v \in V} \left(deg^+(v) + deg^-(v)\right) = 2|E|$$
+$$\sum_{v \in V} \left(\deg^+(v) + \deg^-(v)\right) = 2|E|$$
 
 **Path.** A path is a sequence of vertices and edges $(v_0, e_1, v_1, \dots, e_t, v_t)$, where all vertices $v_0, \dots, v_t$ **differ from each other** and for every $i = 1, 2, \dots, t, e_i = \{ v_{i-1}, v_i\} \in E(G)$. Edges are traversed in a forward direction.
 
@@ -70,7 +70,7 @@ $$L_G = (l_{i,j})^n_{i, j = 1}$$
 defined as follows
 $$l_{i,j} =
 \begin{cases}
-deg(v_i) & \text{for } i = j \\
+\deg(v_i) & \text{for } i = j \\
 -1 & \text{for } \{v_i, v_j \} \in E \\
 0 & \text{otherwise}
 \end{cases}
@@ -110,7 +110,7 @@ In other words, every edge has $-1$ at the source vertex and $+1$ at the target 
 & Adjacency matrix & Laplacian matrix & Adjacency list & Incidence matrix \\
 \hline
 Storage       & \multicolumn{2}{c|}{$V \cdot V \in \mathcal{O}(V^2)$} & $\mathcal{O}(|V| + |E|)$      & $|V| \cdot |E| \in \mathcal{O}(|V| \cdot |E|)$ \\ \hline
-Add vertex    & \multicolumn{2}{c|}{$\mathcal{O}(|V|^2$}              & $\mathcal{O}(|V|)$            & $\mathcal{O}(|V| \cdot |E|)$ \\ \hline
+Add vertex    & \multicolumn{2}{c|}{$\mathcal{O}(|V|^2)$}             & $\mathcal{O}(|V|)$            & $\mathcal{O}(|V| \cdot |E|)$ \\ \hline
 Add edge      & \multicolumn{3}{c|}{$\mathcal{O}(1)$}                                                 & $\mathcal{O}(|V| \cdot |E|)$ \\ \hline
 Remove vertex & \multicolumn{2}{c|}{$\mathcal{O}(|V|^2)$}               & $\mathcal{O}(|E|)$            & $\mathcal{O}(|V| \cdot |E|)$ \\ \hline
 Remove edge   & \multicolumn{2}{c|}{$\mathcal{O}(1)$}                 & $\mathcal{O}(|V|)$            & $\mathcal{O}(|V| \cdot |E|)$ \\ \hline
@@ -127,7 +127,7 @@ Query: get node degree of vertex $v$ & $|V| \in \mathcal{O}(|V|)$ & $\mathcal{O}
 \begin{algorithm}[!htp]
 \caption{Depth First Search (DFS)}
 \begin{algorithmic}[1]
-\State $\mathrm{to\_visit}: \mathbf{Queue} \gets \emptyset$
+\State $\mathrm{to\_visit}: \mathbf{Stack} \gets \emptyset$
 \State $\mathrm{visited} \gets \emptyset$
 \State $\mathrm{to\_visit}.push(\mathrm{start\_vertex})$
 \While{$size(\mathrm{to\_visit}) \ne 0$}
@@ -144,7 +144,7 @@ Query: get node degree of vertex $v$ & $|V| \in \mathcal{O}(|V|)$ & $\mathcal{O}
 
 ## Breadth First Search (BFS)
 
-Same as DFS. Only difference is that it uses $\mathbf{Stack}$ instead of $\mathbf{Queue}$.
+Same as DFS. Only difference is that it uses $\mathbf{Queue}$ instead of $\mathbf{Stack}$.
 
 ## Advanced graphs
 
@@ -154,7 +154,7 @@ V(H) &\subseteq V(G) \\
 E(H) &\subseteq E(G) \cap \binom{V(H)}{2}
 \end{align*}
 
-**Topological ordering.** Let $G$ be DAG. Let's define a binary relation $R$ of a topological ordering over vertices of the graph $G$ such as $R(x, y)$ is valid iff there exists a directed path from $x$ to $y$, that is whenever $y$ is reachable from $x$.
+**Topological ordering.** Let $G$ be a DAG. Let's define a binary relation $R$ of a topological ordering over vertices of the graph $G$ such as $R(x, y)$ is valid iff there exists a directed path from $x$ to $y$, that is whenever $y$ is reachable from $x$.
 
 **Connected component.** A connected component of the graph $G = (V, E)$ with regard to the vertex $v$ is a set
 $$C(v) = \{ u \in V \ | \ \text{there exists a path in } G \text{ from } u \text{ to } v \}.$$

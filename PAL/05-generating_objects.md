@@ -2,7 +2,7 @@
 
 ## Combinatorial Generation
 
-Suppose that $S$ is a finite set. A **ranking function** will be a bijection $rank: S \rightarrow \{ 0, \dots, |S| - 1 \}$ and $unrank* function is an inverse function to $rank$.
+Suppose that $S$ is a finite set. A **ranking function** will be a bijection $rank: S \rightarrow \{ 0, \dots, |S| - 1 \}$ and *unrank* function is an inverse function to $rank$.
 
 Given a ranking function $rank$ defined on $S$, the $successor$ function satisfies the following rule:
 $$successor(s) = t \Leftrightarrow rank(t) = rank(s) + 1$$
@@ -26,7 +26,7 @@ The reflected binary code, also know as Gray code, is a binary numeral system wh
 
 $G^n$ will denote the reflected binary code for $2^n$ binary $n$-tuples, and it will be written as a list of $2^n$ vectors as follows:
 $$G^n = \left[ G_0^n, G_1^n, \dots, G_{2^n - 1}^n \right]$$
-The codes $G^n^ are defined recursively:
+The codes $G^n$ are defined recursively:
 \begin{align*}
 G^1 &= [0, 1] \\
 G^n &= \left[ 0 G_0^{n - 1}, 0 G_1^{n - 1}, \dots, 0 G_{2^{n - 1} - 1}^{n - 1}, 1 G_{2^{n - 1} - 1}^{n - 1}, \dots, 1 G_1^{n - 1}, 1 G_0^{n - 1} \right]

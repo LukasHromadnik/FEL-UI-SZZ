@@ -1,5 +1,4 @@
 \newcommand{\mcal}[1]{\ensuremath{\mathcal{#1}}}
-\newcommand{\modn}[1][n]{\ensuremath{\ (\mathrm{mod}\,#1)}}
 \newcommand{\NP}{\mcal{NP}}
 \newcommand{\RP}{\mcal{RP}}
 \newcommand{\ZPP}{\mcal{ZPP}}
