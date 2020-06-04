@@ -1,0 +1,38 @@
+\begin{table}[!ht]
+    \centering
+    \begin{subtable}{.45\linewidth}
+        \centering
+        \begin{tabular}{c|c|c|}
+            \multicolumn{1}{c}{} & \multicolumn{1}{c}{$C$} & \multicolumn{1}{c}{$D$} \\ \hhline{~|-|-|}
+            $C$ & \cellcolor{green} (-1, -1) & \cellcolor{green} (-4, 0) \\ \hhline{~|-|-|}
+            $D$ & \cellcolor{green} (0, -4) & (-3, -3) \\ \hhline{~|-|-|}
+        \end{tabular}
+    \end{subtable}
+    \begin{subtable}{.45\linewidth}
+        \centering
+        \begin{tabular}{c|c|c|}
+            \multicolumn{1}{c}{} & \multicolumn{1}{c}{Heads} & \multicolumn{1}{c}{Tails} \\ \hhline{~|-|-|}
+            Heads & \cellcolor{green} 1 & \cellcolor{green} -1 \\ \hhline{~|-|-|}
+            Tails & \cellcolor{green} -1 & \cellcolor{green} 1 \\ \hhline{~|-|-|}
+        \end{tabular}
+    \end{subtable}
+    \newline
+    \vspace*{0.5 cm}
+    \newline
+    \begin{subtable}{.45\linewidth}
+        \centering
+        \begin{tabular}{c|c|c|}
+            \multicolumn{1}{c}{} & \multicolumn{1}{c}{Left} & \multicolumn{1}{c}{Right} \\ \hhline{~|-|-|}
+            Left & \cellcolor{green} 1 & 0 \\ \hhline{~|-|-|}
+            Right & 0 & \cellcolor{green} 1 \\ \hhline{~|-|-|}
+        \end{tabular}
+    \end{subtable}
+    \begin{subtable}{.45\linewidth}
+        \centering
+        \begin{tabular}{c|c|c|}
+            \multicolumn{1}{c}{} & \multicolumn{1}{c}{$B$} & \multicolumn{1}{c}{$F$} \\ \hhline{~|-|-|}
+            $B$ & \cellcolor{green} (2, 1) & (0, 0) \\ \hhline{~|-|-|}
+            $F$ & (0, 0) & \cellcolor{green} (1, 2) \\ \hhline{~|-|-|}
+        \end{tabular}
+    \end{subtable}
+\end{table}
