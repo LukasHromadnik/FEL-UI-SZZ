@@ -45,6 +45,16 @@ $$\max_{a_{-i} \in \mathcal{A}_{-i}} \left( \left[\max_{a'_i \in \mathcal{A}_i} 
 **MinimaxRegret.** *Minimax regret* actions for player $i$ are defined as
 $$\argmin_{a_i \in \mathcal{A}_i} \max_{a_{-i} \in \mathcal{A}_{-i}} \left( \left[\max_{a'_i \in \mathcal{A}_i} u_i(a'_i, a_{-i}) \right] - u_i(a_i, a_{-i}) \right)$$
 
+Consider the following game:
+
+\begin{tabular}{c|c|c|}
+    \multicolumn{1}{c}{} & \multicolumn{1}{c}{$L$} & \multicolumn{1}{c}{$R$} \\ \hhline{~|-|-|}
+    $U$ & (2, 1) & (0, 0) \\ \hhline{~|-|-|}
+    $D$ & (0, 0) & (1, 2) \\ \hhline{~|-|-|}
+\end{tabular}
+
+Wouldn't it be better to coordinate 50:50 between outcomes $(U, L)$ and $(D, R)$? We can use a *correlation device* – a coint, a streetlight, commonly observed signal – and use this signal to avoid unwanted outcomes.
+
 **Correlated Equilibirum.** Let $\mathcal{G} = (\mathcal{N}, \mathcal{A}, u)$ be a normal-form game and let $\sigma$ be a probability distribution over joint pure strategy profiles $\sigma \in \Delta(\mathcal{A})$. We say that $\sigma$ is a *correlated equilibrium* if for every player $i$ and every action $a'_i \in \mathcal{A}_i$ it holds
 $$\sum_{a \in \mathcal{A}} \sigma(a) u_i(a_i, a_{-i}) \geq  \sum_{a \in \mathcal{A}} \sigma(a) u_i(a'_i, a_{-i})$$
 
