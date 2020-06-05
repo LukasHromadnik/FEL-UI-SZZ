@@ -4,14 +4,14 @@
 
 Given the **rule of the game**, game theory studies strategic behaviour of the agents in the form of a strategy (e.g. optimality, stability).
 
-Given the **strategic behaviour of the agents**, *mechanism design* (reverse game theory) studies / designs the rule of games with respect to a specific outcome of the game.
+Given the **strategic behaviour of the agents**, *mechanism design* (reverse game theory) studies / designs the rules of games with respect to a specific outcome of the game.
 
 **Game.** Finite, $n$-person game is $(N, A, u)$ where
 
 * $N$ is a finite set of $n$ players, indexed by $i$
 * $A = A_1 \times \cdots \times A_n$ where $A_i$ is the **action set** for player $i$
-    * $a \in A$ is an **action profile** and so $A$ is the space fo action profiles
-* $u \in (u_1, \dots, u_n)$ is a **utility function** for each player, where $u_i: A \rightarrow \mathbb{R}$
+    * $a \in A$ is an **action profile** and so $A$ is the space of action profiles
+* $u \in (u_1, \dots, u_n)$ is an **utility function** for each player, where $u_i: A \rightarrow \mathbb{R}$
 
 Writing a 2-player game as a matrix:
 
@@ -19,7 +19,7 @@ Writing a 2-player game as a matrix:
 * rows are actions $a \in A_1$, columns are $a' \in A_2$
 * cells are outcomes, written as a tuple of utility values for each player
 
-**Strategy $s_i$** refers to a decison (about action choice) at each stage of the game that the agent $i$ makes and ehich leads to an outcome.
+**Strategy $s_i$** refers to a decison (about action choice) at each stage of the game that the agent $i$ makes and which leads to an outcome.
 
 **Outcome** is the set of possible states resulting from agent's decision making.
 

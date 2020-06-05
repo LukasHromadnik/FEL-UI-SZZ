@@ -1,11 +1,11 @@
 # Solving Normal-Form Games
 
 
-**Mixed Strategies.** Let $\mathcal{G} = (\mathcal{N}, \mathcal{A}, u)$ be a normal-form game. then the set of *mixed strategies* $\mathcal{S}_i$ for player $i$ is the set of all probability distributions over $\mathcal{A}_i, \mathcal{S}_i = \Delta(\mathcal{A}_i)$.
+**Mixed Strategies.** Let $\mathcal{G} = (\mathcal{N}, \mathcal{A}, u)$ be a normal-form game, then the set of *mixed strategies* $\mathcal{S}_i$ for player $i$ is the set of all probability distributions over $\mathcal{A}_i, \mathcal{S}_i = \Delta(\mathcal{A}_i)$.
 
 We use $\mathcal{S}_{-i}$ to denote strategies of all other players except player $i$.
 
-We extend the utility function to correspond to **expected utility**:
+We extend the utility function to correspond to the **expected utility**:
 $$u_i(s) = \sum_{a \in \mathcal{A}} u_i(a) \prod_{j \in \mathcal{N}} s_j(a_j)$$
 
 **Strong Dominance.** Let $\mathcal{G} = (\mathcal{N}, \mathcal{A}, u)$ be a normal-form game. We say that $s_i$ *strongly  dominates* $s'_i$ if $\forall s_{-i} \in \mathcal{S}_{-i}, u_i(s_i, s_{-i}) > u_i(s'_i, s_{-i})$.
@@ -14,15 +14,15 @@ $$u_i(s) = \sum_{a \in \mathcal{A}} u_i(a) \prod_{j \in \mathcal{N}} s_j(a_j)$$
 
 **Very Weak Dominance.** Let $\mathcal{G} = (\mathcal{N}, \mathcal{A}, u)$ be a normal-form game. We say that $s_i$ *very weakly dominates* $s'_i$ if $\forall s_{-i} \in \mathcal{S}_{-i}, u_i(s_i, s_{-i}) \geq u_i(s'_i, s_{-i})$.
 
-**Best response.** Let $\mathcal{G} = (\mathcal{N}, \mathcal{A}, u)$ be a normal-form game and let $BR_i(s_{-i}) \subseteq \mathcal{S}_{-i}$ such that $s_i^* \in BR_i(s_{-i})$ iff $\forall s_i \in \mathcal{S}_i, u_i(s:i^*, s:{-i}) \geq u_i(s_i, s_{-i})$.
+**Best response.** Let $\mathcal{G} = (\mathcal{N}, \mathcal{A}, u)$ be a normal-form game and let $BR_i(s_{-i}) \subseteq \mathcal{S}_i$ such that $s_i^* \in BR_i(s_{-i})$ iff $\forall s_i \in \mathcal{S}_i, u_i(s_i^*, s_{-i}) \geq u_i(s_i, s_{-i})$.
 
-**Nash Equilibirum.** Let $\mathcal{G} = (\mathcal{N}, \mathcal{A}, u)$ be a normal-form game. Strategy profile $s = \langle s_1, \dots, s_n \rangle$ is a *Nash equilibirum* iff $\forall i \in \mathcal{N}, s_i \in BR_i(s_{-i})$.
+**Nash Equilibrium.** Let $\mathcal{G} = (\mathcal{N}, \mathcal{A}, u)$ be a normal-form game. Strategy profile $s = \langle s_1, \dots, s_n \rangle$ is a *Nash equilibirum* iff $\forall i \in \mathcal{N}, s_i \in BR_i(s_{-i})$.
 
 **Theorem.** Every game with a finite number of players and action profiles has at least one Nash equilibrium in mixed strategies.
 
 **Support.** The *support* of a mixed strategy $s_i$ for a player $i$ is the set of pure strategies $\{a_i \ | \ s_i (a_i) > 0 \}$.
 
-**Corollary.** Let $s \in \mathcal{S}$ be a nash equilibrium and $a_i, a'_i \in \mathcal{A}_i$ are actions from the support of $s_i$. Now, $u_i(a_i, s_{-i}) = u_i(a'_i, s_{-i})$.
+**Corollary.** Let $s \in \mathcal{S}$ be a Nash equilibrium and $a_i, a'_i \in \mathcal{A}_i$ are actions from the support of $s_i$. Now, $u_i(a_i, s_{-i}) = u_i(a'_i, s_{-i})$.
 
 Playing a Nash strategy when there are multiple Nash equilibria does not give any guarantees for the expected payoff.
 
@@ -34,9 +34,9 @@ Maxmin strategires are conservative strategies against a worst-case opponent. Mi
 
 **Minimax Theorem.** In any finite, two-player zero-sum game, in any Nash equilibirum each player receives a payoff that is equal to both his maxmin value and his minmax value.
 
-As consequences we can safely play Nash strategies in zero-sum games and all Nash equilibria have the same payoff.
+As a consequence we can safely play Nash strategies in zero-sum games and all Nash equilibria have the same payoff.
 
-**Regret.** A player $i$'s *regret* for playing an action $a_i$ if the other agnets adopt action profile $a_{-i}$ is defined as
+**Regret.** A player $i$'s *regret* for playing an action $a_i$ if other agents adopt action profile $a_{-i}$ is defined as
 $$\left[\max_{a'_i \in \mathcal{A}_i} u_i(a'_i, a_{-i}) \right] - u_i(a_i, a_{-i})$$
 
 **MaxRegret.** A player $i$'s *maximum regret* for playing an action $a_i$ is defined as
@@ -50,7 +50,7 @@ $$\sum_{a \in \mathcal{A}} \sigma(a) u_i(a_i, a_{-i}) \geq  \sum_{a \in \mathcal
 
 As a corollary, for every Nash equilibrium there exists a corresponding Correlated Equilibrium.
 
-**Stackelberg Equilibrium.** *Stackelberg equilibrium* is a strategy progile that satisfies the conditions:
+**Stackelberg Equilibrium.** *Stackelberg equilibrium* is a strategy profile that satisfies the conditions:
 
 * *the leader* – publicly commits to a strategy,
 * *the follower(s)* – play a Nash equilibrium with respect to the commitment of the leader,
