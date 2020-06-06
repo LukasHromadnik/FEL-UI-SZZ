@@ -63,3 +63,43 @@ Solution: when agents are silent for a while, every constraint is satisfied $\ri
 $$x_i = a \wedge x_j = b \Rightarrow x_k \ne c$$
 
 If a nogood is no longer active, it is removed and the value is available again.
+
+## ADOPT – Asynchronous Distributed OPTimization
+
+First asynchronous complete algorithm for optimally solving DCOP. Distributed backtrack search using a "opportunistic" best-first strategy: agents keep on choosing the best value based on the current available information.
+
+*Backtrack threshold* used to speed up the search of previously explored solutions.
+
+For finite DCOPs with binary non-negative contraints, ADOPT is guaranteed to terminte with the globally optimal solution.
+
+ADOPT assumes that agents are arranged in a DFS tree, the constraint graph is split into a spanning tree and backedges.
+
+### Messages
+
+* **value**(\verb|parent| $\rightarrow$ \verb|children| $\cup$ \verb|pseudochildren|, $a$): parent informs its descendants that it has taken value $a$
+* **cost**(\verb|child| $\rightarrow$ \verb|parent|, \verb|lower_bound|, \verb|upper_bound|, \verb|context|): a child informs a parent of the best cost of its assignment; attached context to detect obsolescence
+* **threshold**(\verb|parent| $\rightarrow$ \verb|children|, \verb|threshold|): minimum cost of solution in child is at least \verb|threshold|
+* **termination**(\verb|parent| $\rightarrow$ \verb|children|): solution found, terminate
+
+### Best-First Search
+
+The local cost function $\delta(x_i)$ for an agent $A_i$ is the sum of the values of constraints involving only higher-level neighbors in the DFS. The best value for $x_j$ is a value minimizing the sum of $x_j$'s local cost and the lowest cost of children under the context extended with the assignment
+$$OPT_{x_j} (\mathcal{C}) = \min_{d \in d_j} \left( \delta_j(d) + \sum_{x_k \in \mathrm{children}(x_j)} OPT_{x_k}(\mathcal{C} \cup \{x_j, d\} \right)$$
+
+$OPT_{x_k}$ values are incrementally bounded using $[lb_k, ub_k]$ intervals propagated in cost messages.
+
+### Thresholds
+
+Send by parents to a child as allowance on solution cost:
+
+* child then heuristically re-subdivides, or allocates, the threshold among its own children.
+* can be incorrect: corrent for over-estimates over time as cost feedback is (re)received from the children.
+
+Control backtracking to efficiently search: do not change value until $LB(current_value) > threshold$, i.e. there is a strong reason to believe that current value is not the best.
+
+Parent distributes the accumulated bound among children and corrects subdivision as feedback is receive from children.
+
+ADOP maintain invariants:
+
+* **allocation invariant:** the threshold on cost for $x_j$ must equal to the local cost choosing $d$ plus the sum of the thresholds allocated to $x_j$'s children.
+* **child treshold invariant:** the threshold allocated to child $x_k$ by parent $x_j$ cannot be less than the lower bound or greater than the upper boud reported by $x_k$ to $x_j$.
