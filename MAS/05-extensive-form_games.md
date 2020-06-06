@@ -5,8 +5,8 @@ Formal definition:
 * players $\mathcal{N} = \{1, 2, \dots, n\}$
 * actions $\mathcal{A}$
 * choice nodes (histories) $\mathcal{H}$
-* action function $\chi: \mathcal{H} \rightarrow 2^\mathcal{A}$
-* player function $\rho: \mathcal{H} \rightarrow \mathcal{N}$
+* action function $\chi: \mathcal{H} \rightarrow 2^\mathcal{A}$ (which action to play)
+* player function $\rho: \mathcal{H} \rightarrow \mathcal{N}$ (which player has a turn)
 * terminal nodes $\mathcal{Z}$
 * successor function $\varphi: \mathcal{H} \times \mathcal{A} \rightarrow \mathcal{H} \cup \mathcal{Z}$
 * utility function $u = (u_1, u_2, \dots, u_n); u_i : \mathcal{Z} \rightarrow \mathbb{R}$
@@ -14,13 +14,13 @@ Formal definition:
 A pure strategy of player $i$ in an EFG is an assignment of an action for each state where player $i$ acts
 $$S_i = \prod_{h \in \mathcal{H}, \rho(h) = i} \chi(h)$$
 
-**Subgame.** Given a perfect-information extensive-form game $G$, the subgame of $G$ rooted at node $h$ is the restriction of $G$ to the descendants of $h$. The set of subgames of $G$ consists of all subgames of $G$ rooted at some node in $G$.
+**Subgame.** Given a perfect-information extensive-form game $G$, the *subgame* of $G$ rooted at node $h$ is the restriction of $G$ to the descendants of $h$. The set of subgames of $G$ consists of all subgames of $G$ rooted at some node in $G$.
 
 **Subgame-perfect equilibrium.** The *subgame-perfect equilibra (SPE)* of a game $G$ are all strategy profiles $s$ such that for any subgame $G'$ of $G$, the restriction of $s$ to $G'$ is a Nash equilibrium of $G'$.
 
 Every extensive-form game with perfect information has at least one Nash equilibrium in pure strategies that is also a Subgame-perfect equilibrium.
 
-Not ever game can be represented as an EFG with perfect information.
+Not every game can be represented as an EFG with perfect information.
 
 ## EFGs with Chance
 
@@ -50,13 +50,13 @@ Every finite game can be represented as an EFG with imperfect information.
 
 Mixed strategies are defined as before as a probability distribution over pure strategies.
 
-A **behavioral strategy** of player $i$ is a product of probability distributions over actions in each information set
+A **behavioral strategy** $\beta_i$ of player $i$ is a product of probability distributions over actions in each information set
 $$\beta_i: \prod_{I \in \mathcal{I}_i} \Delta(\chi(I))$$
 
-To compare mixed and behaviour strategy:
+To compare mixed and behavioral strategy:
 
 * mixed strategy: flip a coin and based on the result use the selected strategy for the whole game,
-* behaviour strategy: we need to flip a coin before every action.
+* behavioral strategy: we need to flip a coin before every action.
 
 ## Perfect Recall in EFGs
 

@@ -1,15 +1,15 @@
 # Solving Extensive-Form Games
 
-An ordered list of actions of player $i$ executed sequentially from the root of the game tree to some node $h \in \mathcal{H}$ is called a sequence $\sigma_h$. Set of all possible sequences if player $i$ is denoted $\Sigma_i$.
+An ordered list of actions of player $i$ executed sequentially from the root of the game tree to some node $h \in \mathcal{H}$ is called a **sequence** $\sigma_h$. Set of all possible sequences if player $i$ is denoted $\Sigma_i$.
 
 We need to extend the utility function to operate over sequences $g: \Sigma_1 \times \Sigma_2 \rightarrow \mathbb{R}$, where
 $$g(\sigma_1, \sigma_2) = \begin{cases}
-u(z) & \text{iff } $z$ \text{ corresponds to history represented by sequences } \sigma_1 \text{ and } \sigma_2 \\
+u(z) & \text{iff } z \text{ corresponds to history represented by sequences } \sigma_1 \text{ and } \sigma_2 \\
 0 & \text{otherwise}
 \end{cases}
 $$
 
-In games with chance a combination of sequences can lead to multiple nodes / leads. So
+In games with chance a combination of sequences can lead to multiple nodes / leafs. So
 $$g(\sigma_1, \sigma_2) = \begin{cases}
 \sum_{z \in \mathcal{Z}'} \mathcal{C}(z) \cdot u(z)
 & \text{iff } \mathcal{Z}' \text{ is a set of leafs that correspond to history represented} \\

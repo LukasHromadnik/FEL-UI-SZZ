@@ -14,9 +14,9 @@ A social welfare function $f$ is *Pareto optimal* if $a \succ_i b, \forall i \in
 
 An SWF satisfies *independence of irrelevant alternatives* (IIA) if the social preference between any pair of alternatives only depends on the individual preferences restricted to these two alternatives.
 
-Let $R$ and $R'$ be two preference profiles and $a$ and $b$ be two alternatives such that $R|_{\{a, b\}} = R'|_{\{a, b\}}$, i.e. the pairwise comparison between $a$ and $b$ are identicial in both profiles. Then IIA requires that $a$ and $b$ are also ranked identically in $\succ_f|_{\{a, b\}} = \succ'_f|_{\{a, b\}}$.
+Let $R$ and $R'$ be two preference profiles and $a$ and $b$ be two alternatives such that $R|_{\{a, b\}} = R'|_{\{a, b\}}$, i.e. the pairwise comparison between $a$ and $b$ are identicial in both profiles. Then IIA requires that $a$ and $b$ are also ranked identically in $\succ_f|_{\{a, b\}} = \ \succ'_f|_{\{a, b\}}$.
 
-An SWF is **non-dictatorial** if there is no agent who can dictate a string ranking no matter whic preferences the other agents have. Formally, an SWF is non-dictatorial if there is no agent $i$ such that for all preference profiles $\mathcal{R}$ and alternatives $a, b, a \succ_i b$ implies that $a \succ_f b$.
+An SWF is **non-dictatorial** if there is no agent who can dictate a strict ranking no matter which preferences the other agents have. Formally, an SWF is non-dictatorial if there is no agent $i$ such that for all preference profiles $\mathcal{R}$ and alternatives $a, b, a \succ_i b$ implies that $a \succ_f b$.
 
 **Arrow's Theorem.** There exists no SWF that simultaneously satisfies IIA, Pareto-optimality and non-dictatorship whenever $|U| \geq 3$.
 
@@ -28,18 +28,18 @@ Arrows theorem can be reformulated for SCFs by appropriately redefining Pareto-o
 * *Non-dictatorship*: an SCP is non-dictatorial iff there is no agent $i$ such that for all preference profiles $R$ and alternatives $a$ such that $a \succ_i b, \forall \in A \setminus \{a\}$ implies $a \in f(R, A)$
 * *IIA*: an SCF satisfies IIA iff $f(R, A) = f'(R, A)$ if $R|_A = R'|_A$
 
-An SCF $f$ satisfies **weak axiom of revelaed preference** (WARP) iff for all feasible sets $A$ and $B$ and preferencce profiles $R$:
+An SCF $f$ satisfies **weak axiom of revelaed preference** (WARP) iff for all feasible sets $A$ and $B$ and preference profiles $R$:
 $$\text{if } B \subseteq A \text{ and } f(R, A) \cap B \ne \emptyset \text{ then } f(R, A) \cap B = f(R, B).$$
 
-WARP required that the choice set of $B$ consists precisely of those alternatives in $B$ that are also chosen in $A$, whenever this set is non-empty.
+WARP requires that the choice set of $B$ consists precisely of those alternatives in $B$ that are also chosen in $A$, whenever this set is non-empty.
 
-**Arrow Theorem.** There exists no social choce function that simultaneously satisfies IIA, Pareto optimality, non-dictatorship and WAP whenever $|U| \geq 3$.
+**Arrow Theorem.** There exists no social choice function that simultaneously satisfies IIA, Pareto optimality, non-dictatorship and WAP whenever $|U| \geq 3$.
 
 ## Voting rule
 
 A *voting rule* is a function $f: \mathcal{R}(U)^n \rightarrow \mathcal{F}(U)$.
 
-**Positional Scoring Rules.** Assuming $m = |U|$ alternative, we define a score vector $s = (s_1, \dots, s_m) \in \mathbb{R}^m$ such that $s_1 \geq \cdots \geq s_m$ and $s_1 > s_m$. Each time an  alternative is ranked $i$-th by some voter, it gets a particular score $s_i$.
+**Positional Scoring Rules.** Assuming $m = |U|$ alternatives, we define a score vector $s = (s_1, \dots, s_m) \in \mathbb{R}^m$ such that $s_1 \geq \cdots \geq s_m$ and $s_1 > s_m$. Each time an  alternative is ranked $i$-th by some voter, it gets a particular score $s_i$.
 
 * **Borda's rule:** $s = (m - 1, m - 2, \dots, 0)$
 * **Plurality rule:** $s = (1, 0, \dots, 0)$
@@ -63,7 +63,7 @@ Rules that satisfy Condorcet extensions:
 
 ## Other Voting Rules
 
-**Single transferable vote (STV):$$ looks for the alternatives that are ranked in first place the least often, removes them from all voters' ballots and repeat. The alternatives removed in the last round win.
+**Single transferable vote (STV):** looks for the alternatives that are ranked in the first place the least often, removes them from all voters' ballots and repeat. The alternatives removed in the last round win.
 
 **Pairwise elimination:** pair the candidates according to some ordering. The loser of the pairwise election drops out; repeat.
 

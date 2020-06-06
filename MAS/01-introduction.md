@@ -2,13 +2,13 @@
 
 **Autonomous Agents and Multiagent Systems.** Multiagent system is a collection of multiple autonomous agents each acting towards its objectives while all interacting in a shared environment, being able to communicate and possibly coordinate their actions.
 
-**Agent.** An agent is anything that can perceive its environment (through its sensors) and act upon that environment (throught its effectors).
+**Agent.** An *agent* is anything that can perceive its environment (through its sensors) and act upon that environment (throught its effectors).
 
-**Agent behaviour.** Agent's behaviour is described by the agent function $f: \mathcal{P} \rightarrow \mathcal{A}$ that maps percept sequences to actions.
+**Agent's behaviour.** *Agent's behaviour* is described by the agent function $f: \mathcal{P} \rightarrow \mathcal{A}$ that maps percept sequences to actions.
 
 **Rational behaviour.** Rational agent chooses whichever action maximizes the expected value of the performance measure given the percept sequence to date and whatever built-in knowledge the agent has.
 
-To design a rational agent we must specify the task environment:
+To design a rational agent we must specify the task environment (PEAS):
 
 1. Performace measure
 2. Environment

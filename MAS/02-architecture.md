@@ -2,7 +2,7 @@
 
 * **Simple reactive agent** chooses the next action on the basis of the current percept only.
 * **Model-based agent** keeps the track of the world by extracting relevant information from percepts and storing it in its memory.
-* **Goal-based agent**, goals are not necesarily achivable by a single action, thus there is a need for searching and planning.
+* **Goal-based agent**, goals are not necesarily achievable by a single action, thus there is a need for searching and planning.
 * **Utility-based agent** uses the utility function to choose the most desirable action / course of actions to take.
 
 ## BDI agent-oriented systems
@@ -27,13 +27,13 @@ Theoretical reasoning is reasoning directed towards beliefs – concerned with d
 * **Means-ends reasoning:** deciding **how** to achieve these states of affairs.
     * thinking about suitable actions, resources and how to "organize" activity
     * building courses of actions (planning)
-    * the ouputs of means-ends reasoning are **plans**
+    * the outputs of means-ends reasoning are **plans**
 
 ### Desires
 
 Desires describe the states of affairs that are considered for achievement, i.e. basic preferences of the agent.
 
-Desires are much weaker then intentions; not directly related to activity.
+Desires are much weaker than intentions; not directly related to the activity.
 
 ### Intentions
 
