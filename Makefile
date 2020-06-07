@@ -9,6 +9,11 @@ pdf:
 		--variable papersize=a4paper \
 		-o main.pdf
 
+tex:
+	$(PANDOC) \
+		--variable papersize=a4paper \
+		-o main.tex
+
 # html:
 # 	$(PANDOC) \
 # 		--katex \

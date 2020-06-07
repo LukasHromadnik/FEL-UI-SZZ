@@ -2,7 +2,7 @@
 
 It's a binary search tree with no additional tree shape description.
 
-Each node access or insertion *splays* that node to the root.
+Each node access (\texttt{Search}) or insertion *splays* that node to the root.
 
 Rotations are:
 
@@ -15,7 +15,7 @@ All operations run times are $\mathcal{O}(n)$. Amortized run times of all operat
 ### \texttt{Delete(k)}
 
 1. Find $k$  
-    This splays $k$ to the roott
+    This splays $k$ to the root
 2. Remove the root  
     Splits the tree into $L$ and $R$ subtree of the root
 3. $y$ = Find max in $L$ subtree  
@@ -30,7 +30,7 @@ All leaves are at the same distance from the root, the tree is **perfectly balan
 
 ### Splitting strategy
 
-Additionoal insert rule: In our way doown the tree, whenever we reach a 4-node (including a leaf), we split it into two 2-nodes, and move thee middle element up to the parent node.
+Additional insert rule: In our way down the tree, whenever we reach a 4-node (including a leaf), we split it into two 2-nodes, and move the middle element up to the parent node.
 
 ## \textcolor{red}{Red}-Black tree
 
@@ -48,7 +48,7 @@ A binary search tree is a \textcolor{red}{red}-black tree if
 
 **Black height.** $bh(x)$ of a node $x$ is the number of black nodes on any path from $x$ to a leaf, not counting $x$.
 
-**Height.** $h(x) of a RB-tree rooted in node $x$ is at maximum twice of the optimal height of a balanced tree.
+**Height.** $h(x)$ of a RB-tree rooted in node $x$ is at maximum twice of the optimal height of a balanced tree.
 
 ### Insert
 
@@ -72,6 +72,6 @@ Assume we delete a black node. Let $x$ be the child of the deleted (black) node 
 ## Comparison
 
 * For random sequences use *unsorted tree*, no waste time for rebalancing
-* For mostly random oordering with occasioonal runs of sorted order use *\textcolor{red}{red}-black trees*
+* For mostly random ordering with occasional runs of sorted order use *\textcolor{red}{red}-black trees*
 * For insertions often in a sorted order and later accesses tend to be random use *AVL trees*
 * For insertions often in a sorted order and later accesses are sequential or clustered use *splay trees*

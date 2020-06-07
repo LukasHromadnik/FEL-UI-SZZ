@@ -6,9 +6,9 @@ Pseudo-random behavior
 * local unpredicatability – "outout looks like random",
 * statistical tests might reveal more or less "random behavior".
 
-**Pseudorandom integer generator.** A pseudorandom integer generator is an algorithm which produces a sequence
+**Pseudorandom integer generator.** A *pseudorandom integer generator* is an algorithm which produces a sequence
 $$\{x_n\} = x_0, x_1, x_2, \dots$$
-of non-negative integers, which manifest pseudo-random behavior.
+of non-negative integers, which manifests pseudo-random behavior.
 
 Random number in an interval $[a, b]$ must be independently drawn from a uniform distribution.
 
@@ -18,7 +18,7 @@ Each value of $\{y_n\}$ belongs to $\langle 0, 1 )$. "Random" real numbers are t
 
 ## Linear Congruential Generator
 
-Linear Congruential generator produces sequence $\{x_n\}$ defined by relations $0 \leq x_0 < M$ and $x_{n + 1} = (Ax_n + C) \modn[M], n \geq 0$ where $M$ is a modulus, $x_0$ is a seed, $A$ is a multiplier and $C$ is an increment.
+Linear Congruential generator produces a sequence $\{x_n\}$ defined by relations $0 \leq x_0 < M$ and $x_{n + 1} = (Ax_n + C) \modn[M], n \geq 0$ where $M$ is a modulus, $x_0$ is a seed, $A$ is a multiplier and $C$ is an increment.
 
 **Hull-Dobell Theorem.** The length of the period is maximum, i.e. equal to $M$, iff all following conditions hold:
 
@@ -44,7 +44,7 @@ $$\frac{(M_1 - 1)(M_2 - 1)\cdots(M_r - 1)}{2^{r - 1}}$$
 
 ## Lehmer Generator
 
-Lehmer generator produces sequence $\{ x_n \}$ defined by relations
+Lehmer generator produces a sequence $\{ x_n \}$ defined by relations
 \begin{align*}
 0 < x_0 < M, x_0 \text{ coprime to } M \\
 x_{n + 1} = Ax_n \modn[M], n \geq 0
@@ -58,14 +58,14 @@ $$\{G, G^2, G^3, \dots, G^{M - 1}\} = \{1, 2, 3, \dots, M - 1\}$$
 
 ## Blum Blum Shub Generator
 
-Blum Blum Shub generator produces sequence $\{ x_n \}$ defined by relations
+Blum Blum Shub generator produces a sequence $\{ x_n \}$ defined by relations
 \begin{align*}
 2 \leq x_0 < M, x_0 \text{ coprime to } M \\
 x_{n + 1} = x_n^2 \modn[M]
 \end{align*}
 where $M$ is a modulus and $x_0$ is a seed.
 
-Seed $x_0$ is coprime to $M$ and modulus $M$ is a product of two big primes $P$ and $Q$.
+Seed $x_0$ is a coprime to $M$ and the modulus $M$ is a product of two big primes $P$ and $Q$.
 
 ## Primes related notions
 

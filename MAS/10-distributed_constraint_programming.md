@@ -95,11 +95,11 @@ Send by parents to a child as allowance on solution cost:
 * child then heuristically re-subdivides, or allocates, the threshold among its own children.
 * can be incorrect: corrent for over-estimates over time as cost feedback is (re)received from the children.
 
-Control backtracking to efficiently search: do not change value until $LB(current_value) > threshold$, i.e. there is a strong reason to believe that current value is not the best.
+Control backtracking to efficiently search: do not change value until $LB(current\_value) > threshold$, i.e. there is a strong reason to believe that current value is not the best.
 
 Parent distributes the accumulated bound among children and corrects subdivision as feedback is receive from children.
 
-ADOP maintain invariants:
+ADOPT maintain invariants:
 
 * **allocation invariant:** the threshold on cost for $x_j$ must equal to the local cost choosing $d$ plus the sum of the thresholds allocated to $x_j$'s children.
 * **child treshold invariant:** the threshold allocated to child $x_k$ by parent $x_j$ cannot be less than the lower bound or greater than the upper boud reported by $x_k$ to $x_j$.

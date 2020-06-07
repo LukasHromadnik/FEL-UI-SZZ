@@ -69,6 +69,14 @@ The Kosaraju-Sharir algorithm performs two complete traversals of the graph:
 
 ## Tarjan's algorithm
 
+Tarjan's algorithm can determine strongly connected components with only one full DFS traversal of the graph. Each node has an \verb|index| and a \verb|lowlink|. \verb|index| can be seen as a time when the node was visited. \verb|lowlink| is an index to lowest element in the component. This value is updated during the search and it determines the node in a given component.
+
+In each step the algorithm visits a node. This node is push onto the stack, its \verb|index| and \verb|lowlink| are set to the same value. Then we continue with its successors. If one of its successors is on the stack, we update the \verb|lowlink| value to the value of this successor.
+
+The node is marked as visited when all of its successors were visited or when there is no outgoing edge from it. A successor that was already visited and it's not on the stack is not considered in later stages of the algorithm. When closing a node its \verb|lowlink| value is set to the minimum of the current value and \verb|lowlink|s of all successors.
+
+When a node has \verb|index| = \verb|lowlink|, it's the root of the strongly connected component and we can remove all nodes from this component from the stack.
+
 The Tarjan's algorithm performs only one complete traversal of the graph:
 
 * adjacency list: $\Theta(|V| + |E|)$,
@@ -78,7 +86,7 @@ Within absolute numbers the Tarjan's algorithm runs faster then Kosaraju-Sharir 
 
 ## Euler Trail problem
 
-Does a graph $G$ contain a trail (trail is similar to path but vertices can repeat and edges cannot repeat) that visits every edge exactly once?
+Does a graph $G$ contain a trail (nodes can repeat, edges cannot) that visits every edge exactly once?
 
 A graph $G$ has an Euler trail iff it is connected and has 0 or 2 vertices of odd degree.
 

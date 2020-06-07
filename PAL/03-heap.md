@@ -6,24 +6,24 @@ Heap is one the most efficient implementation of an abstract data type called a 
 
 The operations commonly performed with a heap are:
 
-----------------------------------------------------------------------------
-Operation                Description
------------------------- ---------------------------------------------------
-\verb|Insert(x)|         Adds a new key $x$ to the heap
+------------------------------------------------------------------------------
+Operation                  Description
+-------------------------- ---------------------------------------------------
+\method{Insert}{x}         Adds a new key $x$ to the heap
 
-\verb|AccessMin|         Find and returns the minimum item of the heap
+\verb|AccessMin|           Find and returns the minimum item of the heap
 
-\verb|DeleteMin|         Removes the minimum node of the heap
-                         (usually the minimum node is the root of the heap)
+\verb|DeleteMin|           Removes the minimum node of the heap
+                           (usually the minimum node is the root of the heap)
 
-\verb|DecreaseKey(x, d)| Decreases $x$ key within the heap by $d$
+\method{DecreaseKey}{x, d} Decreases $x$ key within the heap by $d$
 
-\verb|Merge(H1, H2)|     Joins two heaps $H_1$ and $H_2$ to form a valid
-                         new heap containing all the elements of both
+\method{Merge}{H_1, H_2}   Joins two heaps $H_1$ and $H_2$ to form a valid
+                           new heap containing all the elements of both
 
-\verb|Delete(x)|         Removes a key $x$ of the heap
+\method{Delete}{x}         Removes a key $x$ of the heap
 
-----------------------------------------------------------------------------
+-------------------------- ---------------------------------------------------
 
 ## Binary Heap
 
@@ -34,19 +34,19 @@ A *binary heap* is a binary tree with two additional constraints:
 
 \input{assets/binary-heap.tikz}
 
-### \texttt{Insert(x)}
+### \method{Insert}{x}
 
 When inserting node the heap we add the node the end of the heap and then swap its location with parents until the heap property is met.
 
 ### \texttt{DeleteMin}
 
-Deleting the min (or the root) is simple. At first increase the value of the root and then switch its position with the last node in the heap. Then we need to make sure that the heap property is valid for the switched node. So we check it, if it's not valid then we switch the node with one of its descendants and repeat. At last delete the last node from the heap.
+Deleting the min (or the root) is simple. At first set the value of the root to $\infty$ and then switch its position with the last node in the heap. Then we need to make sure that the heap property is valid for the switched node. So we check it, if it's not valid then we switch the node with one of its descendants and repeat. At last delete the last node from the heap.
 
-### \texttt{DecreaseKey(x, d)}
+### \method{DecreaseKey}{x, d}
 
-At first decrease the key of $x$ by $d$ and then apply the similar algorithm as in \verb|Insert(x)| case.
+At first decrease the key of $x$ by $d$ and then apply the similar algorithm as in \method{Insert}{x} case.
 
-### \texttt{Delete(\&x)}
+### \method{Delete}{\&x}
 
 Deleting node at given position is very similar to deleting the min node. Switch the node $x$ with the last node in the heap and then verify the heap property by checking all its descendants and its parent. Continue until the property is met.
 
@@ -60,21 +60,21 @@ Then for any given node $n$ we can get
 * 1st child as $2 * n \ (n << 1)$ and
 * 2nd child as $2 * n + 1 \ (n << 1 + 1)$.
 
-### \texttt{BuildHeap(A)}
+### \method{BuildHeap}{A}
 
-Building the heap from the array starts at the last subtree. Compare parent and its children if the heap property is valid. If not switch parent with the biggest child. Continue to the next subtree and check again. With that at the end we have a valid heap stored in an array.
+Building the heap from the array $A$ starts at the last subtree. Compare parent and its children if the heap property is valid. If not switch parent with the biggest child. Continue to the next subtree and check again. With that at the end we have a valid heap stored in an array.
 
 ### Time complexity
 
-Operation                Time complexity
------                    -----
-\verb|Insert(x)|         $\mathcal{O}(\log n)$
-\verb|Delete(x)|         $\mathcal{O}(\log n)$
-\verb|AccessMin|         $\mathcal{O}(1)$
-\verb|DeleteMin|         $\mathcal{O}(\log n)$
-\verb|DecreaseKey(x, d)| $\mathcal{O}(\log n)$
-\verb|BuildHeap|         $\mathcal{O}(n)$
-\verb|Merge(H1, H2)|     $\mathcal{O}(n)$ by building a new heap
+Operation                  Time complexity
+-----                      -----
+\method{Insert}{x}         $\mathcal{O}(\log n)$
+\method{Delete}{x}         $\mathcal{O}(\log n)$
+\verb|AccessMin|           $\mathcal{O}(1)$
+\verb|DeleteMin|           $\mathcal{O}(\log n)$
+\method{DecreaseKey}{x, d} $\mathcal{O}(\log n)$
+\verb|BuildHeap|           $\mathcal{O}(n)$
+\method{Merge}{H_1, H_2}   $\mathcal{O}(n)$ by building a new heap
 
 ## $d$-ary Heap
 
@@ -98,14 +98,14 @@ Alternative definition of a binomial tree is that it consists of two binomial tr
 
 ### Representation
 
-Becuase no operation requires random access to the root nodes of the binomial trees, the roots of the binomial trees can be stored in a linked list, ordered by increasing degree of the tree. But of course, binomial trees can be stored in array as well. We need to have a constant time complexity for access the minimum, for that a MIN pointer is created.
+Because no operation requires random access to the root nodes of the binomial trees, the roots of the binomial trees can be stored in a linked list, ordered by increasing degree of the tree. But of course, binomial trees can be stored in array as well. We need to have a constant time complexity for accessing the minimum, for that a MIN pointer is created.
 
-### \texttt{Insert(x)}
+### \method{Insert}{x}
 
 1. Create a new heap containing only this element.
 2. Merge it with the original heap.
 
-### \texttt{Merge(H1, H2)}
+### \method{Merge}{H_1, H_2}
 
 Due to the structure of binomial trees, they can be merged trivially. As their node is the smallest element within the tree, by comparing the two keys, the smaller of them is the minimum key and becomes the new root node. Then the other tree becomes a subtree of the combined tree. In the end we update the MIN pointer.
 
@@ -113,25 +113,25 @@ Due to the structure of binomial trees, they can be merged trivially. As their n
 
 This operation removes only the root of the tree with the minimum. All children subtrees of the root are then merged to the heap.
 
-### \texttt{Delete(x)}
+### \method{Delete}{x}
 
 1. Decrease $x$ key to $-\infty$ by \verb|DecreaseKey|
 2. Delete the minimum in the heap by \verb|DeleteMin|
 
 ### Time complexity
 
-Operation                Time complexity
------                    -----
-\verb|Merge(H1, H2)|     $\mathcal{O}(\log n)$
-\verb|Insert(x)|         $\mathcal{O}(\log n)$, amortized complexity is $\mathcal{O}(1)$
-\verb|AccessMin|         $\mathcal{O}(1)$
-\verb|DeleteMin|         $\mathcal{O}(\log n)$
-\verb|DecreaseKey(x, d)| $\mathcal{O}(\log n)$
-\verb|Delete(x)|         $\mathcal{O}(\log n)$
+Operation                  Time complexity
+-----                      -----
+\method{Merge}{H_1, H_2}   $\mathcal{O}(\log n)$
+\method{Insert}{x}         $\mathcal{O}(\log n)$, amortized complexity is $\mathcal{O}(1)$
+\verb|AccessMin|           $\mathcal{O}(1)$
+\verb|DeleteMin|           $\mathcal{O}(\log n)$
+\method{DecreaseKey}{x, d} $\mathcal{O}(\log n)$
+\method{Delete}{x}         $\mathcal{O}(\log n)$
 
 ## Fibonacci Heap
 
-Fibonacci Heap is in fact loosely based binomial heap. It has more relaxed structure allowing for improved asymptotic time bounds.
+Fibonacci Heap is in fact a loosely based binomial heap. It has more relaxed structure allowing for improved asymptotic time bounds.
 
 Fibonacci heaps support the same operations but have the advantage that operations that do not involve deleting an element (\verb|AccessMin|, \verb|Merge| and \verb|DecreaseKey|) run in $\mathcal{O}(1)$ amortized time.
 
@@ -153,7 +153,7 @@ Deleting the minimum is simple. Just cut off the root node of the tree and all i
 
 During consolidation we iterate over all trees in the heap until there are no trees with the same level. When we find during the iteration two trees with the same level we merge them to create a Binomial tree with the higher level. This can be done be storing a reference to the tree in an array where index represents the level of the tree.
 
-Time complexity is $\mathcal{O}(N)$, amortized complexity is $\mathcal{O}(\log n)$
+Time complexity is $\mathcal{O}(n)$, amortized complexity is $\mathcal{O}(\log n)$
 
 ## Comparison of time complexity
                   Binary heap      $d$-ary heap     Binomial heap                                Fibonacci heap

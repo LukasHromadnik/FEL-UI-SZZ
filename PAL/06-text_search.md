@@ -2,11 +2,11 @@
 
 **Finite automaton** is a 5-tuple $(A, Q, \sigma, S_0, Q_f)$ where
 
-* $A$ is alphabet, finite set of symbols,
-* $Q$ is set of states,
-* $\sigma$ is transition function, $\sigma: Q \times A \rightarrow Q$,
-* $S_0$ is start state, $s_0 \in Q$,
-* $Q_F$ is unempty set of final states, $\emptyset \ne Q_F \subseteq Q$
+* $A$ is an alphabet, finite set of symbols,
+* $Q$ is a set of states,
+* $\sigma$ is a transition function, $\sigma: Q \times A \rightarrow Q$,
+* $S_0$ is a start state, $s_0 \in Q$,
+* $Q_F$ is an unempty set of final states, $\emptyset \ne Q_F \subseteq Q$
 
 Transforming NFA (Non-deterministic finite automaton) to DFA using a transition table.
 
@@ -54,17 +54,17 @@ Languages represented by regular expressions (RE) are defined the same way.
 
 **$\varepsilon$-closure.** Symbol $\varepsilon$-closure($p$) denotes the set of all states $q$ which can be reached from state $p$ using only $\varepsilon$-transitions. By definition let $\varepsilon$-closure($p$) = $\{p\}$ when there is no $\varepsilon$-transition out from $p$.
 
-We can use $\varepsilon$-transition to union two or more NFA. Just create a start state $S$ and add $\varepsilon$-transitions from $S$ to start states of all involded NFAs. Also we can concatenate multiple NFAs by adding $\varepsilon$-transitions from the final states to the start state of the next NFA.
+We can use $\varepsilon$-transitions to union two or more NFA. Just create a start state $S$ and add $\varepsilon$-transitions from $S$ to start states of all involded NFAs. Also we can concatenate multiple NFAs by adding $\varepsilon$-transitions from the final states to the start state of the next NFA.
 
 ### Intersection
 
 Let $L_1, L_2$ be regular languages.
 
-Create Cartesian product $Q_1 \times Q_2$ where $Q_1, Q_2$ are sets of states of automatons $A_1, A_2$ that accept languages $L_1, L_2$. Each state of the automaton will be an ordered pair of states $A_1, A_2$.
+Create a Cartesian product $Q_1 \times Q_2$ where $Q_1, Q_2$ are sets of states of automatons $A_1, A_2$ that accept languages $L_1, L_2$. Each state of the automaton will be an ordered pair $(a_1, a_2)$ where $a_1 \in A_1$ and $a_2 \in A_2$.
 
-State $(S_1, S_2)$ will be start state. Final states will be just those pairs $(F, G)$ where $F$ is a final state of $A_1$ and $G$ is the final state of $A_2$.
+State $(S_1, S_2)$ will be a start state. Final states will be just those pairs $(F, G)$ where $F$ is a final state of $A_1$ and $G$ is the final state of $A_2$.
 
-Create transition from state $(p_1, p_2)$ to $(q_1, q_2)$ labeled by symbol $x$ iff
+Create transition from state $(p_1, p_2)$ to $(q_1, q_2)$ labeled by a symbol $x$ iff
 
 * there is a transition $p_1 \rightarrow q_1$ labeled by $x$ in $A_1$ and
 * there is a transition $p_2 \rightarrow q_2$ labeled by $x$ in $A_2$.
@@ -83,7 +83,7 @@ Informally: Align the strings and count the number of mismatches of correspondin
 
 Let pattern $P$ be $p[1], p[2], \dots, p[m]$, let text $T$ be $t[1], t[2], \dots, t[n]$.
 
-Create dynamic programming table $D[m + 1][n + 1]$ which elements $d[i][k]$ are defined as follows:
+Create a dynamic programming table $D[m + 1][n + 1]$ which elements $d[i][k]$ are defined as follows:
 
 1. $d[0][k] = 0, \forall k \in 0, \dots, n$
 2. 
@@ -105,7 +105,7 @@ Levenshtein distance in defined for any two strings over a given alphabet.
 
 Let pattern $P$ be $p[1], p[2], \dots, p[m]$, let text $T$ be $t[1], t[2], \dots, t[n]$.
 
-Create dynamic programming table $D[m + 1][n + 1]$ whise elements $d[i][k]$ are defined as follows:
+Create a dynamic programming table $D[m + 1][n + 1]$ whose elements $d[i][k]$ are defined as follows:
 
 1. $d[i][0] = i, d[0][k] = 0, \forall i \in 0, \dots, m, \forall k \in 1, \dots, n$
 2. 
