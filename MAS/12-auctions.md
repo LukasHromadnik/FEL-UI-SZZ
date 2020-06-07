@@ -71,7 +71,7 @@ Combinatorial auctions do not have to have additive valuation function:
 
 The allocation problem among single-minded bidders is \NP-hard. More precisely, the decision problem of whether the optimal allocation has social welfare of at least $k$ is \NP-complete.
 
-**Demand.** For a given bidder valuation $v_i$ and given item prices $p_1, \dots, p_m$) a bundle $Z$ is called a *demand* of bidder $i$ if for every other bundle $Z' \subseteq \mathcal{Z}$ we have that
+**Demand.** For a given bidder valuation $v_i$ and given item prices $p_1, \dots, p_m$ a bundle $Z$ is called a *demand* of bidder $i$ if for every other bundle $Z' \subseteq \mathcal{Z}$ we have that
 $$v_i(Z') - \sum_{j \in Z'} p_j < v_i(Z) - \sum_{j \in Z} p_j.$$
 
 **Walrasian equilibrium.** A set of nonnegative prices $p_1^*, \dots, p_m^*$ and an allocation $S_1^*, \dots, S_n^*$ of the items is *Walrasian equilibrium* if for every player $i, S_i^*$ is a demand of bidder $i$ at prices $p_1^*, \dots, p_m^*$ and for any item $j$ that is not allocated we have $p_j = 0$.
