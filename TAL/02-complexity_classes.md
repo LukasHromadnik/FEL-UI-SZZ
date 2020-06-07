@@ -1,14 +1,3 @@
-\newcommand{\mcal}[1]{\ensuremath{\mathcal{#1}}}
-\newcommand{\NP}{\mcal{NP}}
-\newcommand{\RP}{\mcal{RP}}
-\newcommand{\ZPP}{\mcal{ZPP}}
-\newcommand{\red}{\vartriangleleft}
-\newcommand{\mcalP}{\mcal{P}}
-\newcommand{\mcalU}{\mcal{U}}
-\newcommand{\mcalV}{\mcal{V}}
-\newcommand{\pspace}{\mcalP\texttt{SPACE}}
-\newcommand{\npspace}{\NP\texttt{SPACE}}
-
 [^1]: TSP $\red_p$ HAM $\Rightarrow \mcalP = \NP$
 
 # Třídy složitosti
