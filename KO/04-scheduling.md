@@ -5,12 +5,9 @@ Scheduling is an assignment of a task to a resource in time.
 * set of $n$ tasks $\mathcal{T} = \{ T_1, T_2, \dots, T_n \}$
 * set of $m$ types of resources with capacities $R_k, \mathcal{P} = \left\{ P_1^1, \dots, P_1^{R_1}, P_2^1, \dots, P_2^{R_2}, \dots \dots, P_m^1, \dots, P_m^{R_m} \right\}$
 
-Each task must be **completed**. Set of tasks is known when executing the scheduling algorithm – off-line scheduling.
+Each task must be **completed**. Set of tasks is known beforehand – off-line scheduling.
 
-General constraints:
-
-* Each task is to be processed **by at most one resource at a time**
-* Each resource is capable of processing **at most one task at a time**
+Each task can be processed **by at most one resource at a time** and each resource is capable of processing **at most one task at a time**.
 
 Specific constraints:
 
@@ -31,20 +28,20 @@ Classify scheduling problems by **resources | tasks | criterion**
 +----------------+-------------------------------------------------------------+
 | $\sum C_j$     | minimize the sum of completion times                        |
 +----------------+-------------------------------------------------------------+
-| $\sum w_j C_j$ | minimizes weighted completion time                          |
+| $\sum w_j C_j$ | minimizes weighted sum of completion times                  |
 +----------------+-------------------------------------------------------------+
 | $L_{max}$      | minimizes maximum lateness $L_{max} = \max \{ C_j - d_j \}$ |
 +----------------+-------------------------------------------------------------+
 
 ## Bratley's Algorithm for $1 \, | \, r_j, \tilde{d_j} \, | \, C_{max}$
 
-A **branch and bound** algorithm. Every node is labeled by: (the order of tasks)/(completion time of the last task).
+A **branch and bound** algorithm. Every node is labeled by: (order of tasks)/(last task's completion time).
 
 ### Bounding
 
 1. **eliminate the node** exceeding the deadline (and all its "brothers")
 2. **problem decomposition** due to idle waiting  
-Consider node $v$ on level $k$. If $C_i$ of the last scheduled task is less than or equal to $r_i$ of all unscheduled tasks, there is no need for backtrack above $v$
+Consider node $v$ on level $k$. If $C_i$ of the last scheduled task is less than or equal to $r_i$ of all unscheduled tasks, there is no need for a backtrack above $v$.
 
 ### Block with Release Time Property (BRTP)
 
@@ -52,23 +49,22 @@ BRTP is a set of $k$ tasks that satisfy:
 
 * first task $T_1$ starts at it's release time
 * all $k$ tasks until the end of the schedule run without "idle waiting"
-* $r_1 \leq r_i, \forall u = 2, \dots, k$
+* $r_1 \leq r_i, \forall i = 2, \dots, k$
 
 If BRTP exists, the schedule is optimal.
 
 ## Problem $1 \, || \, L_{max}$
 
 Can be solved by EDD (Earliest Due Date first), i.e. **tasks are scheduled in order of nondecreasing due dates**.
-
 Time complexity is $\mathcal{O}(n \cdot \log n)$.
 
 ## Problem $1 \, | \, r_j, p_j = 1 \, | \, L_{max}$
 
-Optimal schedule can be found by **iterative calls of EDD**: at every moment we schedule the task which is ready and has the lowest $d_j$ among all ready tasks
+Optimal schedule can be found by **iterative calls of EDD**: at every moment we schedule the task which is ready and has the lowest $d_j$ among all ready tasks.
 
-\begin{algorithm}[!htp]
+\begin{algorithm}[H]
 \caption{Problem $1 \, | \, r_j, p_j = 1 \, | \, L_{max}$}
-\hspace*{\algorithmicindent} \textbf{Input:} $\mathcal{T}$, set of $n$ non-preemptive tasks with unit processing time, release dates $(r_1, r_2, \dots, r_n)$ and due-dates $(d_1, d_2, \dots, d_n)$. \\
+\hspace*{\algorithmicindent} \textbf{Input:} $\mathcal{T}$, set of $n$ non-preemptive tasks with \textbf{unit processing time}, release dates and due dates \\
 \hspace*{\algorithmicindent} \textbf{Output:} Start times $(s_1, s_2, \dots, s_n)$
 \begin{algorithmic}[1]
 \State $t \gets 0$
@@ -86,7 +82,7 @@ Optimal schedule can be found by **iterative calls of EDD**: at every moment we 
 ## Problem $1 \, | \, \mathrm{pmtn}, r_j \, | \, L_{max}$ – Horn's Algorithm
 
 \begin{algorithm}[!htp]
-\caption{Problem $1 \, | \, r_j, p_j = 1 \, | \, L_{max}$}
+\caption{Problem $1 \, | \, \mathrm{pmtn}, r_j \, | \, L_{max}$}
 \hspace*{\algorithmicindent} \textbf{Input:} $\mathcal{T}$, set of $n$ preemptive tasks, its processing times, release dates and due-dates \\
 \hspace*{\algorithmicindent} \textbf{Output:} Start times of preempted parts of tasks.
 \begin{algorithmic}[1]
@@ -178,12 +174,10 @@ Principle:
 * **the level of task $T_j$** is the sum of $p_i$ (including $p_j$) along the **longest path** from $T_j$ to a terminal task (a task with no successor)
 * when more tasks of the same level are assigned to less resources, each task gets part of the resource capacity $\beta$
 
-For $P2 \, | \, \mathrm{pmtn, prec} \, | \, C_{max}$ and $P \, | \, \mathrm{pmtn, forest} \, | \, C_{max}$, the algorithm is **exact**. For $P \, | \, \mathrm{pmtn, prec} \, | \, C_{max}$ approximation algorithm with factor $r_{MC} = 2 - \frac{2}{R}$.
-
-Time completixy is $\mathcal{O}(n^2)$.
-
 \begin{algorithm}[!htp]
 \caption{Muntz \& Coffman's Level Algorithm}
+\hspace*{\algorithmicindent} \textbf{Input:} $R$, number of parallel identical resources, $n$ number of preemptive tasks and processing times $(p_1, p_2, \dots, p_n)$. DAG of precedence constraints. \\
+\hspace*{\algorithmicindent} \textbf{Output:} $n$-element vectors $s$ and $z$ where $s_i^k$ is the start time of $k$-th part of the task $T_i$ and $z_i^k$ is the corresponding resource ID.
 \begin{algorithmic}[1]
 \State compute the level of all tasks
 \State $t \gets 0, \quad h \gets R$
@@ -215,11 +209,15 @@ $t + \delta$ is time when
 * OR a current level of an assigned task becomes lower than a level of an unassigned ready task
 * OR a task executed at faster rate $\beta$ started to have current level below the current level of a task executed at slower rate
 
+Time completixy is $\mathcal{O}(n^2)$.
+
+For $P2 \, | \, \mathrm{pmtn, prec} \, | \, C_{max}$ and $P \, | \, \mathrm{pmtn, forest} \, | \, C_{max}$, the algorithm is **exact**. For $P \, | \, \mathrm{pmtn, prec} \, | \, C_{max}$ approximation algorithm with factor $r_{MC} = 2 - \frac{2}{R}$.
+
 ## Project scheduling
 
 ### Temporal Constraints
 
-* A set of non-preemptive tasks $\mathcal{T} = \{ T_1, T_2, \dots, T_n \}$ is represented by the nodes of the directed graph $G$.
+* A set of non-preemptive tasks $\mathcal{T} = \{ T_1, \dots, T_n \}$ is represented by the nodes of the directed graph $G$.
 * Processing time $p_i$ is assigned to each task.
 * The edges represent temporal constraints. Each edge from $T_i$ to $T_j$ has the length $l_{ij}$.
 * Each temporal constraint is characterized by one inequality $s_i + l_{ij} \leq s_j$ – the start time of one task depends on the start time of another task.
@@ -236,9 +234,7 @@ $t + \delta$ is time when
 \end{array}
 \end{equation*}
 
-$x_{it} = 1$ if $s_i = t$.
-
-$UB$ is the upper bound of $C_{max}$ (e.g. $UB = \sum_{i = 1}^n \max\{p_i, \max_{i, j \in 1, \dots, n} l_{ij}\})$.
+where $x_{it} = 1$ if $s_i = t$. $UB$ is the upper bound of $C_{max}$ (e.g. $UB = \sum_{i = 1}^n \max\{p_i, \max_{i, j \in 1, \dots, n} l_{ij}\})$.
 
 Start time of $T_i$ is $s_i = \sum_{t = 0}^{UB - 1}(t \cdot x_{it})$.
 

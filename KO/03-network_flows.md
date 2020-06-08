@@ -3,26 +3,25 @@
 By network we mean a 5-tuple $(G, l, u, s, t)$, where
 
 * $G$ denotes the oriented graph (digraph),
-* $l: E(G) \rightarrow \mathbb{R}_0^+$ denotes the minimum capacity of the arcs,
-* $u: E(G) \rightarrow \mathbb{R}_0^+$ denotes the maximum capacity of the arcs,
+* $l: E(G) \rightarrow \mathbb{R}_0^+$ denotes the minimum capacity of arcs,
+* $u: E(G) \rightarrow \mathbb{R}_0^+$ denotes the maximum capacity of arcs,
 * $s$ represents the source node,
 * $t$ represents the sink node.
 
-$f: E(G) \rightarrow \mathbb{R}_0^+$ is the **flow** if Kirchhoff law
+**Flow.** $f: E(G) \rightarrow \mathbb{R}_0^+$ is the *flow* if Kirchhoff law
 $$\sum_{e \in \delta^-(v)} f(e) = \sum_{e \in \delta^+(v)} f(e)$$
-is valid for every node except $s$ and $t$. Also **feasible flow** must satisfy $f(e) \in \langle l(e), u(e) \rangle$. There might be no feasible flow when $l(e) > 0$.
-
-Given a network $(G, l, u, s, t)$. The goal is to find the **feasible flow $f$** from the source to the sink that maximizes
+is valid for every node $v$ except $s$ and $t$. Also **feasible flow** must satisfy $f(e) \in \langle l(e), u(e) \rangle$. The goal is to find the **feasible flow $f$** from the source to the sink that maximizes
 $$\sum_{e \in \delta^+(s)} f(e) - \sum_{e \in \delta^-(s)} f(e).$$
+There might be no feasible flow when $l(e) > 0$.
 
 ## Ford-Fulkerson Algorithm
 
-The algorithm is based on **incremental augmentation** of the flow along the **path** from source $s$ to sink $t$ while maintaining the flow's feasibility. The path from source $s$ to sink $t$ **does not respect the orientation of arcs**.
+The algorithm is based on **incremental augmentation** of the flow along the **path** from the source $s$ to the sink $t$ while maintaining the flow's feasibility. The path from source $s$ to sink $t$ **does not respect the orientation of arcs**.
 
 An augmenting path for flow $f$ is a path from $s$ to $t$ with
 
 * $f(e) < u(e)$ if $e$ is a forward arc $\rightarrow$ the flow can be increased
-* $f(e) > l(e)$ if $e$ is a backward ard $\rightarrow$ the flow can be decreased
+* $f(e) > l(e)$ if $e$ is a backward arc $\rightarrow$ the flow can be decreased
 
 Capacity $\gamma$ of the augmenting path is the biggest possible increase of the flow on the augmenting path.
 
@@ -54,7 +53,7 @@ The flow from $s$ to $t$ is the **maximum** iff there is no augmenting path.
 
 ## Minimum Cut Problem
 
-The cut in $G$ is an edge set $\delta(A)$ with $s \in A$ and $t \in V(G) \setminus A$ (i.e. the cut separates nodes $s$ and $t$). The **minimum cut** is the cut of minimum capacity
+The cut in $G$ is an edge set $\delta(A)$ with $s \in A$ and $t \in V(G) \setminus A$ (i.e. the cut separates nodes $s$ and $t$). The **minimum cut** is the cut of the minimum capacity
 $$C(A) = \sum_{e \in \delta^+(A)} u(e) - \sum_{e \in \delta^-(A)} l(e).$$
 
 The value of the maximum flow from $s$ to $t$ is equal to the capacity of the **minimum cut**.
@@ -65,6 +64,8 @@ If the capacities of the network are integers, then **an integer-valued maximum 
 
 When choosing the augmenting path, if we always choose the shortest one, time complexity is $\mathcal{O}(m^2n)$.
 
+\clearpage
+
 ## Minimum Cost Flow
 
 **Instance:** 5-tuple $(G, l, u, c, b)$ where
@@ -72,19 +73,18 @@ When choosing the augmenting path, if we always choose the shortest one, time co
 * **cost of arcs** $c: E(G) \rightarrow \mathbb{R}$
 * **balance** $b: V(G) \rightarrow \mathbb{R}$ that represents the supply / consumption of the nodes and satisfies $\sum_{v \in V(G)} b(v) = 0$.
 
-**Goal:** Find the feasible flow $f$ that minimizes
+**Goal:** Find the feasible flow $f$ that
 \begin{equation*}
-\begin{array}{ll}
-\text{minimize} & \displaystyle\sum_{e \in E(G)} f(e) \cdot c(e) \\
-\text{subject to} & \displaystyle\sum_{e \in \delta^+(v)} f(e) - \sum_{e \in \delta^-(v)} f(e) = b(v) \\
+\begin{array}{lll}
+\text{minimize} & \displaystyle\sum_{e \in E(G)} f(e) \cdot c(e) & \\
+\text{subject to} & \displaystyle\sum_{e \in \delta^+(v)} f(e) - \sum_{e \in \delta^-(v)} f(e) = b(v) & \forall v \in V(G) \\
 \end{array}
 \end{equation*}
-
-for all $v \in V(G)$, or decide that it does not exists.
+or decide that it does not exists.
 
 ## Matching
 
-**Matching** is the set or arcs $P \subseteq E(G)$ in graph $G$ such that the endpoints are all different (no arcs from $P$ are incident with the same node). When all nodes of $G$ are incident with some arc in $P$, we call $P$ a **perfect matching**.
+**Matching** is a set or arcs $P \subseteq E(G)$ in graph $G$ such that the endpoints are all different (no arcs from $P$ are incident with the same node). When all nodes of $G$ are incident with some arc in $P$, we call $P$ a **perfect matching**.
 
 ### Maximum Cardinality Matching Problem
 
@@ -112,7 +112,7 @@ Can be transformed to the maximum flow problem:
 
 ### Assignment Problem
 
-We have $n$ exmployees and $n$ tasks and we know the cost of execution for each possible employee-task pair. Goal is to assign one task per employee while minimizing the total cost.
+We have $n$ employees and $n$ tasks and we know the cost of the execution for each possible employee-task pair. The goal is to assign one task per employee while minimizing the total cost.
 
 Can be solved using **Hungarian Algorithm**. (min řádek odečíst, min sloupec odečíst, pokrytí nul, nejmenší prvek odečíst z průsečíků, and repeat)
 
@@ -120,7 +120,7 @@ Can be solved using **Hungarian Algorithm**. (min řádek odečíst, min sloupec
 
 **Instance:** 5-tuple $(G, l, u, c, b^1, \dots, b^m, \dots, b^{|M|})$ where
 
-* vectors $b^m: V(G) \rightarrow \mathbb{R}$ that express (**supply / consumption**) of nodes by commodity $m$. $\sum_{v \in V(G)} b^m(v) = 0$ **for all commodities** $m \in M$.
+* vectors $b^m: V(G) \rightarrow \mathbb{R}$ that express (**supply / consumption**) of nodes of a commodity $m$. $\sum_{v \in V(G)} b^m(v) = 0$ **for all commodities** $m \in M$.
 
 **Goal:** Find the feasible flow $f$ which cost $C$ is minimal or decide that such a flow does not exist.
 

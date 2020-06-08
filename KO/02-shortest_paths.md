@@ -1,7 +1,7 @@
 # Shortest paths
 
 * **Instance:** Directed graph $G$, weights $c: E(G) \rightarrow \mathbb{R}$, nodes $s, t \in V(G)$.
-* **Goal:** Find the shortest $s - t$ path $P$, i.e. one of minimum weight $c(E(P))$, or decide that $t$ is unreachable from $s$.
+* **Goal:** Find the shortest $s - t$ path $P$, i.e. the one of the minimum weight $c(E(P))$, or decide that $t$ is unreachable from $s$.
 
 We consider oriented graphs:
 
@@ -17,7 +17,7 @@ If there is no **negative weight cycle** in the graph, then every shortest edge 
 **Triangle inequality.** If the graph does not contain a cycle of negative weight then distances between **all triplets of nodes** $i, j, k$ satisfy:
 $$l(i, j) \leq l(i,k) + l(k, j).$$
 
-**Bellman's principle of optimality.** Suppose we have directed graph $G$, weights $c: E(G) \rightarrow \mathbb{R}$, no negative cycles. Let $k \in \mathbb{N}$, and let $s$ and $w$ be two vertices. Let $P^k$ be a shortest one among all $s-w$ paths with at most $k$ edges, and let $e = (v, w)$ be its final edge. Then $P^{k - 1}[s, v]$ (i.e. $P^k$ without the edge $e$) is a shortest one among all $s-v$ paths with at most $k - 1$ edges.
+**Bellman's principle of optimality.** Suppose we have a directed graph $G$, weights $c: E(G) \rightarrow \mathbb{R}$, no negative cycles. Let $k \in \mathbb{N}$ and let $s$ and $w$ be two vertices. Let $P^k$ be the shortest one among all $s-w$ paths with at most $k$ edges and let $e = (v, w)$ be its final edge. Then $P^{k - 1}[s, v]$ (i.e. $P^k$ without the edge $e$) is the shortest one among all $s-v$ paths with at most $k - 1$ edges.
 
 ## Dijsktra's Algorithm
 
@@ -42,11 +42,11 @@ $$l(i, j) \leq l(i,k) + l(k, j).$$
 \end{algorithmic}
 \end{algorithm}
 
-To accelerate the computation time we can add **additional information** to Dijkstra's algorithm in order to perform **informed search**. This is idea of A* algorithm which is generalization of Dijkstra that cuts down on the size of the subgraph that must be explored.
+To accelerate the computation time we can add **additional information** to Dijkstra's algorithm in order to perform **informed search**. This is the idea of A* algorithm which is a generalization of Dijkstra that cuts down on the size of the subgraph that must be explored.
 
-Dijkstra is so-called **label setting algorithm**, since label $l(v)$ becomes permanent (optimal) at each iteration.
+Dijkstra is so-called a **label setting algorithm**, since the label $l(v)$ becomes permanent (optimal) at each iteration.
 
-In contrast, **label-correcting algorithms** (e.g. Bellman-Ford's or Floyd's algorithm) consider all labels as temporary until the final step, when they all become permanent.
+In contrast, a **label-correcting algorithms** (e.g. Bellman-Ford's or Floyd's algorithm) consider all labels as temporary until the final step, when they all become permanent.
 
 ## Bellman-Ford Algorithm
 
@@ -70,7 +70,7 @@ In contrast, **label-correcting algorithms** (e.g. Bellman-Ford's or Floyd's alg
 
 If the iteration of the main loop terminates without making any changes, the algorithm can be terminated, as subsequent iterations will not make any more changes.
 
-Bellman-Ford algorithm can **detect negative cycle** that is reachable from vertex $s$ while checking triangular inequality for resulting $l$.
+Bellman-Ford algorithm can **detect negative cycle** that is reachable from vertex $s$ while checking the triangular inequality for resulting $l$.
 
 \begin{algorithm}[!htp]
 \caption{Bellman-Ford Algorithm – negative cycle detection}
@@ -121,4 +121,4 @@ Is better suited for sparse graphs then Floyd \ref{sec:floyd-algorithm}. Uses Di
 
 **Optimal substructure.** The solution to a given optimization problem can be obtained by the **combination of optimal solutions to its subproblems**. Such optimal substructures are usually described by means of **recurrent formula** (examples are Bellman equation in Bellman-Ford algorithm and "shortest path consists of shortests paths in Floyd algorithm").
 
-**Overlapping subproblems.** Computed **solutions to subproblems are stored** so that there don't have to be recomputed. Dynamic programming is not useful when there are no common (overlapping) subproblems because there is no point of storing the solution if they are not needed again.
+**Overlapping subproblems.** Computed **solutions to subproblems are stored** so that they don't have to be recomputed. Dynamic programming is not useful when there are no common (overlapping) subproblems because there is no point of storing the solution if they are not needed again.
