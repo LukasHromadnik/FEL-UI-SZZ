@@ -22,14 +22,14 @@ A **solution** is a sequence of applicable actions that maps $s_0$ into $S_G$. A
 
 A transition system is **deterministic** if there is only **one initial state** and all actions are deterministic. Hence all future states of the world are completely predictable.
 
-**Deterministic transition system.** A *deterministic transition system* is $(S, I, O, G)$ where
+**Deterministic transition system.** A *deterministic transition system* is $(S, I, A, G)$ where
 
 * $S$ is a finite set of states,
 * $I \in S$ is an initial state,
-* actions $a \in O$ (with $a \subseteq S \times S$) are partial functions,
+* actions $a \in A$ (with $a \subseteq S \times S$) are partial functions,
 * $G \subseteq S$ is a finite set of goal states.
 
-Given a state $s$ and an action $a$ so that $a$ is applicable in $s$, the **successor state** of $s$ with respect to $a$ is $s'$ such that $sas'$ denoted by $s' = app_a(s)$.
+**Successor.** Given a state $s$ and an action $a$ so that $a$ is applicable in $s$, the *successor state* of $s$ with respect to $a$ is $s'$ such that $sas'$ denoted by $s' = app_a(s)$.
 
 **Plan.** A *plan* for $(S, I, A, G)$ is a sequence $\pi = a_1, \dots, a_n$ of action instance such that $a_1, \dots, a_n \in A$ and $s_0, \dots, s_n$ is a sequence of states (the **execution** of $\pi$) so that
 
@@ -55,9 +55,9 @@ From every deterministic planning task $\Pi = (V, I, A, G)$ we can produce a cor
 **SAS.** A problem in *SAS* is a tuple $(V, A, I, G)$ where
 
 * $V$ is a finite set of state variables with finite domains $dom(v_i)$,
+* $A$ is a finite set of actions $a$ specified via $\mathrm{pre}(a)$ and $\mathrm{eff}(a)$ both being partial assignments to $V$,
 * $I$ is an  initial state over $V$,
-* $G$ is a partial assignment to $V$,
-* $A$ is a finite set of actions $a$ specified via $\mathrm{pre}(a)$ and $\mathrm{eff}(a)$ both being partial assignments to $V$.
+* $G$ is a partial assignment to $V$.
 
 An action $a$ is applicable in a state $s \in dom(V)$ iff $s[v] = \mathrm{pre}(a)[v]$ whenever $\mathrm{pre}(a)[v]$ is specified.
 
@@ -66,8 +66,8 @@ Applying an applicable action $a$ changes the value of each variable $v$ to $\ma
 **STRIPS.** A problem in *STRIPS* is a tuple $(P, A, I, G)$ where
 
 * $P$ stands for a finite set of atoms (boolean vars),
-* $I \subseteq P$ stands for initial situation,
-* $G \subseteq P$ stands for goal situation,
+* $I \subseteq P$ stands for the initial situation,
+* $G \subseteq P$ stands for the goal situation,
 * $A$ is a finite set of actions $a$ specified via $\pre(a), \add(a)$ and $\del(a)$, all subsets of $P$.
 
 States are collections of atoms. An action $a$ is applicable in a state $s$ iff $\pre(a) \subseteq s$. Applying an applicable action $a$ at $s$ results in $s' = \left(s \setminus \del(a)\right) \cup \add(a)$.
