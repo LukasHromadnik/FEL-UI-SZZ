@@ -94,6 +94,8 @@ Bellman-Ford algorithm can **detect negative cycle** that is reachable from vert
 \hspace*{\algorithmicindent} \textbf{Input:} directed graph $G$, weights $c: E(G) \rightarrow \mathbb{R}_0^+$ \\
 \hspace*{\algorithmicindent} \textbf{Output:} $l_{ij}$ is the length of the shortest path from $i$ to $j$, $p_{ij}$ is the predecessor of $j$ on such path
 \begin{algorithmic}[1]
+\algnotext{EndFor}
+\algnotext{EndIf}
 \State $l_{ij} \gets c((i, j)), \forall (i, j) \in E(G)$
 \State $l_{ij} \gets \infty, \forall (i, j) \notin E(G) \text{ where } i \ne j$
 \State $l_{ii} \gets 0, \forall i$

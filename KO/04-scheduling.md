@@ -203,6 +203,8 @@ Principle:
 \end{algorithmic}
 \end{algorithm}
 
+\clearpage
+
 $t + \delta$ is time when
 
 * EITHER one of the assigned tasks is finished

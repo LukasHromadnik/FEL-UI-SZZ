@@ -6,12 +6,6 @@ Usually the problem is given as
 $$\max \left\{ \mathbf{c}^T \cdot \mathbf{x} \ | \ \mathbf{A} \cdot \mathbf{x} \leq \mathbf{b}, \mathbf{x} \in \mathbb{Z}^n \right\}$$
 Since the **ILP solution space is not a convex set**, we cannot use convex optimization techniques.
 
-The most successful methods to solve the ILP problem are:
-
-* Enumerative methods
-* Branch and bound method
-* Cutting planes methods
-
 ## Enumerative methods
 
 Based on the idea of **inspecting all possible solutions**. Due to the integer nature of the variables, the number of solutions is countable but their number is huge. So this method is usually suited only for smaller instances with a small number of variables.
