@@ -28,7 +28,7 @@ A sequence of operators $\pi$ is called a **plan** iff $s_{goal} \subseteq \pi[s
 
 ## FDR
 
-An FDR **planning task** $P$ is specified by a tuple $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$, where
+A FDR **planning task** $P$ is specified by a tuple $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$, where
 
 * $\mathcal{V}$ is a finite set of **variables**, each variable $V \in \mathcal{V}$ has a finite domain $D_V$,
 * $\mathcal{O} = \{o_1, \dots, o_n\}$ is a set of operators,
@@ -61,7 +61,7 @@ A sequence of operators $\pi$ is called a **plan** iff $\mathrm{res}(\pi, s_{ini
 
 ### \h{add}
 
-Given a STRIPS planning task $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$. $\Pi^+ = \langle \mathcal{F}, \mathcal{O}^+, s_{init}, s_{goal}, c \rangle$ denotes a **relaxed** STRIPS planning task, where $\mathcal{O}^+ = \{ o_i^+ = \langle \pre(o_i), \add(o_i), \emptyset \rangle \ | \ o_i \in \mathcal{O} \}$.
+Given a STRIPS planning task $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ and let $\Pi^+ = \langle \mathcal{F}, \mathcal{O}^+, s_{init}, s_{goal}, c \rangle$ denote a **relaxed** STRIPS planning task, where $\mathcal{O}^+ = \{ o_i^+ = \langle \pre(o_i), \add(o_i), \emptyset \rangle \ | \ o_i \in \mathcal{O} \}$.
 
 Let $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a STRIPS planning task. The heuristic function $\h{add}(s)$ gives an estimate of the distance from $s$ to a node that satisfies the goal $s_{goal}$ as $\h{add}(s) = \sum_{f \in s_{goal}} \Delta_0(s, f)$ where
 $$
@@ -90,7 +90,7 @@ $$\Delta_1(s, o) = \max_{f \in \pre(o)} \Delta_1(s, f), \quad \forall o \in \mat
 
 A **disjunctive operator landmark** $L \subseteq \mathcal{O}$ is a set of operators such that every plan contains at least one operator from $L$.
 
-Let $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a planning task, let $\Delta_1$ denote \h{max} function and let $\f{supp}{o} = \argmax_{f \in \pre(o)} \Delta_1(f)$ denote a function mapping each operator to its **supporters**.
+Let $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a STRIPS planning task, let $\Delta_1$ denote \h{max} function and let $\f{supp}{o} = \argmax_{f \in \pre(o)} \Delta_1(f)$ denote a function mapping each operator to its **supporters**.
 
 A **justification graph** $G = (N, E)$ is a directed labeled multigraph with a set of nodes $N = \{ n_f \ | \ f \in \mathcal{F} \}$ and a set of edges $E = \{ (n_s, n_t, o) \ | \ o \in \mathcal{O}, s = \f{supp}{o}, t \in \add(o)\}$, where the triplet $(a, b, l)$ denotes an edges from $a$ to $b$ with the label $l$.
 
@@ -136,7 +136,7 @@ A **transition system** is a tuple $\mathcal{T} = \langle S, L, T, I, G \rangle$
 * $I \subseteq S$ is a set of initial states and
 * $G \subseteq S$ is a set of goal states.
 
-Given an FDR planning task $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$, $\mathcal{T}(P) = \langle S, L, T, I, G \rangle$ denote a **transition system of $P$** where
+Given a FDR planning task $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$, $\mathcal{T}(P) = \langle S, L, T, I, G \rangle$ denote a **transition system of $P$** where
 
 * $S$ is a set of states over $\mathcal{V}$,
 * $L = \mathcal{O}$,
@@ -144,9 +144,13 @@ Given an FDR planning task $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{g
 * $I = \{ s_{init} \}$ and
 * $G = \{ s \ | \ s \in S, s \text{ is consistent with } s_{goal}\}$.
 
-Let $\mathcal{T}^1 = \langle S^1, L, T^1, I^1, G^1 \rangle$ and $\mathcal{T}^2 = \langle S^2, L, T^2, I^2, G^2 \rangle$ denote two transition systems with the same set of labels and let $\alpha S^1 \mapsto S^2$. We say that $S^2$ is an **anstraction of $S^1$** with **abstraction function $\alpha$** if for every $s \in I^1$ it hols that $\alpha(s) \in I^2$ and for every $s \in G^1$ it holds that $\alpha(s) \in G^2$ and for every $(s, l, t) \in ^1$ it holds that $(\alpha(s), l, \alpha(t)) \in T^2$.
+Let $\mathcal{T}^1 = \langle S^1, L, T^1, I^1, G^1 \rangle$ and $\mathcal{T}^2 = \langle S^2, L, T^2, I^2, G^2 \rangle$ denote two transition systems with the same set of labels and let $\alpha: S^1 \mapsto S^2$. We say that $S^2$ is an **abstraction of $S^1$** with **abstraction function $\alpha$** if it holds
 
-Let $P$ denote an FDR planning task, let $\mathcal{A}$ denote an abstraction of transition system $\mathcal{T}(P) = \langle S, L, T, I, G \rangle$ with the abstraction fucntion $\alpha$. The **abstraction heuristic** induced by $\mathcal{A}$ and $\alpha$ is the function $\h{\mathcal{A}, \alpha}(s) = \h{*}(\mathcal{A}, \alpha(s)), \forall s \in S$.
+* for every $s \in I^1$ that $\alpha(s) \in I^2$,
+* for every $s \in G^1$ that $\alpha(s) \in G^2$ and
+* for every $(s, l, t) \in T^1$ that $(\alpha(s), l, \alpha(t)) \in T^2$.
+
+Let $P$ denote a FDR planning task, let $\mathcal{A}$ denote an abstraction of transition system $\mathcal{T}(P) = \langle S, L, T, I, G \rangle$ with the abstraction function $\alpha$. The **abstraction heuristic** induced by $\mathcal{A}$ and $\alpha$ is the function $\h{\mathcal{A}, \alpha}(s) = \h{*}(\mathcal{A}, \alpha(s)), \forall s \in S$.
 
 Given two transition systems $\mathcal{T}^1 = \langle S^1, L, T^1, I^1, G^1 \rangle$ and $\mathcal{T}^2 = \langle S^2, L, T^2, I^2, G^2 \rangle$ with the same set of labels, the **synchronized product** $\mathcal{T}^1 \otimes \mathcal{T}^2 = \mathcal{T}$ is a transition system $\mathcal{T} = \langle S, L, T, I, G \rangle$ where
 
@@ -155,7 +159,7 @@ Given two transition systems $\mathcal{T}^1 = \langle S^1, L, T^1, I^1, G^1 \ran
 * $I = I^1 \times I^2$ and
 * $G = G^1 \times G^2$.
 
-\begin{algorithm}[!htp]
+\begin{algorithm}[H]
 \caption{Algorithm for computing merge-and-shrink}
 \hspace*{\algorithmicindent} \textbf{Input:} $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ \\
 \hspace*{\algorithmicindent} \textbf{Output:} Abstraction $\mathcal{M}$
@@ -172,7 +176,7 @@ Given two transition systems $\mathcal{T}^1 = \langle S^1, L, T^1, I^1, G^1 \ran
 
 ### LP-Based Heuristics
 
-Let $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote an FDR planning task. The **domain transition graph** for a variable $V \in \mathcal{V}$ is a tuple $\mathcal{A}_V = (N_V, L_V, T_V)$ where
+Let $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a FDR planning task. The **domain transition graph** for a variable $V \in \mathcal{V}$ is a tuple $\mathcal{A}_V = (N_V, L_V, T_V)$ where
 
 * $N_V = \{ n_v \ | \ v \in D_V \} \cup \{ n_\bot \}$ is a set of nodes,
 * $L_V = \left\{ o \ | \ o \in \mathcal{O}, v \in \vars(\pre(o)) \cup \vars(\eff(o)) \right\}$ is a set of labels and
@@ -184,7 +188,7 @@ T_V = \{(n_u, o, n_v) \ | \ o \in L_V, V \in \vars(\eff(o)), \pre(o)[V] = u, \ef
 
 #### \h{flow}
 
-Let $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote an FDR planning task, $\mathcal{A}_V = (N_V, L_V, T_V)$ is a domain transition graph for each variable $V \in \mathcal{V}$ and $s$ is a state reachable from $s_{init}$. Given the followin linear program with real-valued variables $x_0$ for each operator $o \in \mathcal{O}$
+Let $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a FDR planning task, $\mathcal{A}_V = (N_V, L_V, T_V)$ is a domain transition graph for each variable $V \in \mathcal{V}$ and $s$ is a state reachable from $s_{init}$. Given the following linear program with real-valued variables $x_o$ for each operator $o \in \mathcal{O}$
 \begin{equation*}
 \begin{array}{lll}
 \text{minimize}   & \displaystyle\sum_{o \in \mathcal{O}} c(o) x_o & \\
@@ -201,19 +205,19 @@ $$LB_{V, v} = \begin{cases}
 $$
 then the value of the **flow heuristic** $\h{flow}(s)$ for the state $s$ is
 $$\h{flow}(s) = \begin{cases}
-\left\lceil \displaystyle\sum_{o \in \mathcal{O}} c(o) c_o \right\rceil & \text{if the solution is feasible} \\
+\left\lceil \displaystyle\sum_{o \in \mathcal{O}} c(o) x_o \right\rceil & \text{if the solution is feasible} \\
 \infty & \text{if the solution is nnot feasible}
 \end{cases}$$
 
 #### \h{pot}
 
-Let $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote an FDR planning task and $s$ a state reachable from $s_{init}$. Given the following linear program with real-valued variables $P_{V, v}$ for each variable $V \in \mathcal{V}$ and each value $v \in D_V$ and real-values variables $M_V$ for each variable $V \in \mathcal{V}$
+Let $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a FDR planning task and let $s$ be a state reachable from $s_{init}$. Given the following linear program with real-valued variables $P_{V, v}$ for each variable $V \in \mathcal{V}$ and each value $v \in D_V$ and real-values variables $M_V$ for each variable $V \in \mathcal{V}$
 \begin{equation*}
 \begin{array}{lll}
 \text{maximize}   & \displaystyle\sum_{V \in \mathcal{V}} P_{V, s_{init}[V]} & \\
 \text{subject to} & P_{V, v} \leq M_V & \forall V \in \mathcal{V}, \forall v \in D_V \\
                   & \displaystyle\sum_{V \in \mathcal{V}} maxpot(V, s_{goal}) \leq 0 & \\
-                  & \displaystyle\sum_{V \in \vars(\eff(o))} (maxpot(V, \pre(o)) - P_{V, \eff(o)[V]}) \leq c(o) & \forall o \in \mathcal{O}
+                  & \displaystyle\sum_{V \in \vars(\eff(o))} \left(maxpot(V, \pre(o)) - P_{V, \eff(o)[V]}\right) \leq c(o) & \forall o \in \mathcal{O}
 \end{array}
 \end{equation*}
 where
