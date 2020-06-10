@@ -1,5 +1,3 @@
-\part{TAL}
-
 # Turingův stroj
 
 Na základě symbolu $X$, který čte hlava na pásce, a na základě stavu $q$, ve kterém se nachází řídící jednotka, se řídící jednotka Turingova stroje přesune do stavu $p$, hlava přepíše obsah čteného pole na $Y$ a přesune se buď doprava nebo doleva.

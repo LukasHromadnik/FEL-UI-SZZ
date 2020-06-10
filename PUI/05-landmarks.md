@@ -17,12 +17,18 @@ Deciding if a given fact is a landmark, it's the same as deciding if the problem
 
 $A$ is a landmark $\Leftrightarrow \Pi'_A$ is unsolvable where $\Pi'_A$ is $\Pi$ without operators that achieve $A$.
 
+## Landmark discovery
+
 Find landmarks and orderings by **backchaining**
 
 * Every goal is a landmark
 * If $B$ is a landmark and all actions that achieve $B$ share $A$ as a precondition, then
     * $A$ is a landmark and
     * $A \to_n B$.
+
+Disjunctive landsmarks are also possible, e.g (o-in-$\mathrm{p}_1 \vee$ o-in-$\mathrm{p}_2$).
+
+* If $B$ is landmark and all actions that (first) achieve $B$ have $A$ or $C$ as precondition, then $A \vee C$ is a landmark.
 
 Let $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a FDR planning task. The **domain transition graph** for a variable $V \in \mathcal{V}$ is a tuple $\mathcal{A}_V = (N_V, L_V, T_V)$ where
 
@@ -42,6 +48,44 @@ Find landmarks through DTGs if
 
 then $v \mapsto d'$ is a landmark and $(v \mapsto d') \to (v \mapsto d)$.
 
+## Landmark Heuristic (LAMA)
+
+There is no way to tell if we already achieved a landmark just by looking a state. Achieved landmarks are a functionon of a path, not a state.
+
+The landmarks that still need to be achieved after reaching state $s$ via path $\pi$ are
+$$L(s, \pi) = (L \setminus \f{Accepted}{s, \pi}) \cup \f{ReqAgain}{s, \pi}$$
+where
+
+* $L$ is a set of all (discovered) landmarks,
+* $\f{Accepted}{s, \pi} \subset L$ is a set of *accepted* landmarks,
+* $\f{ReqAgain}{s, \pi} \subseteq \f{Accepted}{s, \pi}$ is the set of *required again* landmarks – landmarks that must be achieved again.
+
+In LAMA a landmark $A$ is first accepted by path $\pi$ in state $s$ if all predecessors of $A$ in the landmark graph have been accepted and $A$ becomes true in $s$.
+
+Once a landmark has been accepted, it remains accepted.
+
+A landmark $A$ is required again by a path $\pi$ in a state $s$ if
+
+* *(false-goal)* $A$ is false in $s$ and is a goal or
+* *(open-prerequisite)* $A$ is false in $s$ and is a greedy-necessary predecessor of some landmark that is not accepted.
+
+### Fusing Data from Multiple Paths
+
+Suppose $\mathcal{P}$ is a set of paths from $s_0$ to a state $s$. Define
+$$L(s, \mathcal{P}) = (L \setminus \f{Accepted}{s, \mathcal{P}}) \cup \f{ReqAgain}{s, \mathcal{P}}$$
+where
+
+* $\f{Accepted}{s, \mathcal{P}} = \bigcap_{\pi \in \mathcal{P}} \f{Accepted}{s, \pi}$
+* $\f{ReqAgain}{s, \mathcal{P}} \subseteq \f{Accepted}{s, \mathcal{P}}$ is specified as before by $s$ and the various rules.
+
+$L(s, \mathcal{P})$ is the set of landmarks that we know still needs to be achieved after reaching state $s$ via paths in $\mathcal{P}$.
+
+### Heuristic estimate
+
+LAMA's heuristic: **the number of landmarks that still need to be achieved**.
+
+LAMA's heuristic is inadmissible – a single action can achieve multiple landmarks. To make it admissible we can assign a cost to each landmark, sum over the costs of landmarks.
+
 ## LM-Cut Heuristic
 
 A **disjunctive operator landmark** $L \subseteq \mathcal{O}$ is a set of operators such that every plan contains at least one operator from $L$.
@@ -52,19 +96,22 @@ A **justification graph** $G = (N, E)$ is a directed labeled multigraph with a s
 
 An **s-t-cut** $\mathcal{C}(G, s, t) = (N^0, N^* \cup N^b)$ is a partitioning of nodes from the justification graph $G = (N, E)$ such that $N^*$ contains all nodes from which $t$ can be reached with a zero-cost path, $N^0$ contains all nodes reachable from $s$ without passing through any node from $N^*$, and $N^b = N \setminus (N^0 \cup N^*)$.
 
-\begin{algorithm}[h]
+\begin{algorithm}[htp]
 \caption{Algorithm for computing $\h{lm-cut}(s)$}
 \hspace*{\algorithmicindent} \textbf{Input:} $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$, state $s$ \\
 \hspace*{\algorithmicindent} \textbf{Output:} $\h{lm-cut}(s)$
 \begin{algorithmic}[1]
 \State $\h{lm-cut}(s) \gets 0$
 \State $\Pi_1 = \langle \mathcal{F} \cup \{I, G\}, \mathcal{O}' = \mathcal{O} \cup \{o_{init}, o_{goal}\}, s'_{init} = \{I\}, s'_{goal} = \{G\}, c_1 \rangle$, where \newline
-\begin{equation*}
-\begin{array}{lllll}
-\pre(o_{init}) = \{I\}, & \pre(o_{goal}) = s_{goal}, & \add(o_{init}) = s, & \add(o_{goal}) = \{G\}, & \\
-\del(o_{init}) = \emptyset, & \del(o_{goal}) = \emptyset, & c_1(o_{init}) = 0, & c_1(o_{goal}) = 0, & c_1(o) = c(o), \forall o \in \mathcal{O} \\
-\end{array}
-\end{equation*}
+\hspace*{\algorithmicindent} $\pre(o_{init}) = \{I\}$ \newline
+\hspace*{\algorithmicindent} $\pre(o_{goal}) = s_{goal}$ \newline
+\hspace*{\algorithmicindent} $\add(o_{init}) = s$ \newline
+\hspace*{\algorithmicindent} $\add(o_{goal}) = \{G\}$ \newline
+\hspace*{\algorithmicindent} $\del(o_{init}) = \emptyset$ \newline
+\hspace*{\algorithmicindent} $\del(o_{goal}) = \emptyset$ \newline
+\hspace*{\algorithmicindent} $c_1(o_{init}) = 0$ \newline
+\hspace*{\algorithmicindent} $c_1(o_{goal}) = 0$ \newline
+\hspace*{\algorithmicindent} $c_1(o) = c(o), \forall o \in \mathcal{O}$
 \While{$\h{max}(\Pi_i, s'_{init}) \ne 0$}
     \State Construct a justification graph $G_i$ from $\Pi_i$
     \State Construct an s-t-cut $\mathcal{C}_i(G_i, n_I, n_G) = (N_i^0, N_i^* \cup N_i^b)$

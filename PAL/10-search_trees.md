@@ -127,7 +127,7 @@ When inserting new node split every node that is full on the way to the leaf.
     3. Other wise, i.e. booth $Y$ and $Z$ have only $t - 1$ keys, merge $k$ and all of $Z$ into $Y$, so that $X$ loses both $k$ and the pointer to $Z$, and $Y$ now contains $2t - 1$ keys. Then free $Z$ and recursively delete $k$ from $Y$.
 3. If the key $k$ is not present in internal node $X$, determine the child $X.c$ of the appropriate subtree that must contain $k$, if $k$ is in the tree at all. if $X.c$ has only $t - 1$ keys, execute step \ref{enum:delete-single:3a} or \ref{enum:delete-single:3b} as necessary to guarantee that we descent too a node containing at least $t$ keys. Then finish by recursing on the appropriate child of $X$.
     1. If $X.c$ and both of $X.c$'s immediate siblings have $t - 1$ keys, merge $X.c$ with one sibling, which involves moving a key from $X$ down into the new merged node to become the median key for that node. \label{enum:delete-single:3a}
-    2. If $X.c$ has only $t - 1$ keys but has an immediate sibling with at least $t$ keys, give $X.c$ an extra key by moving a key from $X$ down to $X.c$, moving a key from $X.c$'s immediate left or right sibling up into $X$, and moving the appropriate child pointer from the sibling into $X.c$.
+    2. If $X.c$ has only $t - 1$ keys but has an immediate sibling with at least $t$ keys, give $X.c$ an extra key by moving a key from $X$ down to $X.c$, moving a key from $X.c$'s immediate left or right sibling up into $X$, and moving the appropriate child pointer from the sibling into $X.c$. \label{enum:delete-single:3b}
 
 ## B+ tree
 
