@@ -17,6 +17,16 @@ Deciding if a given fact is a landmark, it's the same as deciding if the problem
 
 $A$ is a landmark $\Leftrightarrow \Pi'_A$ is unsolvable where $\Pi'_A$ is $\Pi$ without operators that achieve $A$.
 
+Let $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a FDR planning task. The **domain transition graph** for a variable $V \in \mathcal{V}$ is a tuple $\mathcal{A}_V = (N_V, L_V, T_V)$ where
+
+* $N_V = \{ n_v \ | \ v \in D_V \} \cup \{ n_\bot \}$ is a set of nodes,
+* $L_V = \left\{ o \ | \ o \in \mathcal{O}, v \in \vars(\pre(o)) \cup \vars(\eff(o)) \right\}$ is a set of labels and
+* $T_V \subseteq N_V \times L_V \times N_V$ is a set of transitions
+\begin{multline*}
+T_V = \{(n_u, o, n_v) \ | \ o \in L_V, V \in \vars(\eff(o)), \pre(o)[V] = u, \eff(o)[V] = v \} \\
+\cup \{(n_v, o, n_v) \ | \ o \in L_V, V \notin \vars(\eff(o)), \pre(o)[V] = v\}.
+\end{multline*}
+
 ## Landmark discovery
 
 Find landmarks and orderings by **backchaining**
@@ -28,19 +38,9 @@ Find landmarks and orderings by **backchaining**
 
 Disjunctive landsmarks are also possible, e.g (o-in-$\mathrm{p}_1 \vee$ o-in-$\mathrm{p}_2$).
 
-* If $B$ is landmark and all actions that (first) achieve $B$ have $A$ or $C$ as precondition, then $A \vee C$ is a landmark.
+* If $B$ is landmark and all actions that (first) achieve $B$ have $A$ or $C$ as a precondition, then $A \vee C$ is a landmark.
 
-Let $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a FDR planning task. The **domain transition graph** for a variable $V \in \mathcal{V}$ is a tuple $\mathcal{A}_V = (N_V, L_V, T_V)$ where
-
-* $N_V = \{ n_v \ | \ v \in D_V \} \cup \{ n_\bot \}$ is a set of nodes,
-* $L_V = \left\{ o \ | \ o \in \mathcal{O}, v \in \vars(\pre(o)) \cup \vars(\eff(o)) \right\}$ is a set of labels and
-* $T_V \subseteq N_V \times L_V \times N_V$ is a set of transitions
-\begin{multline*}
-T_V = \{(n_u, o, n_v) \ | \ o \in L_V, V \in \vars(\eff(o)), \pre(o)[V] = u, \eff(o)[V] = v \} \\
-\cup \{(n_v, o, n_v) \ | \ o \in L_V, V \notin \vars(\eff(o)), \pre(o)[V] = v\}.
-\end{multline*}
-
-Find landmarks through DTGs if
+Given a FDR planning task find landmarks through DTGs if
 
 * $s_0(v) = d_0$,
 * $v \mapsto d$ is a landmark and

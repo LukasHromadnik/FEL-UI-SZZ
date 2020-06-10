@@ -16,9 +16,9 @@ Strategies for defining cost-functions:
 
 To create optimal cost paritioning we can use LP:
 
-* Use variables for cost of each operator in each task copy
+* Use variables for the cost of each operator in each task copy
 * Express heuristic values with linear constraints
-* Maximize sum of heuristic values subject to these constraints
+* Maximize the sum of heuristic values subject to these constraints
 
 ### Optimal Cost Partitioning for Abstraction
 
@@ -42,11 +42,11 @@ To create optimal cost paritioning we can use LP:
 \end{array}
 \end{equation*}
 
-Optimization for every state gives best-possible cost partitioning but takes time.
+Optimization for every state gives best-possible cost partitioning but it takes time.
 
 ## Operator Counting
 
-Idea behind Operator counting is linear constraints whose variables denote number of occurrences of a given operator that must be satisfied by every plan that solves the task.
+Idea behind Operator counting is linear constraints whose variables denote the number of occurrences of a given operator that must be satisfied by every plan that solves the task.
 
 \begin{equation*}
 \begin{array}{rll}
@@ -64,7 +64,7 @@ Operator counting heuristics are admissible and solvable in polynomial time. Add
 Main idea:
 
 * Facts can be produced (made true) or consumed (made false) by an operator
-* Number oof producing and consuming operators must balance out for each fact
+* Number of producing and consuming operators must balance out for each fact
 
 ### \h{flow}
 
@@ -93,17 +93,17 @@ $$\h{flow}(s) = \begin{cases}
 
 Heuristic design as an optimization problem:
 
-* Define simple numberical state features $f_1, \dots, f_n$
-* Considuer heuristics that are linear combination of features
+* Define simple numerical state features $f_1, \dots, f_n$
+* Consider heuristics that are linear combination of features
 $$h(s) = w_1 f_1(s) + \cdots + w_nf_n(s)$$
 with weights (potentials) $w_i \in \mathbb{R}$
 * Find potentials for which $h$ is admissible and well-informed
 
-With potential heuristics, solving ono LP defines the entire heuristic function, not just the estimate for a single state.
+With potential heuristics, solving one LP defines the entire heuristic function, not just the estimate for a single state.
 
 **Feature.** A (state) *feature* for a planning task is a numerical function defined on the states of the task: $f: S \rightarrow \mathbb{R}$.
 
-**Potential heuristic.** A *potential heuristic* for a set of features $\mathcal{F} = \{f_1, \dots, f_n\}$i s a heuristic function $h$ defined as a linear combination of the features
+**Potential heuristic.** A *potential heuristic* for a set of features $\mathcal{F} = \{f_1, \dots, f_n\}$ is a heuristic function $h$ defined as a linear combination of the features
 $$h(s) = w_1f_1(s) + \cdots w_nf_n(s)$$
 with weights (potentials) $w_i \in \mathbb{R}$.
 
