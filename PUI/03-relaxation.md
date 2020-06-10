@@ -11,29 +11,38 @@ General procedure for obtaining a heuristic is to solve an easier version of the
 * **relaxation**: consider *less constrained* version of the problem
 * **abstraction**: consider *smaller* version of the problem
 
-## Relaxation
-
-The **relaxation** $a^+$ of a STRIPS actions $a = (\pre(a), \add(a), \del(a))$ is the action $a^+ = (\pre(a), \add(a), \emptyset)$.
-
 ## Heuristics
 
-### $h_\mathrm{max}$
+### \h{max}
 
-* Action node: $cost(u) = \max\{cost(v_1), \dots, cost(v_k)\}$  
-    if we have to achieve several preconditions, estimate this by the most expensive cost
-* Proposition node: $cost(u) = \min\{cost(v_1), \dots, cost(v_k)\}$  
-    if we have a choice how to achieve a proposition, pick the cheapest possibility
+Let $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a STRIPS planning task. The heuristic function $\h{max}(s)$ gives an estimation of the  distance from $s$ to a node that satisfies the goal $s_{goal}$ as $\h{max} = \max_{f \in s_{goal}} \Delta_1(s, f)$ where
+$$\Delta_1(s, f) = \begin{cases}
+0 & \text{if } f \in s \\
+\infty &  \text{if } \forall o \in \mathcal{O}: f \notin \add(o) \\
+\min\{c(o) + \Delta_1(s, o) \ | \ o \in \mathcal{O}, f \in \add(o) \} & \text{otherwise}
+\end{cases}
+$$
+and
+$$\Delta_1(s, o) = \max_{f \in \pre(o)} \Delta_1(s, f), \quad \forall o \in \mathcal{O}.$$
 
-### $h_\mathrm{add}$
+### \h{add}
 
-* Action node: $cost(u) = cost(v_1) + \cdots + cost(v_k)$  
-    if we have to achieve several preconditions, estimate this by the cost of achieving each in isolation
-* Proposition node: $cost(u) = \min\{cost(v_1), \dots, cost(v_k)\}$  
-    if we have a choice how to achieve a proposition, pick the cheapest possibility
+Given a STRIPS planning task $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ and let $\Pi^+ = \langle \mathcal{F}, \mathcal{O}^+, s_{init}, s_{goal}, c \rangle$ denote a **relaxed** STRIPS planning task, where $\mathcal{O}^+ = \{ o_i^+ = \langle \pre(o_i), \add(o_i), \emptyset \rangle \ | \ o_i \in \mathcal{O} \}$.
+
+Let $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a STRIPS planning task. The heuristic function $\h{add}(s)$ gives an estimate of the distance from $s$ to a node that satisfies the goal $s_{goal}$ as $\h{add}(s) = \sum_{f \in s_{goal}} \Delta_0(s, f)$ where
+$$
+\Delta_0(s, f) = \begin{cases}
+0 & \text{if } f \in s \\
+\infty & \text{if } \forall o \in \mathcal{O}: f \notin \add(o) \\
+\min\{c(o) + \Delta_0(s, o) \ | \ o \in \mathcal{O}, f \in \add(o)\} & \text{otherwise}
+\end{cases}
+$$
+and
+$$\Delta_0(s, o) = \sum_{f \in \pre(o)} \Delta_0(s, f), \quad \forall o \in \mathcal{O}.$$
 
 $h_\mathrm{add}$ is safe and goal-aware. Unlike $h_\mathrm{max}$ is very informative in many planning domains. The price for this is that it's not admissible (and hence also not consistent), so it's not suitable for optimal planning. In fact, it almost always overestimates the $h^+$ value because it does not take positive interactions into account.
 
-### $h_\mathrm{FF}$
+### \h{FF}
 
 Annotations are boolean values, computed top-down.
 
@@ -50,7 +59,7 @@ Apply these rules until **all marked nodes are justified**:
 
 The rules are given in priority order: earlier rules are preferred if applicable.
 
-Always terminate at first layer where goal node is true.
+Always terminate at the first layer where goal node is true.
 
 The heuristic value is the **number of marked action nodes**.
 

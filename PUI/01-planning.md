@@ -1,76 +1,63 @@
 # Planning
 
-State model for classical AI planning
+## STRIPS
 
-* finite state space $S$,
-* an initial state $s_0 \in S$,
-* a set $S_G \subseteq S$ of goal states,
-* applicable actions $A(s) \subseteq A$ for $s \in S$,
-* a transition function $s' = f(a, s)$ for $a \in A(s)$,
-* a cost function $c: A^* \rightarrow [0, \infty)$.
+A STRIPS **planning task** $\Pi$ is specified by a tuple $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$, where
 
-A **solution** is a sequence of applicable actions that maps $s_0$ into $S_G$. An **optimal solution** minimizes $c$.
+* $\mathcal{F} = \{f_1, \dots, f_n\}$ is a **set of facts**,
+* $\mathcal{O} = \{o_1, \dots, o_n\}$ is a set of operators,
+* $s_{init} \subseteq \mathcal{F}$ is an initial state,
+* $s_{goal} \subseteq \mathcal{F}$ is a goal state and
+* $c: \mathcal{O} \to \mathbb{R}_0^+$ is a cost function mapping each operator to a non-negative real number.
 
-**Transition system.** A *transition system* is $(S, I, \{a_1, \dots, a_n\}, G)$ where
+A **state** $s \subseteq \mathcal{F}$ is a set of facts.
 
-* $S$ is a finite set of **states** (the state space),
-* $I \subseteq S$ is a finite set of **initial states**,
-* every **action** $a_i \subseteq S \times S$ is a binary relation on $S$,
-* $G \subseteq S$ is a finite set of **goal states**.
+An **operator** $o \in \mathcal{O}$ is a triplet $o = \langle \pre(o), \add(o), \del(o) \rangle$ where
 
-**Applicable action.** An action $a$ is *applicable* in a state $s$ if exists $sas'$ for at least one state $s'$.
+* $\pre(o) \subseteq \mathcal{F}$ is a set of preconditions,
+* $\add(o) \subseteq \mathcal{F}$ is a set of add effects and
+* $\del(o) \subseteq \mathcal{F}$ is a set of delete effects.
 
-A transition system is **deterministic** if there is only **one initial state** and all actions are deterministic. Hence all future states of the world are completely predictable.
+All operators are well-formed, i.e. $\add(o) \cap \del(o) = \emptyset$ and $\pre(o) \cap \add(o) = \emptyset$.
 
-**Deterministic transition system.** A *deterministic transition system* is $(S, I, A, G)$ where
+An operator $o$ is **applicable** in a state $s$ if $\pre(o) \subseteq s$. The resulting state of applying an applicable operator $o$ in a state $s$ is the state $o[s] = \left( s \setminus \del(o) \right) \cup \add(o)$.
 
-* $S$ is a finite set of states,
-* $I \in S$ is an initial state,
-* actions $a \in A$ (with $a \subseteq S \times S$) are partial functions,
-* $G \subseteq S$ is a finite set of goal states.
+A state $s$ is a **goal state** iff $s_{goal} \subseteq s$.
 
-**Successor.** Given a state $s$ and an action $a$ so that $a$ is applicable in $s$, the *successor state* of $s$ with respect to $a$ is $s'$ such that $sas'$ denoted by $s' = app_a(s)$.
+A **sequence of operators** $\pi = \langle o_1, \dots, o_n \rangle$ is applicable in a state $s_0$ if there are states $s_1, \dots, s_n$ such that $o_i$ is applicable in $s_{i - 1}$ and $s_i = o_i[s_{i - 1}]$ for $1 \leq i \leq n$. The resulting state of this application is $\pi[s_0] = s_n$ and the cost of the plan is $c(\pi) = \sum_{o \in \pi} c(o)$.
 
-**Plan.** A *plan* for $(S, I, A, G)$ is a sequence $\pi = a_1, \dots, a_n$ of action instance such that $a_1, \dots, a_n \in A$ and $s_0, \dots, s_n$ is a sequence of states (the **execution** of $\pi$) so that
+A sequence of operators $\pi$ is called a **plan** iff $s_{goal} \subseteq \pi[s_{init}]$. An **optimal plan** is the plan with the minimal cost over all plans.
 
-1. $s_0 = I$,
-2. $s_i = app_{a_i}(s_{i - 1}), \forall i \in \{1, \dots, n\}$ and
-3. $s_n \in G$.
+## FDR
 
-This can be equivalently expressed as $app_{a_n}\left( app_{a_{n - 1}} \left( \cdots app_{a_1}(I) \cdots \right) \right) \in G$.
+A Finite Domain Representation (FDR) **planning task** $P$ is specified by a tuple $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$, where
 
-**Deterministic planning task.** A *deterministic planning task* is a 4-tuple $\Pi = (V, I, A, G)$ where
+* $\mathcal{V}$ is a finite set of **variables**, each variable $V \in \mathcal{V}$ has a finite domain $D_V$,
+* $\mathcal{O} = \{o_1, \dots, o_n\}$ is a set of operators,
+* $s_{init}$ is the initial (complete) state,
+* $s_{goal}$ is the goal (partial) state,
+* $c: \mathcal{O} \to \mathbb{R}_0^+$ is a cost function mapping each operator to a non-negative real number.
 
-* $V$ is a finite set of state variables,
-* $I$ is an initial state over $V$,
-* $A$ is a finite set of actions over $V$ and
-* $G$ is a constraint over $V$ describing the goal states.
+A (partial) **state** is a (partial) variable assignment over $\mathcal{V}$. We write $\vars(s)$ for the set of variables defined in $s$ and $s[V]$ for the value of $V$ in $s$. The notation $s[V] = \bot$ means that $V \notin \vars(s)$.
 
-From every deterministic planning task $\Pi = (V, I, A, G)$ we can produce a corresponding transition system $\mathcal{T}(\Pi) = (S, I, A', G')$
+A partial state $s$ is **consistent** with a partial state $s'$ if $s[V] = s'[V], \forall V \in \vars(s')$.
 
-1. $S$ is the set of all valuations of $V$,
-2. $A' = \{ R(a) \ | \ a \in A \}$ where $R(a) = \{(s, s') \in S \times S \ | \ s' = app_a(s) \}$ and
-3. $G' = \{ s \in S \ | \ s \vDash G \}$.
+We say that **atom** $V = v$ is true in a (partial) state $s$ iff $s[V] = v$.
 
-**SAS.** A problem in *SAS* is a tuple $(V, A, I, G)$ where
+An **operator** $o \in \mathcal{O}$ is a pair $o = \langle \pre(o), \eff(o) \rangle$ where precondition $\pre(o)$ and effect $\eff(o)$ are partial assignments over $\mathcal{V}$. We require that $V = v$ cannot be both a precondition and an effect.
 
-* $V$ is a finite set of state variables with finite domains $dom(v_i)$,
-* $A$ is a finite set of actions $a$ specified via $\mathrm{pre}(a)$ and $\mathrm{eff}(a)$ both being partial assignments to $V$,
-* $I$ is an  initial state over $V$,
-* $G$ is a partial assignment to $V$.
+An operator $o$ is **applicable** in a state $s$ if $s$ is consistent with $\pre(o)$.
 
-An action $a$ is applicable in a state $s \in dom(V)$ iff $s[v] = \mathrm{pre}(a)[v]$ whenever $\mathrm{pre}(a)[v]$ is specified.
+The **resulting state** of applying an applicable operator $o$ in the state $s$ is the state $\mathrm{res}(o, s)$ with
+$$\mathrm{res}(o, s) = \begin{cases}
+\eff(o)[V] & \text{if } V \in \vars(\eff(o)), \\
+s[V] & \text{otherwise}.
+\end{cases}
+$$
 
-Applying an applicable action $a$ changes the value of each variable $v$ to $\mathrm{eff}(a)[v]$ if $\mathrm{eff}(a)[v]$ is specified.
+A **sequence of operators** $\pi = \langle o_1, \dots, o_n \rangle$ is applicable in a state $s_0$ if there are states $s_1, \dots, s_n$ such that $o_i$ is applicable in $s_{i - 1}$ and $s_i = \mathrm{res}(o_i, s_{i - 1})$ for $1 \leq i \leq n$. The resulting state of this application is $\mathrm{res}(\pi, s_0) = s_n$ and the cost of the plan is $c(\pi) = \sum_{o \in \pi} c(o)$.
 
-**STRIPS.** A problem in *STRIPS* is a tuple $(P, A, I, G)$ where
-
-* $P$ stands for a finite set of atoms (boolean vars),
-* $I \subseteq P$ stands for the initial situation,
-* $G \subseteq P$ stands for the goal situation,
-* $A$ is a finite set of actions $a$ specified via $\pre(a), \add(a)$ and $\del(a)$, all subsets of $P$.
-
-States are collections of atoms. An action $a$ is applicable in a state $s$ iff $\pre(a) \subseteq s$. Applying an applicable action $a$ at $s$ results in $s' = \left(s \setminus \del(a)\right) \cup \add(a)$.
+A sequence of operators $\pi$ is called a **plan** iff $\mathrm{res}(\pi, s_{init})$ is consistent with $s_{goal}$ and an **optimal plan** is the plan with the minimal cost over all plans.
 
 ## Heuristic search
 

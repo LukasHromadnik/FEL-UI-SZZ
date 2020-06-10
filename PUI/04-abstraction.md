@@ -17,27 +17,31 @@ An easy way to achieve this is to ensure that all solutions in $\mathcal{T}$ als
 
 To be useful in practice, an abstraction heuristic must be efficiently computable.
 
-**Transition system.** A *transition system* is a 5-tuple $\mathcal{T} = (S, L, T, I, G)$ where
+A **transition system** is a tuple $\mathcal{T} = \langle S, L, T, I, G \rangle$ where
 
-* $S$ is a finite set of state,
-* $L$ is a finite set of (transition) labels,
-* $T \subseteq S \times L \times S$ is the transition relation,
-* $I \subseteq S$ is the set of initial states and
-* $G \subseteq S$ is the set of goal states.
+* $S$ is a finite set of **states**,
+* $L$ is a finite set of **labels**, each label has **cost** $c(l): L \rightarrow \mathbb{R}_0^+$,
+* $T \subseteq S \times L \times S$ is a **transition relation**,
+* $I \subseteq S$ is a set of initial states and
+* $G \subseteq S$ is a set of goal states.
 
-We say that $\mathcal{T}$ has the transition $\langle s, l, s' \rangle$ if $\langle s, l, s' \rangle \in \mathcal{T}$.
+Given a FDR planning task $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$, $\mathcal{T}(P) = \langle S, L, T, I, G \rangle$ denote a **transition system of $P$** where
+
+* $S$ is a set of states over $\mathcal{V}$,
+* $L = \mathcal{O}$,
+* $T = \{(s, o, t) \ | \ \f{res}{o, s} = t \}$,
+* $I = \{ s_{init} \}$ and
+* $G = \{ s \ | \ s \in S, s \text{ is consistent with } s_{goal}\}$.
 
 ## Abstraction heuristics
 
-Let $\mathcal{T} = (S, L, T, I, G)$ and $\mathcal{T}' = (S', L', T', I', G')$ be transition systems with the same label set $L = L'$, and let $\alpha: S \rightarrow S'$.
+Let $\mathcal{T}^1 = \langle S^1, L, T^1, I^1, G^1 \rangle$ and $\mathcal{T}^2 = \langle S^2, L, T^2, I^2, G^2 \rangle$ denote two transition systems with the same set of labels and let $\alpha: S^1 \mapsto S^2$. We say that $S^2$ is an **abstraction of $S^1$** with **abstraction function $\alpha$** if it holds
 
-We say that $\mathcal{T}'$ is an **abstraction of $\mathcal{T}$ with abstraction mapping $\alpha$** if
+* for every $s \in I^1$ that $\alpha(s) \in I^2$,
+* for every $s \in G^1$ that $\alpha(s) \in G^2$ and
+* for every $(s, l, t) \in T^1$ that $(\alpha(s), l, \alpha(t)) \in T^2$.
 
-* $\forall s \in I$, we have $\alpha(s) \in I'$,
-* $\forall s \in G$, we have $\alpha(s) \in G'$,
-* $\forall \langle s, l, t \rangle \in T$, we have $\langle \alpha(s), l, \alpha(t) \rangle \in T'$.
-
-**Abstraction heuristic.** Let $\Pi$ be an $\mathrm{SAS}^+$ planning task with state space $S$, and let $\mathcal{A}$  be  an abstraction of $\mathcal{T}(\Pi)$ with abstraction mapping $\alpha$. The *abstraction heuristic* induced by $\mathcal{A}$ and $\alpha$ is the heuristic function $h^{\mathcal{A}, \alpha}: S \rightarrow \mathbb{N}_0 \cup \{ \infty \}$ which maps each state $s \in S$ to $h_\mathcal{A}^*(\alpha(s))$ (the goal distance of $\alpha(s)$ in $\mathcal{A}$).
+Let $P$ denote a FDR planning task, let $\mathcal{A}$ denote an abstraction of transition system $\mathcal{T}(P) = \langle S, L, T, I, G \rangle$ with the abstraction function $\alpha$. The **abstraction heuristic** induced by $\mathcal{A}$ and $\alpha$ is the function $\h{\mathcal{A}, \alpha}(s) = \h{*}(\mathcal{A}, \alpha(s)), \forall s \in S$.
 
 The $h^{\mathcal{A}, \alpha}$ is safe, goal-aware, admissible and consistent.
 
@@ -72,15 +76,30 @@ The abstraction heuristic induced by $\pi_P$ is called a **pattern database heur
 
 Main idea: instead of perfectly reflecting a few state variables, reflect all state variables but in a potentially lossy way.
 
-**Synchronized product of transition systems.** For $i \in \{1, 2\}$, let $\mathcal{T}_i = (S_i, L, T_i, I_i, G_i)$ be transition systems with identical label set. The *synchronized product* of $\mathcal{T}_1$ and $\mathcal{T}_2$, in symbols $\mathcal{T}_1 \otimes \mathcal{T}_2$, is the transition system $\mathcal{T}_\otimes = (S_\otimes, L, T_\otimes, I_\otimes, G_\otimes)$ with
+Given two transition systems $\mathcal{T}^1 = \langle S^1, L, T^1, I^1, G^1 \rangle$ and $\mathcal{T}^2 = \langle S^2, L, T^2, I^2, G^2 \rangle$ with the same set of labels, the **synchronized product** $\mathcal{T}^1 \otimes \mathcal{T}^2 = \mathcal{T}$ is a transition system $\mathcal{T} = \langle S, L, T, I, G \rangle$ where
 
-* $S_\otimes = S_1 \times S_2$,
-* $T_\otimes = \left\{ \langle (s_1, s_2), l, (t_1, t_2) \rangle \ | \ \langle s_1, l, t_1 \rangle \in T_1 \text{ and } \langle s_2, l, t_2 \rangle \in T_2 \right\}$,
-* $I_\otimes = I_1 \times I_2$,
-* $G_\otimes = G_1 \times G_2$.
+* $S = S^1 \times S^2$,
+* $T = \{((s_1, s_2), l, (t_1, t_2)) \ | \ (s_1, l, t_1) \in T^1, (s_2, l, t_2) \in T^2 \}$,
+* $I = I^1 \times I^2$ and
+* $G = G^1 \times G^2$.
 
 ## Generic abstraction computation procedure
 
 1. **Initialization step:** Compute all abstract transition systems for atomic projections to form the initial abstraction collection.
 2. **Merge steps:** Combine two abstractions in the collection by replacing them with their synchronized product.
 3. **Shrink steps:** If the abstractions in the collection are too large to compute their synchronized product, make them smaller by abstracting them further.
+
+\begin{algorithm}[!htp]
+\caption{Algorithm for computing merge-and-shrink}
+\hspace*{\algorithmicindent} \textbf{Input:} $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ \\
+\hspace*{\algorithmicindent} \textbf{Output:} Abstraction $\mathcal{M}$
+\begin{algorithmic}[1]
+\State $\mathcal{A} \gets$ set of (atomic) abstractions $(\alpha_i, T_i)$ of $\mathcal{T}(P)$
+\While{$|\mathcal{A}| > 1$}
+    \State $A_1 = (\alpha_1, T_1), A_2 = (\alpha_2, T_2) \gets$ select two abstractions from $\mathcal{A}$
+    \State Shrink $A_1$ and / or $A_2$ until they are "small enough"
+    \State $\mathcal{A} \gets (\mathcal{A} \setminus \{ A_1, A_2 \}) \cup (A_1 \otimes A_2$) \Comment Merge
+\EndWhile
+\State $\mathcal{M} \gets$ the only element of $\mathcal{A}$
+\end{algorithmic}
+\end{algorithm}
