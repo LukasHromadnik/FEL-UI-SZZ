@@ -40,7 +40,7 @@ $$
 and
 $$\Delta_0(s, o) = \sum_{f \in \pre(o)} \Delta_0(s, f), \quad \forall o \in \mathcal{O}.$$
 
-$h_\mathrm{add}$ is safe and goal-aware. Unlike $h_\mathrm{max}$ is very informative in many planning domains. The price for this is that it's not admissible (and hence also not consistent), so it's not suitable for optimal planning. In fact, it almost always overestimates the $h^+$ value because it does not take positive interactions into account.
+\h{add} is safe and goal-aware. Unlike \h{max} is very informative in many planning domains. The price for this is that it's not admissible (and hence also not consistent), so it's not suitable for optimal planning. In fact, it almost always overestimates the $\h{+}$ value because it does not take positive interactions into account.
 
 ### \h{FF}
 
@@ -63,16 +63,16 @@ Always terminate at the first layer where goal node is true.
 
 The heuristic value is the **number of marked action nodes**.
 
-Like $h_\mathrm{add}$ is safe and goal-aware, but neither admissible nor consistent.
-Always more accurate than $h_\mathrm{add}$ with respect to $h^+$.
+Like \h{add} is safe and goal-aware, but neither admissible nor consistent.
+Always more accurate than \h{add} with respect to \h{+}.
 
 ## Comparison
 
-Let $s$ be a state of planning task $(P, I, O, G)$. Then
+Let $s$ be a state of planning task. Then
 
-* $h_\mathrm{max}(s) \leq h^+(s) \leq h^*(s)$
-* $h_\mathrm{max}(s) \leq h^+(s) \leq h_\mathrm{FF}(s) \leq h_\mathrm{add}(s)$
-* $h^*$ and $h_\mathrm{FF}$ are pairwise incomparable
-* $h^*$ and $h_\mathrm{add}$ are incomparable
+* $\h{max}(s) \leq \h{+}(s) \leq \h{*}(s)$
+* $\h{max}(s) \leq \h{+}(s) \leq \h{FF}(s) \leq \h{add}(s)$
+* $\h{*}$ and $\h{FF}$ are pairwise incomparable
+* $\h{*}$ and \h{add} are incomparable
 
-Moreover, $h^+, h_\mathrm{max}, h_\mathrm{add}$ and $h_\mathrm{FF}$ assign $\infty$ to the same set of states.
+Moreover, $\h{+}, \h{max}, \h{add}$ and $\h{FF}$ assign $\infty$ to the same set of states.

@@ -67,6 +67,8 @@ The value of $h(\sigma)$ is called the **heuristic estimate** or **heuristic val
 
 **Perfect heuristic.** The *perfect (optimal) heuristic* of a search space is the heuristic $h^*$ which maps each search node $\sigma$ to the length of a shortest path from $state(\sigma)$ to any goal state.
 
+\clearpage
+
 A heuristic $h$ is called
 
 * **safe** if $h^*(\sigma) = \infty$ for all $\sigma \in \Sigma$ with $h(\sigma) = \infty$

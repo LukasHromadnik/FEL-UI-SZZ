@@ -1,6 +1,6 @@
 # Abstraction
 
-Abstracting a transition system means **dropping some distinctions** between states, while **preserving the transition behaviour** as much as possible.
+Abstracting a transition system means **dropping some distinctions** between states, while **preserving the transition behavior** as much as possible.
 
 An abstraction of a transition system $\mathcal{T}$ is defined by an **abstraction mapping $\alpha$** that defines which states of $\mathcal{T}$ should be distinguished and which ones should not.
 
@@ -20,7 +20,7 @@ To be useful in practice, an abstraction heuristic must be efficiently computabl
 A **transition system** is a tuple $\mathcal{T} = \langle S, L, T, I, G \rangle$ where
 
 * $S$ is a finite set of **states**,
-* $L$ is a finite set of **labels**, each label has **cost** $c(l): L \rightarrow \mathbb{R}_0^+$,
+* $L$ is a finite set of **labels**, each label has a **cost** $c(l): L \rightarrow \mathbb{R}_0^+$,
 * $T \subseteq S \times L \times S$ is a **transition relation**,
 * $I \subseteq S$ is a set of initial states and
 * $G \subseteq S$ is a set of goal states.
@@ -66,7 +66,7 @@ A pattern database heuristic for a planning task is an abstraction heuristic whe
 * some aspects of the task are represented in the abstraction **with perfect precision**, while
 * all other aspects of the task are **not represented at all**.
 
-**Projections.** Let $\Pi$ be an $\mathrm{SAS}^+$ planning task with variable set $V$ and state set $S$. Let $P \subseteq V$ and let $S'$ be the set of states over $P$. The *projection* $\pi_P: S \rightarrow S'$ is defined as $\pi_P(s) := s|_P$ (with $s|_P(v) := s(v), \forall v \in P$). We call $P$ the **pattern** of the projection $\pi_P$.
+**Projections.** Let $\Pi$ be an $\mathrm{SAS}^+$ planning task with the variable set $V$ and the state set $S$. Let $P \subseteq V$ and let $S'$ be the set of states over $P$. The *projection* $\pi_P: S \rightarrow S'$ is defined as $\pi_P(s) := s|_P$ (with $s|_P(v) := s(v), \forall v \in P$). We call $P$ the **pattern** of the projection $\pi_P$.
 
 In other words, $\pi_P$ maps two states $s_1$ and $s_2$ to the same abstract state iff they agree on all variables in $P$.
 
@@ -83,12 +83,6 @@ Given two transition systems $\mathcal{T}^1 = \langle S^1, L, T^1, I^1, G^1 \ran
 * $I = I^1 \times I^2$ and
 * $G = G^1 \times G^2$.
 
-## Generic abstraction computation procedure
-
-1. **Initialization step:** Compute all abstract transition systems for atomic projections to form the initial abstraction collection.
-2. **Merge steps:** Combine two abstractions in the collection by replacing them with their synchronized product.
-3. **Shrink steps:** If the abstractions in the collection are too large to compute their synchronized product, make them smaller by abstracting them further.
-
 \begin{algorithm}[!htp]
 \caption{Algorithm for computing merge-and-shrink}
 \hspace*{\algorithmicindent} \textbf{Input:} $P = \langle \mathcal{V}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ \\
@@ -103,3 +97,9 @@ Given two transition systems $\mathcal{T}^1 = \langle S^1, L, T^1, I^1, G^1 \ran
 \State $\mathcal{M} \gets$ the only element of $\mathcal{A}$
 \end{algorithmic}
 \end{algorithm}
+
+## Generic abstraction computation procedure
+
+1. **Initialization step:** Compute all abstract transition systems for atomic projections to form the initial abstraction collection.
+2. **Merge steps:** Combine two abstractions in the collection by replacing them with their synchronized product.
+3. **Shrink steps:** If the abstractions in the collection are too large to compute their synchronized product, make them smaller by abstracting them further.

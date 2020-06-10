@@ -20,7 +20,7 @@ $A$ is a landmark $\Leftrightarrow \Pi'_A$ is unsolvable where $\Pi'_A$ is $\Pi$
 Find landmarks and orderings by **backchaining**
 
 * Every goal is a landmark
-* If $B$ is a landmark and all actionos that achieve $B$ share $A$ as a precondition, then
+* If $B$ is a landmark and all actions that achieve $B$ share $A$ as a precondition, then
     * $A$ is a landmark and
     * $A \to_n B$.
 
@@ -37,7 +37,7 @@ T_V = \{(n_u, o, n_v) \ | \ o \in L_V, V \in \vars(\eff(o)), \pre(o)[V] = u, \ef
 Find landmarks through DTGs if
 
 * $s_0(v) = d_0$,
-* $v \mapsto d$ is a landamrk and
+* $v \mapsto d$ is a landmark and
 * **every path** from $d_0$ to $d$ passes through $d'$,
 
 then $v \mapsto d'$ is a landmark and $(v \mapsto d') \to (v \mapsto d)$.
@@ -48,26 +48,23 @@ A **disjunctive operator landmark** $L \subseteq \mathcal{O}$ is a set of operat
 
 Let $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$ denote a STRIPS planning task, let $\Delta_1$ denote \h{max} function and let $\f{supp}{o} = \argmax_{f \in \pre(o)} \Delta_1(f)$ denote a function mapping each operator to its **supporters**.
 
-A **justification graph** $G = (N, E)$ is a directed labeled multigraph with a set of nodes $N = \{ n_f \ | \ f \in \mathcal{F} \}$ and a set of edges $E = \{ (n_s, o, n_t) \ | \ o \in \mathcal{O}, s = \f{supp}{o}, t \in \add(o)\}$, where the triplet $(a, l, b)$ denotes an edges from $a$ to $b$ with the label $l$.
+A **justification graph** $G = (N, E)$ is a directed labeled multigraph with a set of nodes $N = \{ n_f \ | \ f \in \mathcal{F} \}$ and a set of edges $E = \{ (n_s, o, n_t) \ | \ o \in \mathcal{O}, s = \f{supp}{o}, t \in \add(o)\}$, where the triplet $(a, l, b)$ denotes an edge from $a$ to $b$ with the label $l$.
 
 An **s-t-cut** $\mathcal{C}(G, s, t) = (N^0, N^* \cup N^b)$ is a partitioning of nodes from the justification graph $G = (N, E)$ such that $N^*$ contains all nodes from which $t$ can be reached with a zero-cost path, $N^0$ contains all nodes reachable from $s$ without passing through any node from $N^*$, and $N^b = N \setminus (N^0 \cup N^*)$.
 
-\begin{algorithm}[!htp]
+\begin{algorithm}[h]
 \caption{Algorithm for computing $\h{lm-cut}(s)$}
 \hspace*{\algorithmicindent} \textbf{Input:} $\Pi = \langle \mathcal{F}, \mathcal{O}, s_{init}, s_{goal}, c \rangle$, state $s$ \\
 \hspace*{\algorithmicindent} \textbf{Output:} $\h{lm-cut}(s)$
 \begin{algorithmic}[1]
 \State $\h{lm-cut}(s) \gets 0$
 \State $\Pi_1 = \langle \mathcal{F} \cup \{I, G\}, \mathcal{O}' = \mathcal{O} \cup \{o_{init}, o_{goal}\}, s'_{init} = \{I\}, s'_{goal} = \{G\}, c_1 \rangle$, where \newline
-\hspace*{\algorithmicindent} $\pre(o_{init}) = \{I\}$, \newline
-\hspace*{\algorithmicindent} $\add(o_{init}) = s$, \newline
-\hspace*{\algorithmicindent} $\del(o_{init}) = \emptyset$, \newline
-\hspace*{\algorithmicindent} $\pre(o_{goal}) = s_{goal}$, \newline
-\hspace*{\algorithmicindent} $\add(o_{goal}) = \{G\}$, \newline
-\hspace*{\algorithmicindent} $\del(o_{goal}) = \emptyset$, \newline
-\hspace*{\algorithmicindent} $c_1(o_{init}) = 0$, \newline
-\hspace*{\algorithmicindent} $c_1(o_{goal}) = 0$ and \newline
-\hspace*{\algorithmicindent} $c_1(o) = c(o), \forall o \in \mathcal{O}$
+\begin{equation*}
+\begin{array}{lllll}
+\pre(o_{init}) = \{I\}, & \pre(o_{goal}) = s_{goal}, & \add(o_{init}) = s, & \add(o_{goal}) = \{G\}, & \\
+\del(o_{init}) = \emptyset, & \del(o_{goal}) = \emptyset, & c_1(o_{init}) = 0, & c_1(o_{goal}) = 0, & c_1(o) = c(o), \forall o \in \mathcal{O} \\
+\end{array}
+\end{equation*}
 \While{$\h{max}(\Pi_i, s'_{init}) \ne 0$}
     \State Construct a justification graph $G_i$ from $\Pi_i$
     \State Construct an s-t-cut $\mathcal{C}_i(G_i, n_I, n_G) = (N_i^0, N_i^* \cup N_i^b)$
