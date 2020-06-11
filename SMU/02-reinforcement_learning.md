@@ -192,4 +192,4 @@ $$Q^\pi(s_k, a_k) = Q^\pi(s_k, a_k) + \alpha(r_k + \gamma Q^\pi(s_{k + 1}, a_{k 
 $$Q^\pi(s_k, a_k) = Q^\pi(s_k, a_k) + \alpha(r_k + \gamma Q^\pi(s_{k + 1}, a_{k + 1}) - Q^\pi(s_k, a_k)).$$
 Q-Learning is an **off-policy** stratedy. Tends to learn $Q$ better even if $\pi$ is far frmo optimal.
 
-SARSA is an **on-policy** stratedy. Tends to adapt better to partially enforced policies.
+SARSA is an **on-policy** strategy. Tends to adapt better to partially enforced policies.

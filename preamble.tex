@@ -18,6 +18,11 @@
 
 \definecolor{green}{HTML}{4cd137}
 
+\let\originalleft\left
+\let\originalright\right
+\renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
+\renewcommand{\right}{\aftergroup\egroup\originalright}
+
 \newcommand{\modn}[1][n]{\ensuremath{\ (\mathrm{mod}\ #1)}}
 \newcommand{\method}[2]{\texttt{#1}($#2$)}
 \newcommand{\mcal}[1]{\ensuremath{\mathcal{#1}}}
