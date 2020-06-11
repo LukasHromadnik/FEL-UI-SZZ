@@ -9,10 +9,10 @@
 **History.** Interaction or *history* up to time $m$ which we denote $\histe$
 $$\histe = x_1, a_1, x_2, a_2, \dots, x_m, a_m$$
 starts with a percept $x_1$ and has a probability
-$$P(\histe) = P(x_1) \cdot \Pc{a_1}{x_1} \cdot \Pc{x_1}{x_1, a_1} \cdots \Pc{x_m}{\hist} \cdot \Pc{a_m}{x_m, \hist}.$$
+$$P(\histe) = P(x_1) \cdot \pc{a_1}{x_1} \cdot \pc{x_1}{x_1, a_1} \cdots \pc{x_m}{\hist} \cdot \pc{a_m}{x_m, \hist}.$$
 
 **Deterministic agent.** We will only assume *deterministic agent*
-$$\Pc{a_k}{\hist, x_k} = \begin{cases}
+$$\pc{a_k}{\hist, x_k} = \begin{cases}
 1 & \text{if } a_k = \pi(\hist, x_k) \\
 0 & \text{otherwise}
 \end{cases}$$
@@ -27,14 +27,14 @@ while everything else in the percepts are *observations* $o_k \in O$. The set $R
 The agent's goal is to maximize the value $V^\pi$ of its policy $\pi$ defined as
 
 * for a **finite** time horizon $m \in \mathbb{N}$, the expected cumulative reward
-$$V^\pi = \mathbb{E}\left(\sum_{k = 1}^m r_k \right) = \sum_{x_{\leq m}} \Pc{x_{\leq m}}{a_{< m}}(r_1 + r_2 + \cdots + r_m)$$
+$$V^\pi = \mathbb{E}\left(\sum_{k = 1}^m r_k \right) = \sum_{x_{\leq m}} \pc{x_{\leq m}}{a_{< m}}(r_1 + r_2 + \cdots + r_m)$$
 * for the **infinite** hoorizon, use a *discount sequence* $\delta_k$ such that $\sum_{i = 1}^\infty \delta_i < \infty$ (usually $\delta_k = \gamma^k, 0 < \gamma < 1$), and maximize
-$$V^\pi = \mathbb{E}\left(\sum_{k = 1}^\infty r_k \delta_k \right) = \lim_{m \to \infty} \sum_{x_{\leq m}} \Pc[P_R]{r_{\leq m}}{a_{< m}} \sum_{k = 1}^m r_k \delta_k$$
+$$V^\pi = \mathbb{E}\left(\sum_{k = 1}^\infty r_k \delta_k \right) = \lim_{m \to \infty} \sum_{x_{\leq m}} \pc[P_R]{r_{\leq m}}{a_{< m}} \sum_{k = 1}^m r_k \delta_k$$
 
 **Markovian Environment.** A *Markovian* or state-based *environment* is one for which a state variable $s: \mathbb{N} \to S$ and distributions $P_x, P_S$ exist such that $S$ has bounded size and
 
-* $\Pc{x_k}{\hist[k]} = \Pc[P_x]{x_k}{s_k}$, i.e. $x_k$ depends only on the current state.
-* State $s_{k + 1}$ is distributed accoding to $\Pc[P_s]{s_{k + 1}}{s_k, a_k}$, i.e. it depends only on the previous state and the action taken by the agent.
+* $\pc{x_k}{\hist[k]} = \pc[P_x]{x_k}{s_k}$, i.e. $x_k$ depends only on the current state.
+* State $s_{k + 1}$ is distributed accoding to $\pc[P_s]{s_{k + 1}}{s_k, a_k}$, i.e. it depends only on the previous state and the action taken by the agent.
 
 **Markovian Agent.** A *Markovian* or state-based *agent* is one for which a state variable $t: \mathbb{N} \to T$ and functions $\pi, \mathcal{T}$ exist such that $T$ has bounded size and
 
@@ -45,8 +45,8 @@ $$V^\pi = \mathbb{E}\left(\sum_{k = 1}^\infty r_k \delta_k \right) = \lim_{m \to
 
 Agent                                             Environment 
 -----         -----                               -----         -----
-actions:      $a = \pi(t_k)$                      percepts:     $x_k \sim \Pc[P_x]{x_k}{s_k}$
-state update: $t_k = \mathcal{T}(t_{k - 1}, x_k)$ state update: $s_k \sim \Pc[P_S]{s_k}{s_{k - 1}, a_{k - 1}}$
+actions:      $a = \pi(t_k)$                      percepts:     $x_k \sim \pc[P_x]{x_k}{s_k}$
+state update: $t_k = \mathcal{T}(t_{k - 1}, x_k)$ state update: $s_k \sim \pc[P_S]{s_k}{s_{k - 1}, a_{k - 1}}$
 
 ## Proper Policies
 
