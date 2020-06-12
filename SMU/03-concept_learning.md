@@ -175,3 +175,19 @@ for any horizon $m \in \mathbb{N}$.
 Version space is **not efficient** even for super-poly $\mathcal{H}$. Needs to verify each $h \in \mathcal{H}$ in the update step.
 
 If $|\mathcal{H}|$ is at most exponential then $\log |\mathcal{H}|$ is polynomial and VS agent learns $\mathcal{H}$ online. This includes s-clause CNF's and s-term DNF's.
+
+## VC Dimension
+
+Concept class $\mathcal{C}$ **shatters** $O' \subseteq O$ if any subset of $O'$ coincides with $C \cap O'$ where $C \in \mathcal{C}$. A hypothesis class $\mathcal{H}$ shatters $O'$ if $\mathcal{C}(\mathcal{H})$ shatters $O'$.
+
+So $O'$ is shattered by $\mathcal{C}$, resp. $\mathcal{H}$, if its elements can be classified in all $2^{O'}$ possible ways by concepts from $\mathcal{C}$, resp. hypotheses from $\mathcal{H}$.
+
+**VC-dimension.** The *VC-dimension* of $\mathcal{C}$ (on $O$) denoted $\f{VC}{\mathcal{C}}$ is the cardinality of the largest subset of $O$ shattered by $\mathcal{C}$. The VC-dimensioon of hypothesis class $\mathcal{H}$ is defined as $\f{VC}{\mathcal{C}(\mathcal{H})}$, also denoted $\f{VC}{\mathcal{H}}$.
+
+### Lower Bounds on Mistake Bounds
+
+A mistake bound with no special assumptions cannot be lower than $|O|$ as each $o \in O$ may have an arbitrary class.
+
+A mistake bound assuming only $C \in \mathcal{C} \subset 2^O$ for the target concept $\mathcal{C}$ cannot be smaller than $\f{VC}{\mathcal{C}}$ as there is a set $\{o_1, o_2, \dots, o_\f{VC}{\mathcal{C}}\} \subseteq O$ shattered by $\mathcal{C}$.
+
+As a corollary the agent using hypothesis class $\mathcal{H}$ cannot be guaranteed to make fewer than $\f{VC}{\mathcal{H}}$ mistakes.
