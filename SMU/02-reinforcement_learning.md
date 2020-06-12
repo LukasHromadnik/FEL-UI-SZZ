@@ -24,18 +24,18 @@ where $0 < \gamma < 1$ is the **discount factor**.
 
 If $\pi$ is proper, we can have $\gamma = 1$ summing only up to the first terminal state $s_{k + i}$.
 
-Since $s_{k + 1}$ are distributed by $\pc[P_S]{s_{k + 1}}{s_k, a_k}$, we can write this as
-$$U^\pi(s_k) = r(s_k) + \gamma \sum_{s \in S} \pc[P_S]{s}{s_k, \pi(s_k)} U^\pi(s).$$
+Since $s_{k + 1}$ is distributed by $\pc[P_s]{s_{k + 1}}{s_k, a_k}$, we can write this as
+$$U^\pi(s_k) = r(s_k) + \gamma \sum_{s \in S} \pc[P_s]{s}{s_k, \pi(s_k)} U^\pi(s).$$
 
 **Optimal policy.**
 $$\pi^* = \argmax_\pi U^\pi(s)$$
 
 Considering the definition of $U^\pi(s_k), \pi^*$ maps each $s_k$ to an action maximizing the expected utility of the next state
-$$\pi^*(s_k) = \argmax_{a \in A} \sum_{s \in S} \pc[P_S]{s}{s_k, a} U(s)$$
+$$\pi^*(s_k) = \argmax_{a \in A} \sum_{s \in S} \pc[P_s]{s}{s_k, a} U(s)$$
 $U(s) = U^{\pi^*}(s)$ is called the **state utility**.
 
-So if the agent knows $P_S$ and $r$ it can decide optimally by $\pi^*(s_k)$. It first needs to compute $U(s), \forall s \in S$. They are solutions of $|S|$ non-linear **Bellman equations** (one for each $s \in S$)
-$$U(s) = r(s) + \gamma \max_{a \in A} \sum_{s' \in S} \pc[P_S]{s'}{s, a} U(s').$$
+So if the agent knows $P_S$ and $r$ it can decide optimally by $\pi^*(s_k)$. It first needs to compute $U(s), \forall s \in S$. They are the solutions of $|S|$ non-linear **Bellman equations** (one for each $s \in S$)
+$$U(s) = r(s) + \gamma \max_{a \in A} \sum_{s' \in S} \pc[P_s]{s'}{s, a} U(s').$$
 which can be solved by the **value iteration** algorithm.
 
 ## Passive Direct Utility Estimation (DUE) Agent
@@ -50,8 +50,8 @@ Instead of computing $\hat{U}$ directly from samples, learn a model of $P_S$ and
 
 For $r$ just collect an array $\hat{r}[s]$ of observed rewards for observed states.
 
-For $\pc[P_S]{s'}{s, a}$ collect the counts $N[s', s, a]$ of observed triples of action $a$ taken in state $s$ and resulting in state $s'$. Then estimate
-$$\pc[P_S]{s'}{s, a} \approx \frac{N[s', s, a]}{\sum_{s'' \in S} N[s'', s, a]}.$$
+For $\pc[P_s]{s'}{s, a}$ collect the counts $N[s', s, a]$ of observed triplets of action $a$ taken in state $s$ and resulting in state $s'$. Then estimate
+$$\pc[P_s]{s'}{s, a} \approx \frac{N[s', s, a]}{\sum_{s'' \in S} N[s'', s, a]}.$$
 
 State utilities should satisfy
 $$U^\pi(s) = r(s) + \gamma \sum_{s' \in S} \pc[P_s]{s'}{s, \pi(s)} U^\pi(s').$$
@@ -60,17 +60,17 @@ $$\hat{U} = \hat{r}[s] + \gamma \sum_{s' \in S} \frac{N[s', s, \pi(s)]}{\sum_{s'
 
 ### Design
 
-Agent's state is a tuple $t_k = \rangle \Pi, s_k^\mathrm{old}, N_k, \hat{r}_k, \hat{U}_k \rangle$ where
+Agent's state is a tuple $t_k = \langle \Pi, s_k^\mathrm{old}, N_k, \hat{r}_k, \hat{U}_k \rangle$ where
 
 * $\Pi$ is a fixed decision array,
 * $s_k^\mathrm{old}$ is the last seen state,
-* $N_k$ is 3-way contingency array indexed by $[s' \in S, s \in S, a \in A]$,
+* $N_k$ is 3-way contingency array indexed by $[s, s' \in S, a \in A]$,
 * $\hat{r}_k$ is the reward array indexed by $s \in S$,
 * $\hat{U}_k$ is the state utility estimate array indexed by $s \in S$.
 
 ## Passive Temporal Difference (TD) Agent
 
-In the passive *temporal difference agent* the expensive policy evaluation of the ADP agent is replaced by only local changes. We make a small iteration for each executed transition
+In the *passive temporal difference agent* the expensive policy evaluation of the ADP agent is replaced by only local changes. We make a small iteration for each executed transition
 $$\hat{U}_{k + 1}[s_k] = \hat{U}_k[s_k] + \alpha\left(r_k + \gamma \hat{U}_k[s_{k + 1}] - \hat{U}_k[s_k] \right)$$
 where $\alpha$ decreases with the number of times $s_k$ has been visited.
 
@@ -105,7 +105,7 @@ This agent has no model of $P_s$ and $r$. It just remembers a single (last state
 ## Active ADP Agent
 
 Change the passive ADP agent into an *active* one following the optimal policy principle
-$$a_k = \pi^*(t_k, s_k) = \argmax_{a \in A} \sum_{s \in S} \pc[P_S]{s}{s_k, a} U(s).$$
+$$a_k = \pi^*(t_k, s_k) = \argmax_{a \in A} \sum_{s \in S} \pc[P_s]{s}{s_k, a} U(s).$$
 With models $N_k, \hat{U}_k$ of $P_S, U$ stored in $t_k = \langle \Pi, s'_k, N_k, \hat{r}_k, \hat{U}_k \rangle$ gives
 $$a_k = \pi(t_k, s_k) = \argmax_{a \in A} \sum_{s \in S} \frac{N_k[s, s_k, a]}{\sum_{s' \in S} N_k[s', s_k, a]} \hat{U}_k[s].$$
 
@@ -118,7 +118,7 @@ The $n$-armed bandit problem
 * set of actions $A$ and rewards $R$,
 * agent repeatedly picks $a \in A$ and gets $r \in R$ according to $\pc[P_{r|a}]{r}{a}$,
 * no states, just a series of independent trials,
-* agent's goal is to, without knowing $P_{r|a}$, maximize mean of received rewards.
+* agent's goal is to, without knowing $P_{r|a}$, maximize the mean of received rewards.
 
 **Greedy approach:**
 $$a = \argmax_{a \in A} \hat{r}[a]$$
@@ -141,9 +141,9 @@ GLIE strategies tend to converge slow.
 ## Exploration Function
 
 Faster convergence is achieved if unexplored nodes are deliberately promoted by tweaking the utility function
-$$U_e^\pi(s_k) = r(s_k) + \gamma \max f\left(\sum_{s \in S} \pc[P_S]{s}{s_k, a_k} U_e^\pi(s_k), N_k(s_k, a_k)\right)$$
+$$U_e^\pi(s_k) = r(s_k) + \gamma \max f\left(\sum_{s \in S} \pc[P_s]{s}{s_k, a_k} U_e^\pi(s_k), N_k(s_k, a_k)\right)$$
 where
-$$a_k = \pi(s_k) = \argmax_{a \in A} \sum_{s \in S} \pc[P_S]{s}{s_k, a} U_e^\pi(s)$$.
+$$a_k = \pi(s_k) = \argmax_{a \in A} \sum_{s \in S} \pc[P_s]{s}{s_k, a} U_e^\pi(s)$$.
 The *exploration function* $f$ trades off between
 
 * the estimated expected utility of the next state and
@@ -176,8 +176,8 @@ Agent's state is a tuple $t_k = \langle s_k^\mathrm{old}, a_k^\mathrm{old}, r_k^
 * $s_k^\mathrm{old}, a_k^\mathrm{old}$ are the last state and action,
 * $r_k^\mathrm{old}$ is the last reward,
 * $N_k$ is state-action pair frequency array addressed by $[s, a]$,
-* $\hat{Q}_k$ is en estimate array of $Q^\pi$ addressed by $[s, a]$,
-* $\alpha: \mathbb{N} \to \mathbb{R}$ is a positive monotone descreasing function.
+* $\hat{Q}_k$ is an estimate array of $Q^\pi$ addressed by $[s, a]$,
+* $\alpha: \mathbb{N} \to \mathbb{R}$ is a positive monotone decreasing function.
 
 ### Greedy Q-Learning Agent
 
@@ -188,8 +188,8 @@ $$Q^\pi(s_k, a_k) = Q^\pi(s_k, a_k) + \alpha(r_k + \gamma Q^\pi(s_{k + 1}, a_{k 
 
 ### SARSA Agent
 
-*SARSA agent* is the exploratory Q-Learning agent where even for a nono-greedy strategy the iteration is changed to
+*SARSA agent* is the exploratory Q-Learning agent where even for a non-greedy strategy the iteration is changed to
 $$Q^\pi(s_k, a_k) = Q^\pi(s_k, a_k) + \alpha(r_k + \gamma Q^\pi(s_{k + 1}, a_{k + 1}) - Q^\pi(s_k, a_k)).$$
-Q-Learning is an **off-policy** stratedy. Tends to learn $Q$ better even if $\pi$ is far frmo optimal.
+Q-Learning is an **off-policy** strategy. Tends to learn $Q$ better even if $\pi$ is far frmo optimal.
 
 SARSA is an **on-policy** strategy. Tends to adapt better to partially enforced policies.
