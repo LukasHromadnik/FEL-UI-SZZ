@@ -1,27 +1,25 @@
 # Concept Learning
 
-In *concept learning*, the agent tries to guess the environment state $s_k \in S$ at each $k$ from the observation $o_k \in O$ and it's immediately (at $k + 1$) rewarded for a correct guess.
+In *concept learning*, the agent tries to guess the environment state $s_k \in S$ at each $k$ from the observation $o_k \in O$ and is immediately (at $k + 1$) rewarded for a correct guess.
 
-The agent learns a representation of a *concept*, which is the set of all observations in $O$ for which the correct answer is yes.
-
-At time $k$
-
-* states are distributed by $\pc[P_s]{s_{k + 1}}{s_k, a_k}$,
-* observations are distributed by $\pc[P_o]{o_k}{s_k}$,
-* rewards are distributed by $\pc[P_r]{r_k}{s_k}$, alternatively $\pc[P_r]{r_{k + 1}}{s_k, a_k}$.
-
-**Concept.** We assume $S = \{0, 1\}$ and some function $c: O \to S$ that is unknown to the agent. We call a *concept* on $O$
+**Concept.** We assume $S = \{0, 1\}$ and some function $c: O \to S$ that is unknown to the agent. We call a *concept* on $O$ the set of all observations in $O$ for which the correct answer is yes
 $$C = \{ o \in O; c(o) = 1 \}.$$
 The agent's goal is to learn the concept so that it can make correct predictions of states.
 
-**Reward.** The *reward* is dependent on the previous state and the action
+At time $k$
+
+* states are distributed by $\pc[P_S]{s_{k + 1}}{s_k, a_k}$,
+* observations are distributed by $\pc[P_O]{o_k}{s_k}$,
+* rewards are distributed by $\pc[P_R]{r_k}{s_k}$, alternatively $\pc[P_R]{r_{k + 1}}{s_k, a_k}$.
+
+**Reward.** The *reward* depends on the previous state and the action
 $$r_{k + 1} = r(s_k, a_k) = \begin{cases}
 0 & \text{if } s_k = a_k \\
 -1 & \text{otherwise}
 \end{cases}
 $$
 
-**Hypotheses.** A *hypotesis* $h$ is any finite description, from which $\pi$ can derive a $0/1$ decision for an observation.
+**Hypothesis.** A *hypotesis* $h$ is any finite description from which $\pi$ can derive a $0/1$ decision for an observation.
 
 **Hypothesized concept.**
 $$C(h) = \{ o \in O; \pi(h, o) = 1 \}$$
@@ -30,23 +28,23 @@ A good concept-learning agent will find a $h$ such that $C = C(h)$, which means 
 
 ## Generalizing Agent
 
-Assume $O = \{0, 1\}^n$ and let $h_k$ be **conjunctions** using $n$ propositional variables. Then try this
+Assume $O = \{0, 1\}^n$ and let $h_k$ be a **conjunction** using $n$ propositional variables. Then try this
 
 * start with the conjunction of **all literals**, i.e. include both $p$ and $\neg p$ for each variable $p$,
-* on each error, remove from the conjuction exactly all literals inconsistent with the previous observation, i.e. literals logically false in it.
+* on each error, remove from the conjuction all literals inconsistent with the previous observation, i.e. literals logically false in it.
 
 If $h_k$ misclassifies a negative example, then $o_k$ is consistent with the example, therefore $h_k$ cannot remove any literals that are logically false, because there aren't any.
 
 ### Mistake bound
 
-The initial hypothesis $h_1$ has $2n$ literals, **no more than $2n$ mistakes** are made before $h_k = h^*$.
+The initial hypothesis $h_1$ has $2n$ literals, so **no more than $2n$ mistakes** are made before $h_k = h^*$.
 
-So the cumulative reward for an arbitrary horizon $m \in \mathbb{N}$ is
+The cumulative reward for an arbitrary horizon $m \in \mathbb{N}$ is
 $$\sum_{k = 1}^m r_k \geq -2n$$
 
 ## Mistake-Bound Learning Model
 
-Let $\mathcal{H}$ be a **hypothesis class**, i.e. any set of hypothesis. $\mathcal{H}$ induces the **concept class** $\mathcal{C}(\mathcal{H}) = \{ C(h) \ | \ h \in \mathcal{H} \}$, where $C(h) = \{ o \in O, \pi(h, o) = 1 \}$. Let $n$ be the size (complexity) of observations (usually their arity).
+Let $\mathcal{H}$ be a **hypothesis class**, i.e. any set of hypotheses. $\mathcal{H}$ induces the **concept class** $\mathcal{C}(\mathcal{H}) = \{ C(h) \ | \ h \in \mathcal{H} \}$, where $C(h) = \{ o \in O, \pi(h, o) = 1 \}$. Let $n$ be the size (complexity) of observations (usually their arity).
 
 Agent **learns class $\mathcal{H}$ on-line** (in the mistake-bound model) if with any target concept $C \in \mathcal{C}(\mathcal{H})$ it will make no more than a polynomial (in the size $n$) number of mistakes. Furthermore, it learns $\mathcal{H}$ **efficiently** if it spends at most polynomial time between each percept and the next action. $\mathcal{H}$ is **(efficiently) learnable on-line** if there is an agent that learns it (efficiently) on-line.
 
@@ -113,7 +111,7 @@ An s-CNF is a conjunction of s-clauses, which is a disjuction of at most $s \in 
 * set $h_1$ to the conjunction of **all** s-clauses on these variables,
 * for each positive example, remove from $h_k$ all clauses false for the example.
 
-The number of mistakes will not be greater than the number of all s-clauses on $n$ variables. This number is $\mathcal{O}[\binom{2n}{s}] = \mathcal{O}(n^s)$, i.e. polynomial. Therefore s-CNF's are **efficiently learnable online$$.
+The number of mistakes will not be greater than the number of all s-clauses on $n$ variables. This number is $\mathcal{O}[\binom{2n}{s}] = \mathcal{O}(n^s)$, i.e. polynomial. Therefore s-CNF's are **efficiently learnable online**.
 
 ## Separating Agent
 
@@ -160,7 +158,7 @@ If $C \in \mathcal{C}( \mathcal{H})$, then this agent makes at most $|\mathcal{H
 
 The agent learns online (not necessarily efficiently) any $\mathcal{H}$ such that $|\mathcal{H}| \leq poly(n)$.
 
-It cannot learnn online unconstrained conjunctions or disjunctions.
+It cannot learn online unconstrained conjunctions or disjunctions.
 
 ## Version Space
 

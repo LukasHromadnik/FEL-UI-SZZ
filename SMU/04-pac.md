@@ -22,7 +22,7 @@ Let $O_l \subseteq O$ denote the set of all observations inconsistent with a lit
 $$\f{err}{h} \leq \sum_{l \in h} P_O(O_l)$$
 With $n$ variables, there are at most $2n$ literals in $h$ so if $P_O(O_l) \leq \varepsilon / 2n$ for each literal $l \in h$ then $\f{err}{h} \leq \varepsilon$. Call literal $l$ **bad** if
 $$P_O(O_l) > \frac{\varepsilon}{2n}$$
-Let $l$ be bad. At time $k + 1$ the probability that $l \in h_{k + 1}$ is the probability that $l$ is consistent with $k$ i.i.d. observations is $(1 - P_O(O_l))^k$. Due to the previous equation we have
+Let $l$ be bad. At time $k + 1$ the probability that $l \in h_{k + 1}$ is consistent with $k$ i.i.d. observations is $(1 - P_O(O_l))^k$. Due to the previous equation we have
 $$(1 - P_O(O_l))^k < \left(1 - \frac{\varepsilon}{2n}\right)^k$$
 Probability that some bad literal is consistent with the $k$ observations is upper bounded by the above times the number of all literals so it is at most
 $$2n \left(1 - \frac{\varepsilon}{2n}\right)^k < 2ne^{-k \frac{\varepsilon}{2n}}$$
