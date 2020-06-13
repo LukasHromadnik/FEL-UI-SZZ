@@ -111,8 +111,6 @@ $$L_s = \overline{L_p}, \quad L_p = \overline{L_s}.$$
 
 Jazyky $L_p$ a $L_s$ patří do průniku tříd \NP a co-\NP.
 
-\clearpage
-
 **Millerův test prvočíselnosti.**
 
 * Vstup: velké liché přirozené číslo $n$

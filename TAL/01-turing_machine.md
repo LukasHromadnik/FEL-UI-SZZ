@@ -17,13 +17,9 @@ Turingův stroj je sedmice $(Q, \Sigma, \Gamma, \delta, q_0, B, F)$, kde
 Na začátku práce se Turingův stroj nachází v počátečním stavu $q_0$, na pásce má na $n$ polích vstupní slovo $a_1 \, a_2 \, \dots \, a_n (a_i \in \Sigma)$, ostatní pole obsahují blank $B$ a hlava čte pole pásky se symbolem $a_1$. Tedy formálně počáteční situaci zapisujeme $q_0 \, a_1 \, a_2 \, \dots \, a_n$.
 
 Předpokládejme, že se Turingův stroj nachází v situaci
-
 $$X_1 \, X_2 \, \dots \, X_{i - 1} \, q \, X_i \, \dots \, X_k.$$
-
 Jestliže $\delta(q, X_i) = (p, Y, R)$, TM se přesune do stavu $p$, na pásku místo symbolu $X_i$ napíše symbol $Y$ a hlavu posune o jedno pole doprava.
-
 $$X_1 \, X_2 \, \dots \, X_{i - 1} \, q \, X_i \, \dots \, X_k  \quad \vdash \quad X_1 \, X_2 \, \dots \, X_{i - 1} \, Y \, p \, X_{i + 1} \, \dots \, X_k.$$
-
 Jestliže $\delta(q, X_i)$ není definováno, TM se zastaví.
 
 **Výpočet Turingova stroje** nad slovem $w = a_1 \, a_2 \, \dots \, a_k$ je posloupnost jeho kroků, která začíná v počáteční situaci $q_0 \, a_1 \, \dots \, a_k$. Formálně se jedná o reflexivní a tranzitivní uzávěr $\vdash^*$ relace $\vdash$ (můžu udělat žádný nebo konečný počet kroků).
