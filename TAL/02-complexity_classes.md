@@ -76,8 +76,8 @@ Je-li jazyk $L$ ve třídě \mcalP, pak i jeho doplněk $\overline{L}$ patří d
 
 Jazyk $L$ patří do třídy co-\NP, jestliže jeho doplněk patří do třídy \NP.
 
-* Jazyk USAT, který je doplňkem jazyka SAT, se skládá ze všech nesplnitelných booleovských formulí a ze všech slov, která neodpovídají booleovské formuli
-* Jazyk TAUT, který se skládá ze všech slov odpovídajících tautologii výrokové logiky
+* Jazyk USAT, který je doplňkem jazyka SAT, se skládá ze všech nesplnitelných booleovských formulí a ze všech slov, která neodpovídají booleovské formuli.
+* Jazyk TAUT, který se skládá ze všech slov odpovídajících tautologii výrokové logiky.
 
 Mějme dva jazyky $L_1$ a $L_2$, pro které platí $L_1 \red_p L_2$. Pak platí také $\overline{L_1} \red_p \overline{L_2}$.
 
