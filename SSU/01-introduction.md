@@ -18,7 +18,7 @@ Main assumptions:
 
 Typical concepts:
 
-* **regression:** $Y = f(X) + \epsilon$, where $f$ is unknown and $\epsilon$ is a random error,
+* **regression:** $Y = f(X) + \varepsilon$, where $f$ is unknown and $\varepsilon$ is a random error,
 * **classification:** $p(x, y) = p(y) \pc[p]{x}{y}$ where $p(y)$ is the prior class probability and $\pc[p]{x}{y}$ is the conditional feature distribution.
 
 Consequences and problems:
