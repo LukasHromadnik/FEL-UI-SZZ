@@ -97,3 +97,22 @@ RRT              \checkmark                 $\times$
 RRG              \checkmark                 \checkmark
 PRM\star         \checkmark                 \checkmark
 RRT\star         \checkmark                 \checkmark
+
+## Improved Sampling-based Motion Planners
+
+Although asymptotically optimal sampling-based motion planners such as RRT\star or RRG may provied high-quality or even optimal solutions of the complex problem, their performance in simple, e.g. 2D scenarios, is relatively poor.
+
+The general idea of improvements is based on **informing** the sampling process.
+
+### Informed RRT\star
+
+* Use Euclidean distance as an admissible heuristic
+* Having a feasible solution, the sampling continues inside the ellipse
+
+### Batch Informed Trees (BIT\star)
+
+* Batches of samples – a new batch starts with denser implicit RGG (Random Geometric Graph)
+
+### Regionally Accelerated BIT\star (RABIT\star)
+
+Uses local optimizer to exploit obstacle informaction and improve a global search. The initial straight-line edge is given to a local optimizer which uses information about obstacles to find a local optima between the specified states. If this edge is collision-free, it is added to the tree and its potential outgoing edges are added to the queue.
