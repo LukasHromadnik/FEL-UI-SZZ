@@ -22,14 +22,14 @@ The robot control is decomposed into functional modules that are sequentially ex
 
 ## Reactive Paradigm
 
-**Behaviors.** The mapping of sensory inputs to the pattern of motor actinos
+**Behaviors.** The mapping of sensory inputs to the pattern of motor actions
 
 * Reflexive behaviors – "hardwired" stimulus-response
     * Reflexes – the response lasts only as long as the stimules
     * Taxes – the response to stimulus results in a movement towards or away of the stimulus
-    * Fixed-Action Patterns – the response continues for a longer duration than the stimulous
+    * Fixed-Action Patterns – the response continues for a longer duration than the stimulus
 * Reactive behaviors – learned and then executed without conscious thought
-* Conscious behaviors – deliverative as a sequence of the rpeviously developed behaviors
+* Conscious behaviors – deliberative as a sequence of the previously developed behaviors
 
 Four ways to acquire a behavior
 

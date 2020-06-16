@@ -18,6 +18,6 @@ $$\pi: [0, 1] \to \mathcal{C}_{free}, \text{ with } \pi(0) = q_0, \text{ and } \
 * Visibility graph
 * Minimal Construct – algorithm computes visibility graph during the A${}^*$ search
 * Voronoi graph – roadmap that maximizes clearance from the obstacles
-* Cell decomposition – decompose free space intoo parts, any twoo points in a convex region can be directly connected by a segment
+* Cell decomposition – decompose free space into parts, any two points in a convex region can be directly connected by a segment
 * Shortest Path Map – speedup computation of the shortest path towards a particular goal location $p_g$ for a polygonal domain $\mathcal{P}$ with $n$ vertices
 * Potential field method – the idea is to create a function $f$ that will provide a direction towards the goal for any configuration of the robot

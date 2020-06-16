@@ -2,7 +2,7 @@
 
 ## Grid-based Planning
 
-* A subdivision of $\mathcal{C}$-free into smaller cells.
+* A subdivision of $\mathcal{C}$-free into smaller cells
 * Grow obstacles
 * Neighbor-relations – 4-neighbors, 8-neighbors
 
@@ -20,7 +20,7 @@ Simple grid-based planning:
 * A\star
     * Incremental Heuristic Search – repeated planning of the path from the current state to the goal
     * Real-Time Heuristic Search – repeated planning with limited look-ahead (Real-Time Adaptive A\star)
-* Jump Point Search algorithm is based on a maxro operator that identifies and selectively expands only certain nodes (jump points)
+* Jump Point Search algorithm is based on a macro operator that identifies and selectively expands only certain nodes (jump points)
 * Theta\star is an extension of A\star with \verb|LineOfSight()|
 * Lazy Theta\star – reduces the number of line-of-sight checks
 
@@ -29,7 +29,7 @@ Simple grid-based planning:
 * It searches from the goal node to the start node, i.e. $g$-values estimate the goal distance
 * Incrementally repair solution paths when changes occur
 * Maintains two estimates of costs per node
-    * $g$ – the objective functino value
+    * $g$ – the objective function value
     * $rhs$ – one-step lookahead of the objective function value
 * Inconsistent nodes $g \ne rhs$ are stored in the priority queue for processing
 $$rhs(u) = \begin{cases}

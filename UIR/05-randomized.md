@@ -54,7 +54,7 @@ $$\lim_{n \to \infty} Pr(\mathcal{A} \text{ returns a solution to } \mathcal{P})
 
 * Function $\phi: [0, 1] \to \mathcal{C}_{free}$ is called **homotopy**, if $\phi(0) = \pi_1$ and $\phi(1) = \pi_2$ and $\phi(\tau)$ is collision-free path for all $\tau \in [0, 1]$.
 * A collision-free path $\pi_1$ is **homotopic** to $\pi_2$ if there exists homotopy function $\phi$.
-* A collision-free path $\pi: [0, s] \to \mathcal{C}_{free}$ has **weak $\delta$-clearance** if there exists a path $\pi'$ that has **strong $delta$-clearance** and homotopy $\phi$ with $\phi(0) = \pi, \phi(1) = \pi'$ and for all $\alpha \in (0, 1]$ there exists $\delta_\alpha > 0$ such that $\phi(\alpha)$ has strong $\delta$-clearance. Weak $\delta$-clearance does not required points along a path to be at least a distance $\delta$ from obstacles.
+* A collision-free path $\pi: [0, s] \to \mathcal{C}_{free}$ has **weak $\delta$-clearance** if there exists a path $\pi'$ that has **strong $\delta$-clearance** and homotopy $\phi$ with $\phi(0) = \pi, \phi(1) = \pi'$ and for all $\alpha \in (0, 1]$ there exists $\delta_\alpha > 0$ such that $\phi(\alpha)$ has strong $\delta$-clearance. Weak $\delta$-clearance does not required points along a path to be at least a distance $\delta$ from obstacles.
 * A collision-free path $\pi^*$ is **robustly optimal solution** if it has *weak $\delta$-clearance* and for any sequence of collision free paths $\{ \pi_n \}_{n \in \mathbb{N}}, \pi_n \in \mathcal{C}_{free}$ such that $\lim_{n \to \infty} \pi_n = \pi^*, \lim_{n \to \infty} c(\pi_n) = c(\pi^*)$.
 
 An algorithm $\mathcal{A}$ is **asymptotically optimal** if for any path planning problem $\mathcal{P} = (\mathcal{C}_{free}, q_{init}, \mathcal{Q}_{goal})$ and cost function $c$ that admit a robust optimal solution with the finite cost $c^*$
@@ -69,9 +69,9 @@ There is a main issue with randomized sampling-based approaches and that are nar
 
 Single-query algorithm that incrementally builds a graph (tree) towards the goal area.
 
-1. Start with initial configuratioon $q_0$, which is a root of the constructed graph (tree).
-2. Generate a new randmo configuration $q_new$ in $\mathcal{C}_{free}$.
-3. Find the closest noode $q_{near}$ to $q_{new}$ in the tree.
+1. Start with initial configuration $q_0$, which is a root of the constructed graph (tree).
+2. Generate a new random configuration $q_{new}$ in $\mathcal{C}_{free}$.
+3. Find the closest node $q_{near}$ to $q_{new}$ in the tree.
 4. Extend $q_{near}$ towards $q_{new}$ (extend the tree by a small step).
 5. Go to 2, until the tree is within a sufficient distance from the goal configuration.
 
@@ -79,7 +79,7 @@ Time complexity is $\mathcal{O}(n^2)$.
 
 ## Rapidly-exploring Random Graph (RRG)
 
-At each iteration, RRG tries to connect new sample to all vertices in the $r_n$ ball centered at it. The connectioon radius decreases with $n$.
+At each iteration, RRG tries to connect new sample to all vertices in the $r_n$ ball centered at it. The connection radius decreases with $n$.
 
 It's probabilistically complete and asymptotically optimal. Time complexity is $\mathcal{O}(\log n)$.
 
