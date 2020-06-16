@@ -24,7 +24,7 @@ Typical concepts:
 Consequences and problems:
 
 * the inference rule $h(X)$ and the loss $\ell(Y, h(X))$ become random variables,
-* risk of an inference rule $h(X) \Rightarrow$ expected loss
+* risk of the inference rule $h(X) \Rightarrow$ expected loss
 $$R(h) = \mathbb{E}\ell(Y, h(X)) = \sum_{x \in \mathcal{X}} \sum_{y \in \mathcal{Y}} p(x, y) \ell(y, h(x))$$
 
 Since $p(x, y)$ is unknown we can estimate $R(h)$ by **empirical risk** based on the test sample $\mathcal{S}^l = \{(x^i, y^i) \in \mathcal{X} \times \mathcal{Y} \ | \ i = 1, \dots, l\}$ drawn from $p(x, y)$
@@ -38,7 +38,7 @@ but $p(x, y)$ is **not known** and we can only collect examples drawn from it.
 
 ### Discriminative learning
 
-The optimal inference rule $h^*$ is in some class of rules $\mathcal{H} \Rightarrow$ replace the true risk by **empirical risk** based on trainig data $\mathcal{T}$
+The optimal inference rule $h^*$ is in some class of rules $\mathcal{H} \Rightarrow$ replace the true risk by **empirical risk** based on training data $\mathcal{T}$
 $$R_\mathcal{T}(h) = \frac{1}{|\mathcal{T}|} \sum_{(x, y) \in \mathcal{T}} \ell(y, h(x))$$
 and minimise it w.r.t. $h \in \mathcal{H}$, i.e. $h_\mathcal{T}^* = \argmin_{h \in \mathcal{H}} R_\mathcal{T}(h)$.
 
