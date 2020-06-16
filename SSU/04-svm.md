@@ -14,7 +14,7 @@ $$(\bm{w}^*, b^*) = \argmin_{\bm{w} \in \mathbb{R}^n, b \in \mathbb{R}}
 $$
 where $C > 0$ is the regularization constant.
 
-It can be re-formulated as a convext *quadratic program*
+It can be re-formulated as a convex *quadratic program*
 $$(\bm{w}^*, b^*, \bm{\xi}^*) = \argmin_{\substack{(\bm{w}, b) \in \mathbb{R}^{n + 1} \\ \bm{\xi} \in \mathbb{R}^m}} \left( \frac{1}{2} \lVert \bm{w} \rVert^2 + C \sum_{i = 1}^m \xi_i \right)$$
 subject to
 \begin{center}
@@ -32,25 +32,25 @@ $$
 
 ## Dual SVM problem
 
-$$\bm{alpha}^* = \argmax_{\bm{\alpha} \in \mathbb{R}^m} \left( \sum_{i = 1}^m \alpha_i - \frac{1}{2} \sum_{i = 1}^m \sum_{j = 1}^m \alpha_i \alpha_j y^i y^j \langle \bm{\phi}(x^i), \bm{\phi}(x^j) \rangle \right)$$
+$$\bm{\alpha}^* = \argmax_{\bm{\alpha} \in \mathbb{R}^m} \left( \sum_{i = 1}^m \alpha_i - \frac{1}{2} \sum_{i = 1}^m \sum_{j = 1}^m \alpha_i \alpha_j y^i y^j \langle \bm{\phi}(x^i), \bm{\phi}(x^j) \rangle \right)$$
 subject to
 $$\sum_{i = 1}^m \alpha_i y^i = 0, \quad 0 \leq \alpha_i \leq C, \quad i \in \{ 1, \dots, m \}$$
 The primal variables $(\bm{w}, b)$ are obtained from the dual variables $\alpha$ by
 \begin{align*}
-\bm{w} &= \sum_{i = 1}^m y&i \bm{\phi}(x^i) \alpha_i = \sum_{i \in \mathcal{I}_\mathrm{SV}} y^i \bm{\phi}(x^i) \alpha_i \\
+\bm{w} &= \sum_{i = 1}^m y^i \bm{\phi}(x^i) \alpha_i = \sum_{i \in \mathcal{I}_\mathrm{SV}} y^i \bm{\phi}(x^i) \alpha_i \\
 b &= y^i - \langle \bm{w}, \bm{\phi}(x^i) \rangle, \forall i \in \mathcal{I}_\mathrm{SV}^b = \{ j \ | \ 0 < \alpha_j < C \}
 \end{align*}
 
 ## Kernel SVM
 
-The SVM algorithm required observatinos in terms of for products only. Gen a feature map $\bm{\phi}: \mathcal{X} \to \mathbb{R}^n$, define **kernel function** $k: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$
+The SVM algorithm requires observations in terms of dot product only. Given a feature map $\bm{\phi}: \mathcal{X} \to \mathbb{R}^n$, define **kernel function** $k: \mathcal{X} \times \mathcal{X} \to \mathbb{R}$
 $$k(x, x') = \langle \bm{\phi}(x), \bm{\phi}(x') \rangle$$
 
 ### Radial basis function (RBF) kernel
 
-Assume observation are real-values features $\mathcal{X} = \mathbb{R}^d$. The RBF kernel
+Assume observation are real-valued features $\mathcal{X} = \mathbb{R}^d$. The RBF kernel
 $$k(\bm{x}, \bm{x}') = \exp\left(-\gamma \lVert \bm{x} - \bm{x}' \rVert^2 \right)$$
-corresponds to dot product $\langle \bm{\phi}(\bm{x}), \bm{phi}(\bm{x}') \rangle$ in infinite dimensional space
+corresponds to dot product $\langle \bm{\phi}(\bm{x}), \bm{\phi}(\bm{x}') \rangle$ in infinite dimensional space.
 
 ### String Subsequence kernel
 
