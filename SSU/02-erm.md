@@ -11,13 +11,13 @@ $$P\left(\left| \frac{1}{l} \sum_{i = 1}^l z^i - \mu \right| \geq \varepsilon \r
 ## Confidence intervals
 
 * For which $\varepsilon$ is $\mu \in (\mu_l - \varepsilon, \mu_l + \varepsilon)$ with probability at least $\gamma$?
+
+Using Hoeffding inequality we can write
 \begin{equation}
 P\left(|\mu_l - \mu| < \varepsilon\right) = 1 - P\left( |\mu_l - \mu| \geq \varepsilon \right) \geq 1 - 2e^{-\frac{2l\varepsilon^2}{(b - a)^2}} = \gamma
 \label{eq:conf-int}
 \end{equation}
-Using Hoeffding inequality we can write
-
-and solving the last equality for $\varepsilon$ yields
+and solving the last equality \ref{eq:conf-int} for $\varepsilon$ yields
 $$\varepsilon = |b - a| \sqrt{\frac{\log(2) - \log(1 - \gamma)}{2l}}$$
 where with increasing number of examples the size of the interval decreases.
 
@@ -43,7 +43,7 @@ h_m \in \argmin_{h \in \mathcal{H}} R_{\mathcal{T}^m}(h).
 \end{equation}
 Depending on the choice of $\mathcal{H}, \ell$ and the algorithm solving \ref{eq:erm} we get individual instances, e.g. SVM, Linear Regression, Neural Networks learned by back-propagation, etc.
 
-Errors charactering a learning algorithm:
+Errors characterizing a learning algorithm:
 
 * $R^* = \inf_{h \in \mathcal{Y}^\mathcal{X}} R(h)$ best attainable (Bayes) risk
 * $R(h_\mathcal{H})$ best risk in $\mathcal{H}; h_\mathcal{H} \in \argmin_{h \in \mathcal{H}} R(h)$
