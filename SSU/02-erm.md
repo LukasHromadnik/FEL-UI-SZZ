@@ -58,7 +58,7 @@ where $h_m = A(\mathcal{T}^m)$ is the hypothesis returned by the algorithm $A$ f
 
 The *statistically consistent* means that we can make the estimation error arbitrary small if we have enough examples.
 
-**Uniform Law of Large Numbers.** The hypothesis space $\mathcal{H} \subseteq \mathcal{Y}^\mathcal{X}$ satisfies the uniform law of large numbers if for all $\varepsilon > 0$ it holds that
+**Uniform Law of Large Numbers.** The hypothesis space $\mathcal{H} \subseteq \mathcal{Y}^\mathcal{X}$ satisfies the *uniform law of large numbers* if for all $\varepsilon > 0$ it holds that
 $$\lim_{m \to \infty} P\left(\sup_{h \in \mathcal{H}} |\underbrace{R(h) - R_{\mathcal{T}^m}(h)}_\text{generalization error}| \geq \varepsilon \right) = 0$$
 
 ULLN says that the probability of seaing a "bad training set" can be made arbitrarily low if we have enough examples.
@@ -119,7 +119,7 @@ holds for any $h \in \mathcal{H}$ with probability $1 - \delta$ at least.
 
 ## Trailing linear classifier from separable examples
 
-The examples $\mathcal{T}^m = \{ (x^i, y^i) \in (\mathcal{X} \times \mathcal{Y}) \ | \ i = 1, \dots, m \}$ are **linearly separable** w.r.t. feature map $\bm{\phi}: \mathcal{X} \to \mathbb{R}^n$ if there exists $(\bm{w}, b) \in \mathbb{R}^{n + 1}$$ such that
+The examples $\mathcal{T}^m = \{ (x^i, y^i) \in (\mathcal{X} \times \mathcal{Y}) \ | \ i = 1, \dots, m \}$ are **linearly separable** w.r.t. feature map $\bm{\phi}: \mathcal{X} \to \mathbb{R}^n$ if there exists $(\bm{w}, b) \in \mathbb{R}^{n + 1}$ such that
 $$y^i(\langle \bm{w}, \bm{\phi}(x^i) \rangle + b) > 0, \quad i \in \{ 1, \dots, m \}$$
 
 \begin{algorithm}[h]
