@@ -1,6 +1,6 @@
 # SAT solving
 
-**SAT problem.** Given a formula $\varphi$ in CNF decide wheter $\varphi \in$ \verb|SAT|.
+**SAT problem.** Given a formula $\phi$ in CNF decide wheter $\phi \in \texttt{SAT}$.
 
 ## Resolution rule
 
@@ -19,7 +19,7 @@ Let $\varphi$ be a set of clauses. If $\varphi$ is unsatisfiable, then $\varphi 
 
 Let $\varphi$ be a set of clauses. If $\varphi \vdash \square$ then $\varphi$ is unsatisfiable.
 
-Either we produce the empty clause and hence $\varphi \notin$ \verb|SAT|, or we produce a satured set of clauses and hence $\varphi \in$ \verb|SAT|.
+Either we produce the empty clause and hence $\varphi \notin \texttt{SAT}$, or we produce a satured set of clauses and hence $\varphi \in \texttt{SAT}$.
 
 ## Davis-Putnam algorithm
 
@@ -27,8 +27,37 @@ We have a set of clauses $\varphi$. We choose a variable $p$ such that both $p$ 
 
 **Subsumption.** A clause $c_1$ is said to *subsume* a clause $c_2$ if $c_1 \subseteq c_2$.
 
-If $c_1, c_2 \in \varphi$ and $c_1 \subseteq c_2$ then $\varphi \in$ \verb|SAT| iff $\varphi \setminus c_2 \in$ \verb|SAT|. Moreover this can shorten a derivation of the empty clause.
+If $c_1, c_2 \in \varphi$ and $c_1 \subseteq c_2$ then $\varphi \in \texttt{SAT}$ iff $\varphi \setminus c_2 \in \texttt{SAT}$. Moreover this can shorten a derivation of the empty clause.
 
 If it is possible to obtain more different resolvents from two clauses, then all there resolvents are tautologies, hence always satisfiable and hance we can ignore them.
 
 ## DPLL algorithm
+
+\begin{algorithm}[!htp]
+\caption{DPLL Algorithm}
+\hspace*{\algorithmicindent} \textbf{Input:} A set of clauses $\varphi$
+\begin{algorithmic}[1]
+\While{$\phi$ contains a unit clause $\{l\}$} \Comment unit propagation
+    \State delete clauses containing $l$ from $\phi$ \Comment unit subsumption
+    \State delete $\bar{l}$ from all clauses in $\phi$ \Comment unit resolution
+\EndWhile
+\If{$\square \in \phi$}
+    \State \textbf{return} false \Comment empty clause
+\EndIf
+\While{$\phi$ contains a pure literal $l$}
+    \State delete clauses containing $l$ from $\phi$
+\EndWhile
+\If{$\phi = \emptyset$}
+    \State \textbf{return} true \Comment no clause
+\Else
+    $l \gets$ select a litaral occurring in $\phi$ \Comment a choice of literal
+    \If{$\textsc{DPLL}(\phi \cup \{\{l\}\}$)}
+        \State \textbf{return} true
+    \ElsIf{$\textsc{DPLL}(\phi \cup \{\{\bar{l}\}\})$}
+        \State \textbf{return} false
+    \Else
+        \State \textbf{return} false
+    \EndIf
+\EndIf
+\end{algorithmic}
+\end{algorithm}

@@ -26,6 +26,7 @@
 \let\originalright\right
 \renewcommand{\left}{\mathopen{}\mathclose\bgroup\originalleft}
 \renewcommand{\right}{\aftergroup\egroup\originalright}
+\renewcommand{\phi}{\varphi}
 
 \newcommand{\modn}[1][n]{\ensuremath{\ (\mathrm{mod}\ #1)}}
 \newcommand{\method}[2]{\texttt{#1}($#2$)}
@@ -37,6 +38,7 @@
 \newcommand{\mcalP}{\mcal{P}}
 \newcommand{\mcalU}{\mcal{U}}
 \newcommand{\mcalV}{\mcal{V}}
+\newcommand{\mm}{\mcal{M}}
 \newcommand{\pspace}{\ensuremath{\mathcal{P}}\texttt{SPACE}\xspace}
 \newcommand{\npspace}{\ensuremath{\mathcal{NP}}\texttt{SPACE}\xspace}
 \newcommand{\h}[1]{\ensuremath{h^\mathrm{#1}}}
