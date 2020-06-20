@@ -95,3 +95,23 @@ Given a finite set of pairs of terms $T = \{ s_1 \doteq t_1, \dots, s_n \doteq t
 **Resolution.** Let $l_1, \dots, l_m, l_{m + 1}, \dots, l_{m + n}$ be literals and $p$ and $q$ atomic formulae.
 $$\frac{\{l_1, \dots, l_m, \textcolor{red}{p}\} \quad \{\textcolor{red}{\neg q}, l_{m + 1}, \dots, l_{m + n} \}}{\{l_1, \dots, l_m, l_{m + 1}, \dots, l_{m + n} \} \sigma}$$
 where $\sigma = mgu(p, q)$ and $\{l_1, \dots, l_m, l_{m + 1}, \dots, l_{m + n} \} \sigma$ is equal to $\{ l_1 \sigma, \dots, l_m \sigma, l_{m + 1} \sigma, \dots, l_{m + n} \sigma \}$.
+
+Unlike in propositional logic, it is possible to resolve two clauses in multiple ways and still obtain useful resolvents.
+
+Let $\Gamma$ be a set of clauses. $\Gamma$ is unsatisfiable $\Leftrightarrow \Gamma \vdash \square$.
+
+**Factoring.** We need to add the factoring rule. Let $l_1, \dots, l_m, l_{m + 1}, l, k$ be literals.
+$$\frac{\{l_1, \dots, l_m, \textcolor{red}{l}, \textcolor{red}{k}\}}{\{l_1, \dots, l_m, \textcolor{red}{l}\}\sigma}$$
+where $\sigma = mgu(l, k)$. Note that $l$ and $k$ are either both positive or both negative. Moreover, $\{ l_1, \dots, l_m, l, k\} \vDash \{l_1, \dots, l_m, l\} \sigma$.
+
+**Subsumption.** A clause $\phi$ *subsumes* a clause $\psi$, denoted $\phi \sqsubseteq \psi$, if there is a substitution $\sigma$ such that $\phi \sigma \subseteq \psi$.
+
+If $\phi \sqsubseteq \psi$, then $\psi \vDash \psi$.
+
+**Positive resolution.** Let $\Gamma$ be a set of clauses. We split it into the positive part $\Gamma^+$ and $\Gamma' = \Gamma \setminus \Gamma^+$. If $\Gamma^+ = \emptyset$, then making all atomic predicates *false* satisfies $\Gamma' = \Gamma$. If $\Gamma' = \emptyset$, then making all atomic predicates *true* satisifies $\Gamma^+ = \Gamma$.
+
+**Semantic resolution.** A generalization of positive resolution, we have an interpretation $I$ and we alyways select at least one clause that is not valid in $I$.
+
+**Watchlist.** It is a set of clauses we feed into the prover that can be used for guiding the proof search (lemmata, hints), e.g. clauses that led to proofs in previous similar problems.
+
+**Clause splitting.** If we can split a clause into two (or more parts), which do not share variables, then we can do that and solve two (simpler) cases.
