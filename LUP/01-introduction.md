@@ -1,4 +1,4 @@
-# Introductiono
+# Introduction
 
 We are in propositional logic. A **literal** $l$ is a propositinoal variable $p$, also called an *atom*, or a negation of propositional variable $\neg p$. In this context we write $\bar{p}$ instead of $\neg p$.
 
